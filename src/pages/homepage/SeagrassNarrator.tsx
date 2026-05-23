@@ -19,7 +19,7 @@ export default function SeagrassNarrator() {
     >
       {/* Co bien field at bottom 80% */}
       <div className="absolute" style={{ left: 0, top: 656, width: 1440, height: 164 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.svg`} />
       </div>
 
       {/* LEFT — Container with big photo at (120, 70) 486×750 */}
@@ -27,7 +27,7 @@ export default function SeagrassNarrator() {
         <img
           alt=""
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          src={`${A}/imgImageThmCBinDiLongDiDngTiCuLaoCham.png`}
+          src={`${A}/imgImageThmCBinDiLongDiDngTiCuLaoCham.jpg`}
         />
 
         {/* Inner small photo card at (38, 132) 220×210 rotated +2.5° */}
@@ -48,7 +48,7 @@ export default function SeagrassNarrator() {
                   <img
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
-                    src={`${A}/imgImageAnhSangLcQuaDayBinNiThmCBinSinhSng.png`}
+                    src={`${A}/imgImageAnhSangLcQuaDayBinNiThmCBinSinhSng.jpg`}
                   />
                 </div>
                 <p
@@ -88,21 +88,21 @@ export default function SeagrassNarrator() {
       >
         <div style={{ transform: 'rotate(15deg)' }}>
           <div className="relative" style={{ width: 79, height: 52 }}>
-            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLayer1.png`} />
+            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLayer1.svg`} />
           </div>
         </div>
       </div>
 
       {/* Layer_1 small at (1211, 108) 103.67×94.34 */}
       <div className="absolute" style={{ left: 1211, top: 108, width: 103.67, height: 94.34 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgLayer2.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgLayer2.svg`} />
       </div>
 
       {/* === RIGHT — S5 Text Content (732, 70) 588×... === */}
       <div className="absolute flex flex-col items-start overflow-clip" style={{ left: 732, top: 70, width: 588, gap: 24 }}>
         {/* Label torn-tag */}
         <div className="relative" style={{ width: 173, height: 33 }}>
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.png`} />
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.svg`} />
           <div
             className="absolute flex items-center justify-center"
             style={{
@@ -145,7 +145,7 @@ export default function SeagrassNarrator() {
 
         {/* Divider Line */}
         <div className="relative" style={{ width: 48, height: 0 }}>
-          <img alt="" className="block w-full" src={`${A}/imgLine.png`} style={{ position: 'absolute', top: -1, width: '100%' }} />
+          <img alt="" className="block w-full" src={`${A}/imgLine.svg`} style={{ position: 'absolute', top: -1, width: '100%' }} />
         </div>
 
         {/* 4 Stat grid 2×2 */}

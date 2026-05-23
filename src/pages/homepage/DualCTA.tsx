@@ -9,7 +9,7 @@ export default function DualCTA() {
     <section className="relative" style={{ width: 1440, height: 560, background: '#e8d5b0', overflow: 'hidden' }}>
       {/* LEFT bg photo (0,0) 720x560 with 0.4 dark overlay */}
       <div className="absolute" style={{ left: 0, top: 0, width: 720, height: 560 }}>
-        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375331.png`} />
+        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375331.jpg`} />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.4)' }} />
       </div>
 
@@ -26,7 +26,7 @@ export default function DualCTA() {
       >
         {/* Label */}
         <div className="relative" style={{ width: 186, height: 33 }}>
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.png`} />
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.svg`} />
           <div
             className="absolute flex items-center justify-center"
             style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
@@ -79,7 +79,7 @@ export default function DualCTA() {
       >
         {/* Label */}
         <div className="relative" style={{ width: 144, height: 33 }}>
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel1.png`} />
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel1.svg`} />
           <div
             className="absolute flex items-center justify-center"
             style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}

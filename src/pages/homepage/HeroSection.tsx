@@ -17,7 +17,7 @@ export default function HeroSection() {
     >
       {/* Co bien field — bottom 211px */}
       <div className="absolute" style={{ left: 0, top: 709, width: 1440, height: 211 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.svg`} />
       </div>
 
       {/* Turtle silhouette at (50, 668) 290×182 */}
@@ -27,7 +27,7 @@ export default function HeroSection() {
 
       {/* CO₂ Bubble cluster at (200, 80) 738×394 */}
       <div className="absolute" style={{ left: 200, top: 80, width: 738, height: 394 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBubble.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgCoBubble.svg`} />
       </div>
 
       {/* Big photo at (764, 75) 540×490 rotated -1.5° */}
@@ -88,7 +88,7 @@ export default function HeroSection() {
                 <img
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover"
-                  src={`${A}/imgImageDiThuynDanhCaTrongVungNcXanhLa.png`}
+                  src={`${A}/imgImageDiThuynDanhCaTrongVungNcXanhLa.jpg`}
                 />
               </div>
               <p
@@ -114,7 +114,7 @@ export default function HeroSection() {
       >
         {/* Label torn tag — SVG image from Figma */}
         <div className="relative" style={{ width: 266, height: 33 }}>
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.png`} />
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.svg`} />
           <div
             className="absolute flex items-center justify-center"
             style={{
@@ -175,7 +175,7 @@ export default function HeroSection() {
       <div className="absolute flex flex-col items-start" style={{ left: 0, bottom: 0, width: 1440, height: 80 }}>
         <div className="relative overflow-clip" style={{ width: '100%', height: 80 }}>
           <div className="absolute" style={{ left: 0, right: 0, bottom: 0, top: '31.77%' }}>
-            <img alt="" className="block w-full h-full" src={`${A}/imgVector.png`} />
+            <img alt="" className="block w-full h-full" src={`${A}/imgVector.svg`} />
           </div>
         </div>
       </div>

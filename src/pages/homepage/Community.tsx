@@ -84,7 +84,7 @@ export default function Community() {
     <section className="relative" style={{ width: 1440, height: 1018, background: '#e8d5b0', overflow: 'hidden' }}>
       {/* Section label at (120, 83) */}
       <div className="absolute" style={{ left: 120, top: 83, width: 206, height: 33 }}>
-        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel4.png`} />
+        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel4.svg`} />
         <div
           className="absolute flex items-center justify-center"
           style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
@@ -120,8 +120,8 @@ export default function Community() {
 
       {/* 3 Portraits */}
       <Portrait
-        imgSrc={`${A}/imgFisher.png`}
-        labelImg={`${A}/imgLabel.png`}
+        imgSrc={`${A}/imgFisher.jpg`}
+        labelImg={`${A}/imgLabel.svg`}
         labelText="Ngư dân"
         labelW={88}
         quote={`"Biển mà không còn cỏ, thì tôm cá cũng không còn chỗ lớn."`}
@@ -137,8 +137,8 @@ export default function Community() {
       />
 
       <Portrait
-        imgSrc={`${A}/imgHost.png`}
-        labelImg={`${A}/imgLabel1.png`}
+        imgSrc={`${A}/imgHost.jpg`}
+        labelImg={`${A}/imgLabel1.svg`}
         labelText="Chủ nhà"
         labelW={88}
         quote={`"Khách ở lại qua đêm hiểu đảo hơn nhiều. Họ trân trọng hơn."`}
@@ -155,8 +155,8 @@ export default function Community() {
       />
 
       <Portrait
-        imgSrc={`${A}/imgGuard.png`}
-        labelImg={`${A}/imgLabel2.png`}
+        imgSrc={`${A}/imgGuard.jpg`}
+        labelImg={`${A}/imgLabel2.svg`}
         labelText="Người giữ biển"
         labelW={143}
         quote={`"17 ha cỏ biển — đó là con số chúng tôi phải bảo vệ từng ngày."`}
@@ -186,7 +186,7 @@ export default function Community() {
 
         {/* Anh Vũ torn-tag */}
         <div className="relative" style={{ width: 272, height: 33 }}>
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel3.png`} />
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel3.svg`} />
           <div
             className="absolute flex items-center justify-center"
             style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}

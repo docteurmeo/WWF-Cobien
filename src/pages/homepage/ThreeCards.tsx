@@ -106,17 +106,17 @@ export default function ThreeCards() {
 
       {/* Cua at (1128, 108) 165×129 */}
       <div className="absolute" style={{ left: 1128, top: 108, width: 165, height: 129 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCua.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgCua.svg`} />
       </div>
 
       {/* Group 1 bubble cluster at (920, 140) 428×148 */}
       <div className="absolute" style={{ left: 920, top: 140, width: 428, height: 148 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgGroup1.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgGroup1.svg`} />
       </div>
 
       {/* Section Label "Khám phá cù lao chàm" at (120, 83) */}
       <div className="absolute" style={{ left: 120, top: 83, width: 206, height: 33 }}>
-        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel3.png`} />
+        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel3.svg`} />
         <div
           className="absolute flex items-center justify-center"
           style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
@@ -132,8 +132,8 @@ export default function ThreeCards() {
 
       {/* Card — EAT at (106.26, 350.38) rotated +1.5° */}
       <Card
-        imgSrc={`${A}/imgEat.png`}
-        labelImg={`${A}/imgLabel.png`}
+        imgSrc={`${A}/imgEat.jpg`}
+        labelImg={`${A}/imgLabel.svg`}
         labelText="Ăn gì?"
         title="Từ biển lên bàn ăn."
         body={`Bữa trưa, thay vì đưa ra thực đơn, dân làng sẽ hỏi bạn: "Bữa ni ăn cá tôm hầy? Mới lên sáng ni!"\nChính điều ấy làm bữa ăn ở đây khác đi. Bạn không thể đoán trước bữa ăn sắp tới có gì, nhưng có thể chắc chắn rằng mỗi nguyên liệu đều ở độ tươi ngon nhất.`}
@@ -148,8 +148,8 @@ export default function ThreeCards() {
 
       {/* Card — STAY at (540, 322.86) rotated -0.5° */}
       <Card
-        imgSrc={`${A}/imgStay.png`}
-        labelImg={`${A}/imgLabel1.png`}
+        imgSrc={`${A}/imgStay.jpg`}
+        labelImg={`${A}/imgLabel1.svg`}
         labelText="Ở đâu"
         title="Sống cùng người địa phương."
         body="Ở Cù Lao Chàm, bạn sẽ không thấy nhiều khách sạn lớn. Thay vào đó là những ngôi nhà nhỏ, nằm dọc theo Bãi Làng, Bãi Hương. Người mở cửa đón bạn không phải là lễ tân, mà là chính chủ nhà."
@@ -165,8 +165,8 @@ export default function ThreeCards() {
 
       {/* Card — EXPLORE at (960, 350.69) rotated -1.8° */}
       <Card
-        imgSrc={`${A}/imgExplore.png`}
-        labelImg={`${A}/imgLabel2.png`}
+        imgSrc={`${A}/imgExplore.jpg`}
+        labelImg={`${A}/imgLabel2.svg`}
         labelText="đi đâu"
         title="Lên rừng - Xuống biển"
         body="Ở Cù Lao Chàm, dưới mặt nước là nhiều lớp sự sống khác nhau. Rời biển một chút, bạn sẽ bước vào một không gian hoàn toàn khác. Rừng ở Cù Lao Chàm không quá dày đặc, nhưng đủ để bạn cảm nhận sự thay đổi."
@@ -181,7 +181,7 @@ export default function ThreeCards() {
 
       {/* Layer_1 decoration at (493, 824) 184×163 */}
       <div className="absolute" style={{ left: 493, top: 824, width: 184, height: 163 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.png`} />
+        <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.svg`} />
       </div>
     </section>
   );
