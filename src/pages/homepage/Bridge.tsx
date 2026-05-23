@@ -74,9 +74,11 @@ export default function Bridge() {
           Bãi biển chưa bị xói lở.
         </p>
 
-        {/* Divider Line 56×0 */}
+        {/* Divider Line — Figma: outer h=0, inner inset [-2 0 0 0] → renders 56×2px */}
         <div className="relative" style={{ width: 56, height: 0 }}>
-          <img alt="" className="block w-full" src={`${A}/imgLine.svg`} style={{ position: 'absolute', top: -2 }} />
+          <div className="absolute" style={{ top: -2, left: 0, right: 0, bottom: 0, height: 2 }}>
+            <img alt="" className="block w-full h-full" src={`${A}/imgLine.svg`} />
+          </div>
         </div>
 
         {/* Big closing text — color is OCEAN PRIMARY teal, not dark ink */}
