@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 type TornTagProps = {
   children: ReactNode;
   bg?: string; // tailwind bg utility e.g. 'bg-ocean-primary'
   color?: string; // tailwind text utility e.g. 'text-ink-white'
   className?: string;
+  style?: CSSProperties;
 };
 
 /**
@@ -17,11 +18,12 @@ export default function TornTag({
   bg = 'bg-ocean-primary',
   color = 'text-ink-white',
   className = '',
+  style,
 }: TornTagProps) {
   return (
     <span
       className={`relative inline-flex items-center px-[18px] py-[9px] text-tag-up uppercase ${color} ${className}`}
-      style={{ minHeight: 28 }}
+      style={{ minHeight: 28, ...style }}
     >
       {/* Torn-edge polygon background */}
       <span
