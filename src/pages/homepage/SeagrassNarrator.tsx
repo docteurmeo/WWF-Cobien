@@ -1,159 +1,200 @@
-import TornTag from '@/components/TornTag';
-import PhotoFrame from '@/components/PhotoFrame';
-import Creature from '@/components/Creature';
-import SeagrassField from '@/components/SeagrassField';
-
 /**
- * S5 Seagrass Narrator — 1440×820 at y=3686.
- * DARK collage moment.
- * Container left (120, 70) 486×750 — oval photo of seagrass macro.
- * S5 Text Content (732, 70) 588×586.
- * 🐢 Fish at (571, 535) 90×71.
- * Layer_1 illustration at (1211, 108) 104×94.
- * Cỏ biển dài/tròn psd at (288,236)/(70,118).
- * Co bien seagrass at (0, 656) 1440×211.
- * 4 stat callouts in grid.
+ * S5 Seagrass Narrator (DARK collage moment) — 1440×820 at y=3686.
+ * Pixel-perfect from Figma node 55:17.
  */
+const A = '/WWF-Cobien/assets/s5';
 
 const stats = [
-  { num: '35×', label: 'hấp thụ CO₂ nhanh hơn rừng trên cạn', color: '#E86B35' },
-  { num: '80%', label: 'loài hải sản thương mại phụ thuộc vào cỏ biển', color: '#7DD3D0' },
-  { num: '800T', label: 'carbon lưu giữ trên mỗi hecta', color: '#6BAE6B' },
-  { num: '17 ha', label: 'còn lại tại Cù Lao Chàm — đang thu hẹp', color: '#E86B35' },
+  { num: '35×', label: 'hấp thụ CO₂ nhanh hơn rừng trên cạn' },
+  { num: '80%', label: 'loài hải sản thương mại phụ thuộc vào cỏ biển' },
+  { num: '800T', label: 'carbon lưu giữ trên mỗi hecta' },
+  { num: '17 ha', label: 'còn lại tại Cù Lao Chàm — đang thu hẹp' },
 ];
 
 export default function SeagrassNarrator() {
   return (
-    <section className="relative w-[1440px] h-[820px] overflow-hidden">
-      {/* Dark gradient */}
-      <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, #0A1E1D 0%, #102F2D 50%, #122A28 100%)' }}
-      />
+    <section
+      className="relative"
+      style={{ width: 1440, height: 820, background: '#225322', overflow: 'hidden' }}
+    >
+      {/* Co bien field at bottom 80% */}
+      <div className="absolute" style={{ left: 0, top: 656, width: 1440, height: 164 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.png`} />
+      </div>
 
-      {/* Subtle wave silhouettes */}
-      <div
-        className="absolute rounded-full"
-        style={{ left: -130, top: 50, width: 1700, height: 280, background: 'rgba(26,127,124,0.25)', border: '3px solid rgba(255,255,255,0.30)' }}
-      />
-      <div
-        className="absolute rounded-full"
-        style={{ left: -30, top: 140, width: 1500, height: 240, background: 'rgba(58,172,168,0.30)', border: '3px solid rgba(255,255,255,0.30)' }}
-      />
+      {/* LEFT — Container with big photo at (120, 70) 486×750 */}
+      <div className="absolute overflow-clip" style={{ left: 120, top: 70, width: 486, height: 750 }}>
+        <img
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          src={`${A}/imgImageThmCBinDiLongDiDngTiCuLaoCham.png`}
+        />
 
-      {/* LEFT — Container (120, 70) 486×750 — oval photo of seagrass */}
-      <div className="absolute" style={{ left: 120, top: 70, width: 486, height: 680 }}>
-        {/* Oval photo */}
+        {/* Inner small photo card at (38, 132) 220×210 rotated +2.5° */}
         <div
-          className="absolute"
-          style={{
-            left: 0,
-            top: 0,
-            width: 460,
-            height: 540,
-            transform: 'rotate(-2.5deg)',
-          }}
+          className="absolute flex items-center justify-center"
+          style={{ left: 38, top: 132, width: 228.951, height: 219.396 }}
         >
-          <PhotoFrame
-            width={460}
-            height={540}
-            bg="bg-green-deep"
-            label="Macro cỏ biển — lá, gân, cá con ẩn trong lá"
-            shadow="lg"
-            style={{ borderRadius: 900 }}
-          />
-        </div>
-
-        {/* "Cỏ biển dài.psd" placeholder at (70, 118) 155×171 — psuedoseagrass leaf */}
-        <div className="absolute" style={{ left: 70, top: 118 }}>
-          <Creature type="leaf" width={155} height={171} fill="#3D8B3D" rotate={-15} />
-        </div>
-
-        {/* "Cỏ biển trònpsd.psd" at (288, 236) 233x233 - cluster */}
-        <div className="absolute" style={{ left: 288, top: 236, width: 233, height: 233 }}>
-          <svg viewBox="0 0 233 233" width="233" height="233">
-            {[
-              { x: 80, y: 10, rot: -15 },
-              { x: 120, y: 20, rot: 5 },
-              { x: 60, y: 40, rot: -25 },
-              { x: 150, y: 30, rot: 18 },
-              { x: 90, y: 60, rot: -8 },
-              { x: 130, y: 70, rot: 12 },
-            ].map((b, i) => (
-              <g key={i} transform={`translate(${b.x} ${b.y}) rotate(${b.rot})`}>
-                <path
-                  d="M 8 0 Q 20 30 14 80 Q 10 130 8 170 Q 6 130 2 80 Q -4 30 8 0 Z"
-                  fill="#3D8B3D"
-                  stroke="#fff"
-                  strokeWidth="3"
-                  opacity="0.9"
-                />
-              </g>
-            ))}
-          </svg>
+          <div style={{ transform: 'rotate(2.5deg)' }}>
+            <div
+              className="flex flex-col items-start bg-white relative"
+              style={{ width: 220, height: 210, filter: 'drop-shadow(4px 8px 18px rgba(28,43,26,0.28))' }}
+            >
+              <div
+                className="flex flex-col gap-4 bg-white items-start"
+                style={{ width: 220, height: 210, paddingTop: 5.812, paddingLeft: 6, paddingRight: 6 }}
+              >
+                <div className="relative" style={{ width: '100%', height: 160, background: '#b8ccba' }}>
+                  <img
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src={`${A}/imgImageAnhSangLcQuaDayBinNiThmCBinSinhSng.png`}
+                  />
+                </div>
+                <p
+                  className="font-mono text-center"
+                  style={{ width: '100%', fontSize: 9, color: '#6b5c3e', lineHeight: '12.375px' }}
+                >
+                  Độ sâu 3–5m · Bãi Hương
+                </p>
+              </div>
+              {/* Subtle dark overlay */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to right, rgba(26,61,43,0.13), rgba(26,61,43,0.44))' }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Fish at (571, 535) 90×71 */}
-      <div className="absolute" style={{ left: 571, top: 535 }}>
-        <Creature type="fish" width={90} height={71} fill="#E86B35" rotate={18} />
+      {/* Cỏ biển dài background illustration at ~28.78% inset */}
+      <div className="absolute" style={{ left: 288, top: 236, width: 233, height: 233 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/imgCBinDai.png`} />
       </div>
 
-      {/* Layer_1 small leaf at (1211, 108) 104×94 */}
-      <div className="absolute" style={{ left: 1211, top: 108 }}>
-        <Creature type="leaf" width={50} height={94} fill="#6BAE6B" rotate={20} />
+      {/* Cỏ biển trònpsd at ~14.35% inset (mirrored, rotated 5.57°) */}
+      <div
+        className="absolute"
+        style={{ left: 70, top: 118, width: 155, height: 171, transform: 'scaleX(-1) rotate(5.57deg)' }}
+      >
+        <img alt="" className="block w-full h-full" src={`${A}/imgCBinTronpsd.png`} />
       </div>
 
-      {/* === RIGHT — S5 Text Content (732, 70) 588×586 === */}
-      <div className="absolute" style={{ left: 732, top: 70, width: 588 }}>
-        {/* Tag */}
-        <div className="flex items-center gap-3 mb-3">
-          <TornTag bg="bg-green-mid">Cỏ biển · Seagrass</TornTag>
-          <span className="text-tag-up uppercase text-sand-mid opacity-60">Độ sâu 3–5m · Bãi Hương</span>
+      {/* Fish at (557.62, 534.66) rotated 15° */}
+      <div
+        className="absolute flex items-center justify-center"
+        style={{ left: 557.62, top: 534.66, width: 89.767, height: 70.675 }}
+      >
+        <div style={{ transform: 'rotate(15deg)' }}>
+          <div className="relative" style={{ width: 79, height: 52 }}>
+            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLayer1.png`} />
+          </div>
+        </div>
+      </div>
+
+      {/* Layer_1 small at (1211, 108) 103.67×94.34 */}
+      <div className="absolute" style={{ left: 1211, top: 108, width: 103.67, height: 94.34 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/imgLayer2.png`} />
+      </div>
+
+      {/* === RIGHT — S5 Text Content (732, 70) 588×... === */}
+      <div className="absolute flex flex-col items-start overflow-clip" style={{ left: 732, top: 70, width: 588, gap: 24 }}>
+        {/* Label torn-tag */}
+        <div className="relative" style={{ width: 173, height: 33 }}>
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.png`} />
+          <div
+            className="absolute flex items-center justify-center"
+            style={{
+              left: 'calc(50% + 0.5px)',
+              top: 'calc(50% + 0.5px)',
+              transform: 'translate(-50%, -50%)',
+              paddingLeft: 16,
+              paddingRight: 16,
+              paddingTop: 10,
+              paddingBottom: 10,
+            }}
+          >
+            <p
+              className="font-display font-semibold text-white uppercase whitespace-nowrap"
+              style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px' }}
+            >
+              Cỏ biển · Seagrass
+            </p>
+          </div>
         </div>
 
         {/* H2 */}
-        <h2
-          className="font-display font-bold text-ink-white mt-4"
-          style={{ fontSize: 56, lineHeight: '108%', letterSpacing: '-1.5px' }}
+        <div
+          className="font-display font-bold"
+          style={{ color: '#fff', fontSize: 52, letterSpacing: '-0.8px', lineHeight: 0, width: '100%' }}
         >
-          Tôi là cỏ biển.<br />
-          <span className="text-ocean-light">Không phải rong.</span>
-        </h2>
+          <p style={{ lineHeight: 1.08, marginBottom: 0 }}>Tôi là cỏ biển.</p>
+          <p style={{ lineHeight: 1.08, color: '#6bae6b' }}>Không phải rong.</p>
+        </div>
 
-        {/* Body */}
-        <p
-          className="font-body text-sand-mid mt-8"
-          style={{ fontSize: 17, lineHeight: '170%', opacity: 0.88 }}
+        {/* Subhead Lora Italic */}
+        <div
+          className="font-quote italic"
+          style={{ color: '#e8d5b0', fontSize: 18, opacity: 0.92, lineHeight: 0, width: '100%' }}
         >
-          Nhiều người lần đầu nhìn thấy thường nghĩ tôi là rong. Nhưng tôi có rễ, có thân ngầm, có lá. Và tôi ra hoa.
-        </p>
+          <p style={{ lineHeight: 'normal', marginBottom: 0 }}>Nhiều người lần đầu nhìn thấy thường nghĩ tôi là rong.</p>
+          <p style={{ lineHeight: 'normal', marginBottom: 0 }}>Nhưng tôi có rễ, có thân ngầm, có lá. Và tôi ra hoa.</p>
+          <p style={{ lineHeight: 'normal' }}>Và tôi đang làm rất nhiều việc mà bạn không hay biết.</p>
+        </div>
 
-        {/* 4 STAT GRID 2×2 */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-8">
+        {/* Divider Line */}
+        <div className="relative" style={{ width: 48, height: 0 }}>
+          <img alt="" className="block w-full" src={`${A}/imgLine.png`} style={{ position: 'absolute', top: -1, width: '100%' }} />
+        </div>
+
+        {/* 4 Stat grid 2×2 */}
+        <div className="grid grid-cols-2 gap-3 w-full">
           {stats.map((s, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <div className="font-display font-black flex-shrink-0" style={{ color: s.color, fontSize: 32, letterSpacing: '-1px', lineHeight: '100%' }}>
+            <div
+              key={i}
+              className="flex flex-col gap-1.5 items-start relative"
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                padding: 17,
+                height: 97,
+              }}
+            >
+              <p
+                className="font-mono font-bold whitespace-nowrap"
+                style={{ color: '#f5a07a', fontSize: 24, lineHeight: '24px' }}
+              >
                 {s.num}
-              </div>
-              <div className="font-body text-sand-light" style={{ fontSize: 13, lineHeight: '150%', opacity: 0.82 }}>
+              </p>
+              <p
+                className="font-display font-medium"
+                style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, letterSpacing: '0.8px', width: 180 }}
+              >
                 {s.label}
-              </div>
+              </p>
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <button
-          className="mt-8 inline-flex items-center justify-center bg-ocean-primary rounded-[2px] hover:bg-ocean-deep transition-colors"
-          style={{ width: 216, height: 46 }}
+        <div
+          className="flex items-center font-display font-medium text-white rounded-[2px] overflow-clip"
+          style={{
+            background: '#e86b35',
+            paddingLeft: 28,
+            paddingRight: 28,
+            paddingTop: 16,
+            paddingBottom: 16,
+            fontSize: 14,
+            lineHeight: 1,
+            letterSpacing: '0.5px',
+            boxShadow: '0px 8px 20px 0px rgba(41,153,150,0.35)',
+          }}
         >
-          <span className="text-cta-btn text-ink-white">Câu chuyện của tôi  →</span>
-        </button>
+          <p className="whitespace-pre">{'Câu chuyện của tôi  →'}</p>
+        </div>
       </div>
-
-      {/* Seagrass field at bottom (0, 656) 1440×211 */}
-      <SeagrassField width={1440} height={164} baseColor="#1E5C1E" className="absolute" style={{ left: 0, top: 656 }} />
     </section>
   );
 }

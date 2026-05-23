@@ -1,173 +1,187 @@
-import TornTag from '@/components/TornTag';
-import PhotoFrame from '@/components/PhotoFrame';
-import Creature from '@/components/Creature';
-
 /**
- * S3 Three Cards — 1440×1026 at y=2010.
- * Section title left + asymmetric 3 cards (EAT/STAY/EXPLORE).
- * Card positions per Figma:
- * - EAT: (120, 350) 373×529 rotation -1.5°
- * - STAY: (540, 326) 365×523 rotation +0.5°
- * - EXPLORE: (960, 362) 376×531 rotation +1.8°
- * Floating Cua creature at (1128, 108) 165×129.
- * Group 1 (CO₂ bubble cluster) at (920, 140) 428×148.
- * Label "Khám phá cù lao chàm" at (120, 83) 206×33.
+ * S3 Three Cards — 1440×1026 at y=2010. Pixel-perfect from Figma node 54:17.
+ * Real assets in /public/assets/s3cards/
  */
-const cards = [
-  {
-    id: 'EAT',
-    tag: 'Ăn gì?',
-    tagBg: 'bg-coral',
-    photoBg: 'bg-coral-light',
-    photoLbl: 'Bàn ăn gỗ ngoài trời — hải sản tươi',
-    title: 'Từ biển lên bàn ăn.',
-    body: 'Bữa trưa, thay vì đưa ra thực đơn, dân làng sẽ hỏi bạn: "Bữa ni ăn cá tôm hầy? Mới lên sáng ni."',
-    cta: 'Từ biển lên bàn ăn  →',
-    ctaColor: 'text-coral',
-    x: 120,
-    y: 350,
-    rotate: -1.5,
-  },
-  {
-    id: 'STAY',
-    tag: 'Ở đâu',
-    tagBg: 'bg-ocean-primary',
-    photoBg: 'bg-ocean-light',
-    photoLbl: 'Hiên homestay — võng, ánh chiều nghiêng',
-    title: 'Sống cùng người địa phương.',
-    body: 'Ở Cù Lao Chàm, bạn sẽ không thấy nhiều khách sạn lớn. Thay vào đó là những ngôi nhà nhỏ, nằm dọc theo Bãi Làng, Bãi Hương.',
-    cta: 'Sống cùng người đảo  →',
-    ctaColor: 'text-ocean-primary',
-    x: 540,
-    y: 326,
-    rotate: 0.5,
-  },
-  {
-    id: 'EXPLORE',
-    tag: 'đi đâu',
-    tagBg: 'bg-green-mid',
-    photoBg: 'bg-green-light',
-    photoLbl: 'San hô, đàn cá, ánh sáng dưới nước',
-    title: 'Lên rừng — Xuống biển.',
-    body: 'Ở Cù Lao Chàm, dưới mặt nước là nhiều lớp sự sống khác nhau. Rời biển một chút, bạn sẽ bước vào rừng nguyên sinh.',
-    cta: 'Bãi nào, làm gì  →',
-    ctaColor: 'text-green-mid',
-    x: 960,
-    y: 362,
-    rotate: 1.8,
-  },
-];
+const A = '/WWF-Cobien/assets/s3cards';
+
+type CardProps = {
+  imgSrc: string;
+  labelImg: string;
+  labelText: string;
+  title: string;
+  body: string;
+  cta: string;
+  ctaColor: string;
+  x: number;
+  y: number;
+  rotate: number;
+  labelW: number;
+  labelLeft: number;
+  labelRotate?: number;
+};
+
+function Card({ imgSrc, labelImg, labelText, title, body, cta, ctaColor, x, y, rotate, labelW, labelLeft, labelRotate = 0 }: CardProps) {
+  return (
+    <div
+      className="absolute flex items-center justify-center"
+      style={{ left: x, top: y, width: rotate < 0 ? 373.489 : rotate < 1 ? 364.524 : 376.156, height: 530 }}
+    >
+      <div style={{ transform: `rotate(${rotate}deg)` }}>
+        <div
+          className="bg-white relative overflow-clip rounded-[2px]"
+          style={{ width: 360, height: 520, boxShadow: '0px 18px 40px 0px rgba(13,38,33,0.13)' }}
+        >
+          {/* Photo Frame */}
+          <div className="absolute bg-white overflow-clip" style={{ left: 6, top: 6, width: 348, height: 252 }}>
+            <div className="absolute" style={{ left: 4, top: 4, width: 340, height: 244, background: '#b8ccba' }}>
+              <img alt="" className="absolute inset-0 w-full h-full object-cover" src={imgSrc} />
+            </div>
+          </div>
+
+          {/* Torn-tag Label */}
+          <div
+            className="absolute flex items-center justify-center"
+            style={{
+              left: labelLeft,
+              top: 238,
+              width: labelW,
+              height: 33,
+              transform: labelRotate ? `rotate(${labelRotate}deg)` : undefined,
+            }}
+          >
+            <div className="relative" style={{ width: labelW, height: 33 }}>
+              <img alt="" className="absolute inset-0 w-full h-full" src={labelImg} />
+              <div
+                className="absolute flex items-center justify-center"
+                style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
+              >
+                <p
+                  className="font-display font-semibold text-white uppercase whitespace-nowrap"
+                  style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px' }}
+                >
+                  {labelText}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Content text block */}
+          <div className="absolute flex flex-col items-start" style={{ left: 24, top: 298, width: 312, gap: 16 }}>
+            <p
+              className="font-display font-bold"
+              style={{ color: '#1a2e2d', fontSize: 28, lineHeight: 'normal', letterSpacing: '-0.3px' }}
+            >
+              {title}
+            </p>
+            <p
+              className="font-display font-normal whitespace-pre-wrap"
+              style={{ color: '#5a7370', fontSize: 12, lineHeight: 1.5, letterSpacing: '0.2px' }}
+            >
+              {body}
+            </p>
+            <p
+              className="font-display font-semibold whitespace-pre-wrap"
+              style={{ color: ctaColor, fontSize: 15, lineHeight: 1, letterSpacing: '0.5px' }}
+            >
+              {cta}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ThreeCards() {
   return (
-    <section className="relative w-[1440px] h-[1026px] bg-ink-offwhite overflow-hidden">
-      {/* Section label (120, 83) */}
-      <div className="absolute" style={{ left: 120, top: 83 }}>
-        <TornTag bg="bg-ocean-primary">Khám phá Cù Lao Chàm</TornTag>
-      </div>
-
-      {/* Title at (120, 128) 549×112 */}
-      <h2
-        className="absolute font-display font-bold text-ink-main"
-        style={{ left: 120, top: 128, width: 720, fontSize: 52, lineHeight: '108%', letterSpacing: '-0.8px' }}
+    <section className="relative" style={{ width: 1440, height: 1026, background: '#f8f5ef', overflow: 'hidden' }}>
+      {/* Section title at (120, 128) */}
+      <div
+        className="absolute font-display font-bold whitespace-nowrap"
+        style={{ left: 120, top: 128, color: '#1a2e2d', fontSize: 52, letterSpacing: '-0.8px', lineHeight: 0 }}
       >
-        Đây là nơi để sống —<br />
-        không chỉ để ghé qua.
-      </h2>
-
-      {/* Floating Cua at (1128, 108) 165×129 */}
-      <div className="absolute" style={{ left: 1128, top: 108 }}>
-        <Creature type="crab" width={165} height={129} fill="#E86B35" rotate={-12} />
+        <p style={{ lineHeight: 1.08, marginBottom: 0 }}>Đây là nơi để sống —</p>
+        <p style={{ lineHeight: 1.08 }}>không chỉ để ghé qua.</p>
       </div>
 
-      {/* Group 1 (CO₂ bubbles) at (920, 140) 428×148 */}
+      {/* Cua at (1128, 108) 165×129 */}
+      <div className="absolute" style={{ left: 1128, top: 108, width: 165, height: 129 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/imgCua.png`} />
+      </div>
+
+      {/* Group 1 bubble cluster at (920, 140) 428×148 */}
       <div className="absolute" style={{ left: 920, top: 140, width: 428, height: 148 }}>
-        <div className="absolute" style={{ left: 0, top: 0 }}>
-          <svg width="24" height="24"><circle cx="12" cy="12" r="10" fill="#7DD3D0" fillOpacity="0.22" stroke="#fff" strokeWidth="1.5" /></svg>
-        </div>
-        <div className="absolute" style={{ left: 160, top: 60 }}>
-          <svg width="16" height="16"><circle cx="8" cy="8" r="7" fill="#7DD3D0" fillOpacity="0.22" stroke="#fff" strokeWidth="1.5" /></svg>
-        </div>
-        <div className="absolute" style={{ left: 400, top: 120 }}>
-          <svg width="28" height="28"><circle cx="14" cy="14" r="13" fill="#7DD3D0" fillOpacity="0.22" stroke="#fff" strokeWidth="1.5" /></svg>
+        <img alt="" className="block w-full h-full" src={`${A}/imgGroup1.png`} />
+      </div>
+
+      {/* Section Label "Khám phá cù lao chàm" at (120, 83) */}
+      <div className="absolute" style={{ left: 120, top: 83, width: 206, height: 33 }}>
+        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel3.png`} />
+        <div
+          className="absolute flex items-center justify-center"
+          style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
+        >
+          <p
+            className="font-display font-semibold text-white uppercase whitespace-nowrap"
+            style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px' }}
+          >
+            Khám phá cù lao chàm
+          </p>
         </div>
       </div>
 
-      {/* Cards */}
-      {cards.map((c) => (
-        <div
-          key={c.id}
-          className="absolute bg-ink-white rounded-[2px] shadow-card overflow-hidden"
-          style={{
-            left: c.x,
-            top: c.y,
-            width: c.id === 'STAY' ? 365 : c.id === 'EXPLORE' ? 376 : 373,
-            height: c.id === 'STAY' ? 523 : c.id === 'EXPLORE' ? 531 : 529,
-            transform: `rotate(${c.rotate}deg)`,
-          }}
-        >
-          {/* Photo top — full width, 248h */}
-          <div className="relative w-full h-[252px] p-[6px] bg-white">
-            <div className={`relative w-full h-full ${c.photoBg} flex items-center justify-center`}>
-              <span className="text-body-caption text-ink-white opacity-55 text-center px-3">[ {c.photoLbl} ]</span>
-            </div>
-          </div>
+      {/* Card — EAT at (106.26, 350.38) rotated +1.5° */}
+      <Card
+        imgSrc={`${A}/imgEat.png`}
+        labelImg={`${A}/imgLabel.png`}
+        labelText="Ăn gì?"
+        title="Từ biển lên bàn ăn."
+        body={`Bữa trưa, thay vì đưa ra thực đơn, dân làng sẽ hỏi bạn: "Bữa ni ăn cá tôm hầy? Mới lên sáng ni!"\nChính điều ấy làm bữa ăn ở đây khác đi. Bạn không thể đoán trước bữa ăn sắp tới có gì, nhưng có thể chắc chắn rằng mỗi nguyên liệu đều ở độ tươi ngon nhất.`}
+        cta={'Từ biển lên bàn ăn  →'}
+        ctaColor="#e86b35"
+        x={106.26}
+        y={350.38}
+        rotate={1.5}
+        labelW={82}
+        labelLeft={20}
+      />
 
-          {/* Torn tag overlapping photo bottom */}
-          <div className="absolute" style={{ left: 22, top: 240 }}>
-            <TornTag bg={c.tagBg}>{c.tag}</TornTag>
-          </div>
+      {/* Card — STAY at (540, 322.86) rotated -0.5° */}
+      <Card
+        imgSrc={`${A}/imgStay.png`}
+        labelImg={`${A}/imgLabel1.png`}
+        labelText="Ở đâu"
+        title="Sống cùng người địa phương."
+        body="Ở Cù Lao Chàm, bạn sẽ không thấy nhiều khách sạn lớn. Thay vào đó là những ngôi nhà nhỏ, nằm dọc theo Bãi Làng, Bãi Hương. Người mở cửa đón bạn không phải là lễ tân, mà là chính chủ nhà."
+        cta={'Sống cùng người đảo  →'}
+        ctaColor="#2a9b97"
+        x={540}
+        y={322.86}
+        rotate={-0.5}
+        labelW={64}
+        labelLeft={17.63}
+        labelRotate={0.5}
+      />
 
-          {/* Content area */}
-          <div className="px-6 pt-[48px]">
-            <h3
-              className="font-display font-bold text-ink-main"
-              style={{ fontSize: 26, lineHeight: '116%', letterSpacing: '-0.3px' }}
-            >
-              {c.title}
-            </h3>
-            <p
-              className="font-body text-ink-muted mt-3"
-              style={{ fontSize: 14, lineHeight: '168%' }}
-            >
-              {c.body}
-            </p>
-            <div className={`mt-5 font-display font-semibold ${c.ctaColor}`} style={{ fontSize: 14, letterSpacing: '0.5px' }}>
-              {c.cta}
-            </div>
-          </div>
-        </div>
-      ))}
+      {/* Card — EXPLORE at (960, 350.69) rotated -1.8° */}
+      <Card
+        imgSrc={`${A}/imgExplore.png`}
+        labelImg={`${A}/imgLabel2.png`}
+        labelText="đi đâu"
+        title="Lên rừng - Xuống biển"
+        body="Ở Cù Lao Chàm, dưới mặt nước là nhiều lớp sự sống khác nhau. Rời biển một chút, bạn sẽ bước vào một không gian hoàn toàn khác. Rừng ở Cù Lao Chàm không quá dày đặc, nhưng đủ để bạn cảm nhận sự thay đổi."
+        cta={'Bãi nào, làm gì  →'}
+        ctaColor="#3d8b3d"
+        x={960}
+        y={350.69}
+        rotate={-1.8}
+        labelW={72}
+        labelLeft={19.92}
+      />
 
-      {/* Bottom Layer_1 deco at (493, 824) 184×163 */}
+      {/* Layer_1 decoration at (493, 824) 184×163 */}
       <div className="absolute" style={{ left: 493, top: 824, width: 184, height: 163 }}>
-        <svg viewBox="0 0 184 163" width="184" height="163">
-          {/* Cut-paper coral/seagrass cluster */}
-          <path
-            d="M 20 130 Q 30 90 25 50 Q 40 80 45 130 Z"
-            fill="#3D8B3D"
-            stroke="#fff"
-            strokeWidth="3"
-          />
-          <path
-            d="M 60 140 Q 75 100 70 40 Q 90 90 95 140 Z"
-            fill="#6BAE6B"
-            stroke="#fff"
-            strokeWidth="3"
-          />
-          <path
-            d="M 110 145 Q 120 100 115 50 Q 135 90 140 145 Z"
-            fill="#3D8B3D"
-            stroke="#fff"
-            strokeWidth="3"
-          />
-          <path
-            d="M 155 140 Q 165 100 160 60 Q 178 95 180 140 Z"
-            fill="#6BAE6B"
-            stroke="#fff"
-            strokeWidth="3"
-          />
-        </svg>
+        <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.png`} />
       </div>
     </section>
   );

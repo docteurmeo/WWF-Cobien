@@ -1,90 +1,128 @@
-import TornTag from '@/components/TornTag';
-import Creature from '@/components/Creature';
-
 /**
- * S8 Dual CTA — 1440×560 at y=5524.
- * 2 background photo halves (720×560 each).
- * Left Conservation at (120, 70) 588×440.
- * Right Tourism at (770, 70) 588×440.
- * Labels: "tìm hiểu về Bảo tồn" + "LÊN KẾ HOẠCH".
+ * S8 Dual CTA — 1440×560 at y=5524. Pixel-perfect from Figma node 57:2.
+ * Bg: 2 photo halves of co bien (real photos with dark overlay) + text + CTAs.
  */
+const A = '/WWF-Cobien/assets/s8';
+
 export default function DualCTA() {
   return (
-    <section className="relative w-[1440px] h-[560px] overflow-hidden bg-ink-bgdark">
-      {/* 2 photo halves background */}
+    <section className="relative" style={{ width: 1440, height: 560, background: '#e8d5b0', overflow: 'hidden' }}>
+      {/* LEFT bg photo (0,0) 720x560 with 0.4 dark overlay */}
+      <div className="absolute" style={{ left: 0, top: 0, width: 720, height: 560 }}>
+        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375331.png`} />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.4)' }} />
+      </div>
+
+      {/* RIGHT bg photo (720,0) 720x560 with 0.27 dark overlay */}
+      <div className="absolute" style={{ left: 720, top: 0, width: 720, height: 560 }}>
+        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375332.png`} />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.27)' }} />
+      </div>
+
+      {/* LEFT Conservation Block (120, 70) 588×440 */}
       <div
-        className="absolute bg-ocean-deep"
-        style={{ left: 0, top: 0, width: 720, height: 560 }}
+        className="absolute flex flex-col items-start overflow-clip"
+        style={{ left: 120, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24 }}
       >
-        {/* Dark teal photo bg (left/conservation) */}
-        <div className="w-full h-full flex items-center justify-center text-body-caption text-ink-white opacity-40">
-          [ Underwater seagrass photo bg ]
+        {/* Label */}
+        <div className="relative" style={{ width: 186, height: 33 }}>
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel.png`} />
+          <div
+            className="absolute flex items-center justify-center"
+            style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
+          >
+            <p
+              className="font-display font-semibold text-white uppercase whitespace-nowrap"
+              style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px' }}
+            >
+              tìm hiểu về Bảo tồn
+            </p>
+          </div>
+        </div>
+
+        {/* H3 */}
+        <div
+          className="font-display font-bold text-white whitespace-nowrap"
+          style={{ fontSize: 42, letterSpacing: '-0.8px', lineHeight: 0 }}
+        >
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Cỏ biển là gì.</p>
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Tại sao đang mất dần.</p>
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Điều gì đang được làm</p>
+          <p style={{ lineHeight: 1.15 }}>để giữ lại.</p>
+        </div>
+
+        {/* CTA Left */}
+        <div
+          className="flex items-center overflow-clip rounded-[2px]"
+          style={{
+            background: '#1a7f7c',
+            paddingLeft: 28,
+            paddingRight: 28,
+            paddingTop: 15,
+            paddingBottom: 15,
+            boxShadow: '0px 8px 16px 0px rgba(26,128,125,0.35)',
+          }}
+        >
+          <p
+            className="font-display font-medium text-white whitespace-pre"
+            style={{ fontSize: 14, lineHeight: 1, letterSpacing: '0.5px' }}
+          >
+            {'Đọc câu chuyện cỏ biển  →'}
+          </p>
         </div>
       </div>
+
+      {/* RIGHT Tourism Block (770, 70) 588×440 */}
       <div
-        className="absolute bg-sand-dark"
-        style={{ left: 720, top: 0, width: 720, height: 560 }}
+        className="absolute flex flex-col items-start overflow-clip"
+        style={{ left: 770, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24 }}
       >
-        <div className="w-full h-full flex items-center justify-center text-body-caption text-ink-white opacity-40">
-          [ Island/harbor photo bg ]
+        {/* Label */}
+        <div className="relative" style={{ width: 144, height: 33 }}>
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel1.png`} />
+          <div
+            className="absolute flex items-center justify-center"
+            style={{ left: '50%', top: 'calc(50% + 0.5px)', transform: 'translate(-50%, -50%)', paddingLeft: 16, paddingRight: 16, paddingTop: 10, paddingBottom: 10 }}
+          >
+            <p
+              className="font-display font-semibold text-white uppercase whitespace-nowrap"
+              style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px' }}
+            >
+              LÊN KẾ HOẠCH
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Subtle overlay to ensure text readability */}
-      <div className="absolute inset-0" style={{ background: 'rgba(15, 37, 36, 0.55)' }} />
-
-      {/* LEFT — Conservation at (120, 70) 588×440 */}
-      <div className="absolute" style={{ left: 120, top: 70, width: 588, height: 440 }}>
-        <div style={{ marginTop: 30 }}>
-          <TornTag bg="bg-ocean-deep">tìm hiểu về Bảo tồn</TornTag>
+        {/* H3 */}
+        <div
+          className="font-display font-bold text-white whitespace-nowrap"
+          style={{ fontSize: 42, letterSpacing: '-0.8px', lineHeight: 0 }}
+        >
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Cách ra đảo.</p>
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Ở đâu, ăn gì, đi đâu.</p>
+          <p style={{ lineHeight: 1.15, marginBottom: 0 }}>Vì sao nên ở lại</p>
+          <p style={{ lineHeight: 1.15 }}>lâu hơn một ngày.</p>
         </div>
-        <h3
-          className="font-display font-bold text-ink-white mt-6"
-          style={{ fontSize: 42, lineHeight: '115%', letterSpacing: '-0.5px' }}
-        >
-          Cỏ biển là gì.<br />
-          Tại sao đang mất dần.<br />
-          Điều gì đang được làm<br />
-          để giữ lại.
-        </h3>
-        <button
-          className="mt-8 bg-ocean-deep rounded-[2px] hover:bg-ocean-primary transition-colors flex items-center justify-center shadow-btn-teal"
-          style={{ width: 246, height: 44, paddingLeft: 28, paddingRight: 28 }}
-        >
-          <span className="text-cta-btn text-ink-white">Đọc câu chuyện cỏ biển  →</span>
-        </button>
-      </div>
 
-      {/* Small accent: Coral creature/leaf at bottom-left edge */}
-      <div className="absolute" style={{ left: 540, top: 460 }}>
-        <Creature type="leaf" width={50} height={90} fill="#3D8B3D" rotate={-12} />
-      </div>
-
-      {/* RIGHT — Tourism at (770, 70) 588×440 */}
-      <div className="absolute" style={{ left: 770, top: 70, width: 588, height: 440 }}>
-        <div style={{ marginTop: 30 }}>
-          <TornTag bg="bg-coral">LÊN KẾ HOẠCH</TornTag>
+        {/* CTA Right */}
+        <div
+          className="flex items-center overflow-clip rounded-[2px]"
+          style={{
+            background: '#e86b35',
+            paddingLeft: 28,
+            paddingRight: 28,
+            paddingTop: 15,
+            paddingBottom: 15,
+            boxShadow: '0px 8px 16px 0px rgba(232,107,54,0.35)',
+          }}
+        >
+          <p
+            className="font-display font-medium text-white whitespace-pre"
+            style={{ fontSize: 14, lineHeight: 1, letterSpacing: '0.5px' }}
+          >
+            {'Khám phá Cù Lao Chàm  →'}
+          </p>
         </div>
-        <h3
-          className="font-display font-bold text-ink-white mt-6"
-          style={{ fontSize: 42, lineHeight: '115%', letterSpacing: '-0.5px' }}
-        >
-          Cách ra đảo.<br />
-          Ở đâu, ăn gì, đi đâu.<br />
-          Vì sao nên ở lại<br />
-          lâu hơn một ngày.
-        </h3>
-        <button
-          className="mt-8 bg-coral rounded-[2px] hover:opacity-90 transition-opacity flex items-center justify-center shadow-btn-coral"
-          style={{ width: 246, height: 44, paddingLeft: 28, paddingRight: 28 }}
-        >
-          <span className="text-cta-btn text-ink-white">Khám phá Cù Lao Chàm  →</span>
-        </button>
-      </div>
-
-      {/* Cua bottom-right accent */}
-      <div className="absolute" style={{ left: 1280, top: 470 }}>
-        <Creature type="crab" width={80} height={60} fill="#E86B35" rotate={15} />
       </div>
     </section>
   );
