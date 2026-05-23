@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Base reset === */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Geologica', system-ui, sans-serif;
+  color: #1A2E2D;
+  background: #F5EDD8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* Pixel-perfect 1440px — disable mobile responsive scaling */
+  min-width: 1440px;
+}
+
+#root {
+  width: 100%;
+}
+
+/* Lora italic helper */
+.font-quote {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+}
+
+/* === Page frame helper === */
+.page-frame {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+/* === Smooth scroll === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === Torn-edge polygon backgrounds via clip-path === */
+.torn-tag-clip {
+  clip-path: polygon(
+    2% 11%, 10% 0%, 22% 7%, 36% 4%, 48% 11%, 62% 0%, 76% 7%, 88% 4%, 96% 0%, 99% 11%,
+    100% 89%, 92% 100%, 78% 96%, 65% 100%, 50% 93%, 35% 100%, 22% 96%, 10% 100%, 4% 93%, 0% 89%
+  );
+}
