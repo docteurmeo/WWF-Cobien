@@ -143,9 +143,11 @@ export default function SeagrassNarrator() {
           <p style={{ lineHeight: 'normal' }}>Và tôi đang làm rất nhiều việc mà bạn không hay biết.</p>
         </div>
 
-        {/* Divider Line */}
+        {/* Divider Line — explicit height to prevent SVG intrinsic size expansion */}
         <div className="relative" style={{ width: 48, height: 0 }}>
-          <img alt="" className="block w-full" src={`${A}/imgLine.svg`} style={{ position: 'absolute', top: -1, width: '100%' }} />
+          <div className="absolute" style={{ top: -1, left: 0, right: 0, height: 2 }}>
+            <img alt="" className="block w-full h-full" src={`${A}/imgLine.svg`} />
+          </div>
         </div>
 
         {/* 4 Stat grid 2×2 */}
