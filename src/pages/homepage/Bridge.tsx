@@ -30,12 +30,13 @@ export default function Bridge() {
           <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 2 }}>
             <Wave fill={NEXT_BG} height={80} amplitude={14} wavelength={420} speedSeconds={16} />
           </div>
-          {/* Diving bubbles — nổi từ đáy section (1440x650) lên đỉnh,
-              dày hơn 2 section khác vì đây là khoảnh khắc "lặn xuống" */}
-          <div className="absolute left-0 right-0 bottom-0" style={{ height: 650, zIndex: 3 }}>
+          {/* Diving bubbles — nổi từ MẶT NƯỚC (top của bottom wave, y=570)
+              lên đỉnh (vừa dưới top wave, y=80). Cao 490px, nằm GIỮA 2 wave
+              để bubble không bị clip ở mép section. */}
+          <div className="absolute left-0 right-0" style={{ bottom: 80, height: 490, zIndex: 3 }}>
             <BubbleField
               width={1440}
-              height={570}
+              height={490}
               count={22}
               sizeRange={[18, 48]}
               durationRange={[9, 17]}
