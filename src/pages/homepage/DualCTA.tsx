@@ -1,28 +1,55 @@
+import FrameSection from '@/components/FrameSection';
+
 /**
  * S8 Dual CTA — 1440×560 at y=5524. Pixel-perfect from Figma node 57:2.
  * Bg: 2 photo halves of co bien (real photos with dark overlay) + text + CTAs.
+ *
+ * Responsive: 2 photo halves go in fullBleed slot, each at 50vw width with
+ * `background-size: cover` — preserves photo ratio while filling viewport edge-to-edge.
+ * Text/CTA stay in centered 1440 grid.
  */
 const A = '/WWF-Cobien/assets/s8';
 
 export default function DualCTA() {
   return (
-    <section className="relative" style={{ width: 1440, height: 560, background: '#e8d5b0', overflow: 'hidden' }}>
-      {/* LEFT bg photo (0,0) 720x560 with 0.4 dark overlay */}
-      <div className="absolute" style={{ left: 0, top: 0, width: 720, height: 560 }}>
-        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375331.jpg`} />
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.4)' }} />
-      </div>
-
-      {/* RIGHT bg photo (720,0) 720x560 with 0.27 dark overlay */}
-      <div className="absolute" style={{ left: 720, top: 0, width: 720, height: 560 }}>
-        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375332.png`} />
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.27)' }} />
-      </div>
-
+    <FrameSection
+      height={560}
+      background="#e8d5b0"
+      fullBleed={
+        <>
+          {/* LEFT half — fills left 50vw at any viewport ≥1440 */}
+          <div
+            className="absolute top-0 bottom-0"
+            style={{
+              left: 0,
+              width: '50%',
+              backgroundImage: `url(${A}/imgCoBien15868375331.jpg)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.4)' }} />
+          </div>
+          {/* RIGHT half — fills right 50vw */}
+          <div
+            className="absolute top-0 bottom-0"
+            style={{
+              left: '50%',
+              width: '50%',
+              backgroundImage: `url(${A}/imgCoBien15868375332.png)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.27)' }} />
+          </div>
+        </>
+      }
+    >
       {/* LEFT Conservation Block (120, 70) 588×440 */}
       <div
         className="absolute flex flex-col items-start overflow-clip"
-        style={{ left: 120, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24 }}
+        style={{ left: 120, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24, zIndex: 2 }}
       >
         {/* Label */}
         <div className="relative" style={{ width: 186, height: 33 }}>
@@ -75,7 +102,7 @@ export default function DualCTA() {
       {/* RIGHT Tourism Block (770, 70) 588×440 */}
       <div
         className="absolute flex flex-col items-start overflow-clip"
-        style={{ left: 770, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24 }}
+        style={{ left: 770, top: 70, width: 588, height: 440, paddingTop: 30, gap: 24, zIndex: 2 }}
       >
         {/* Label */}
         <div className="relative" style={{ width: 144, height: 33 }}>
@@ -124,6 +151,6 @@ export default function DualCTA() {
           </p>
         </div>
       </div>
-    </section>
+    </FrameSection>
   );
 }

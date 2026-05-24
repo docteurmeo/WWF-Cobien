@@ -2,6 +2,8 @@
  * S5 Seagrass Narrator (DARK collage moment) — 1440×820 at y=3686.
  * Pixel-perfect from Figma node 55:17.
  */
+import FrameSection from '@/components/FrameSection';
+
 const A = '/WWF-Cobien/assets/s5';
 
 const stats = [
@@ -13,15 +15,22 @@ const stats = [
 
 export default function SeagrassNarrator() {
   return (
-    <section
-      className="relative"
-      style={{ width: 1440, height: 820, background: '#225322', overflow: 'hidden' }}
+    <FrameSection
+      height={820}
+      background="#225322"
+      fullBleed={
+        <div
+          className="seagrass-field"
+          style={{
+            bottom: 0,
+            height: 164,
+            backgroundSize: '1440px 164px',
+            backgroundImage: `url(${A}/imgCoBien.svg)`,
+            zIndex: 1,
+          }}
+        />
+      }
     >
-      {/* Co bien field at bottom 80% */}
-      <div className="absolute" style={{ left: 0, top: 656, width: 1440, height: 164 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.svg`} />
-      </div>
-
       {/* LEFT — Container with big photo at (120, 70) 486×750 */}
       <div className="absolute overflow-clip" style={{ left: 120, top: 70, width: 486, height: 750 }}>
         <img
@@ -197,6 +206,6 @@ export default function SeagrassNarrator() {
           <p className="whitespace-pre">{'Câu chuyện của tôi  →'}</p>
         </div>
       </div>
-    </section>
+    </FrameSection>
   );
 }

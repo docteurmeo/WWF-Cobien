@@ -1,15 +1,14 @@
 import MapFigma from '@/pages/figma-generated/Map';
+import FrameSection from '@/components/FrameSection';
 
 /**
  * S2 Island Positioning — 1440×990 at y=1020.
  * Section bg sand light + intro text + illustrated map (96 assets from Figma).
+ * Responsive: bg extends to viewport edges via FrameSection.
  */
 export default function IslandMap() {
   return (
-    <section
-      className="relative"
-      style={{ width: 1440, height: 990, background: '#F5EDD8', overflow: 'hidden' }}
-    >
+    <FrameSection height={990} background="#F5EDD8">
       {/* S2 Content — intro narrator text at (340, 50) */}
       <div className="absolute flex flex-col items-center text-center" style={{ left: 340, top: 50, width: 760, gap: 28 }}>
         <h2
@@ -32,6 +31,6 @@ export default function IslandMap() {
       <div className="absolute" style={{ left: 120, top: 267, width: 1200, height: 676 }}>
         <MapFigma />
       </div>
-    </section>
+    </FrameSection>
   );
 }

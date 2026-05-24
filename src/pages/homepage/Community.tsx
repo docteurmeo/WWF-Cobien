@@ -2,6 +2,8 @@
  * S7 Community — 1440×1018 at y=4506. Pixel-perfect from Figma node 56:22.
  * Bg: Sand/02 Mid (#E8D5B0). 3 portrait cards + Anh Vũ pull quote block.
  */
+import FrameSection from '@/components/FrameSection';
+
 const A = '/WWF-Cobien/assets/s7';
 
 type PortraitProps = {
@@ -81,7 +83,7 @@ function Portrait({ imgSrc, labelImg, labelText, labelW, quote, x, y, containerW
 
 export default function Community() {
   return (
-    <section className="relative" style={{ width: 1440, height: 1018, background: '#e8d5b0', overflow: 'hidden' }}>
+    <FrameSection height={1018} background="#e8d5b0">
       {/* Section label at (120, 83) */}
       <div className="absolute" style={{ left: 120, top: 83, width: 206, height: 33 }}>
         <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLabel4.svg`} />
@@ -207,6 +209,6 @@ export default function Community() {
           {'Gặp người dân đảo  →'}
         </p>
       </div>
-    </section>
+    </FrameSection>
   );
 }

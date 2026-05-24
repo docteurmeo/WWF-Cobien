@@ -18,7 +18,10 @@ export default function Nav() {
   };
 
   return (
-    <nav className="relative w-[1440px] h-[100px] bg-sand-light shadow-nav z-50">
+    <nav className="relative w-full h-[100px] bg-sand-light shadow-nav z-50" style={{ minWidth: 1440 }}>
+      {/* All grid-locked items live inside a 1440 centered container so nav bg
+          stretches to viewport edges while content keeps Figma positions. */}
+      <div className="absolute" style={{ left: '50%', top: 0, transform: 'translateX(-50%)', width: 1440, height: 100 }}>
       {/* Logo at x=120, y=10, 74x80 */}
       <Link to="/" className="absolute left-[120px] top-[10px]">
         <Logo width={74} height={80} />
@@ -61,6 +64,7 @@ export default function Nav() {
       <button className="absolute left-[1143px] top-[31px] w-[177px] h-[38px] bg-ocean-primary rounded-[2px] flex items-center justify-center hover:bg-ocean-deep transition-colors">
         <span className="text-cta-btn text-ink-white">Khám phá ngay  →</span>
       </button>
+      </div>
     </nav>
   );
 }

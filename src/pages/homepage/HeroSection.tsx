@@ -1,27 +1,45 @@
+import FrameSection from '@/components/FrameSection';
+import Wave from '@/components/Wave';
+
 /**
  * S1 Hero — 1440×920 at y=100. Pixel-perfect from Figma node 51:14.
  * Real assets in /public/assets/heros1/
+ *
+ * Responsive: wraps in FrameSection so background gradient + bottom wave +
+ * seagrass field extend to viewport edges (≥1440). All grid-locked elements
+ * (turtle, photos, copy) stay inside the centered 1440 grid.
  */
 const A = '/WWF-Cobien/assets/heros1';
+const HERO_H = 920;
+const NEXT_BG = '#F5EDD8'; // IslandMap bg — wave fill color
 
 export default function HeroSection() {
   return (
-    <section
-      className="relative size-full"
-      style={{
-        width: 1440,
-        height: 920,
-        background: 'linear-gradient(180deg, #f5edd8 0%, #e8d5b0 45%, #7dd3d0 100%)',
-      }}
-      data-name="S1 Hero — Collage Moment"
+    <FrameSection
+      height={HERO_H}
+      background="linear-gradient(180deg, #f5edd8 0%, #e8d5b0 45%, #7dd3d0 100%)"
+      fullBleed={
+        <>
+          {/* Co bien field — fixed 211px height, tiles horizontally (repeat-x).
+              Width fills viewport; never scales taller on wider screens. */}
+          <div
+            className="seagrass-field"
+            style={{
+              bottom: 0,
+              backgroundImage: `url(${A}/imgCoBien.svg)`,
+              zIndex: 1,
+            }}
+          />
+          {/* Bottom wave — code-generated, fixed 80px tall, animated drift.
+              Fills with NEXT section color so it reads as a smooth transition. */}
+          <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 2 }}>
+            <Wave fill={NEXT_BG} height={80} amplitude={14} wavelength={420} speedSeconds={16} />
+          </div>
+        </>
+      }
     >
-      {/* Co bien field — bottom 211px */}
-      <div className="absolute" style={{ left: 0, top: 709, width: 1440, height: 211 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBien.svg`} />
-      </div>
-
-      {/* Turtle silhouette at (50, 668) 290×182 */}
-      <div className="absolute" style={{ left: 50, top: 668, width: 290, height: 182 }}>
+      {/* Turtle silhouette at (50, 668) 290×182 — sits ABOVE wave via DOM order */}
+      <div className="absolute" style={{ left: 50, top: 668, width: 290, height: 182, zIndex: 3 }}>
         <img alt="" className="block w-full h-full object-cover" src={`${A}/img202605211045051.png`} />
       </div>
 
@@ -171,15 +189,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* WaveDivider at bottom — 1440×80 */}
-      <div className="absolute flex flex-col items-start" style={{ left: 0, bottom: 0, width: 1440, height: 80 }}>
-        <div className="relative overflow-clip" style={{ width: '100%', height: 80 }}>
-          <div className="absolute" style={{ left: 0, right: 0, bottom: 0, top: '31.77%' }}>
-            <img alt="" className="block w-full h-full" src={`${A}/imgVector.svg`} />
-          </div>
-        </div>
-      </div>
-
       {/* Scroll hint centered at top 886 */}
       <p
         className="absolute font-display font-normal uppercase text-center whitespace-pre"
@@ -190,8 +199,9 @@ export default function HeroSection() {
           color: '#225322',
           fontSize: 12,
           opacity: 0.55,
+          zIndex: 3,
         }}
       >{'↓  cuộn để khám phá'}</p>
-    </section>
+    </FrameSection>
   );
 }

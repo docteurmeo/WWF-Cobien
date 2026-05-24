@@ -1,9 +1,18 @@
+import FrameSection from '@/components/FrameSection';
+import Wave from '@/components/Wave';
+
 /**
  * S4 Bridge — 1440×650 at y=3036. Pixel-perfect from Figma node 55:2.
  * Background: horizontal gradient L→R (off-white → sand → light-teal).
- * 2 wave dividers (top flipped, bottom normal). 6 diving bubbles. Text in teal.
+ * 2 code-generated wave dividers (top flipped fills with prev section #f8f5ef,
+ * bottom fills with next section #225322). 6 diving bubbles. Text in teal.
+ *
+ * Responsive: bg gradient + waves extend to viewport edges. Waves keep FIXED
+ * 80px height — no proportional scaling at 1920px.
  */
 const A = '/WWF-Cobien/assets/s4';
+const PREV_BG = '#f8f5ef'; // ThreeCards bg
+const NEXT_BG = '#225322'; // SeagrassNarrator bg
 
 const bubbles = [
   { src: 'imgDivingBubble1', x: 180, y: 200, size: 24 },
@@ -16,35 +25,28 @@ const bubbles = [
 
 export default function Bridge() {
   return (
-    <section
-      className="relative"
-      style={{
-        width: 1440,
-        height: 650,
-        // CRITICAL: gradient is LEFT→RIGHT not top→bottom (Figma uses bg-gradient-to-r)
-        background: 'linear-gradient(to right, #f8f5ef 0%, #e8d5b0 50%, rgba(125,211,208,0.85) 100%)',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Top WaveDivider (rotated 180°) — at y=0, 1440×80 */}
-      <div className="absolute" style={{ left: 0, top: 0, width: 1440, height: 80 }}>
-        <div className="flex items-center justify-center w-full h-full">
-          <div style={{ transform: 'rotate(180deg)', width: 1440, height: 80 }}>
-            <div className="relative w-full h-full overflow-clip">
-              <div className="absolute" style={{ left: 0, right: 0, top: '31.77%', bottom: 0 }}>
-                <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/imgVector1.svg`} />
-              </div>
-            </div>
+    <FrameSection
+      height={650}
+      background="linear-gradient(to right, #f8f5ef 0%, #e8d5b0 50%, rgba(125,211,208,0.85) 100%)"
+      fullBleed={
+        <>
+          {/* Top wave (flipped) — prev section color dips down into bridge */}
+          <div className="absolute left-0 right-0 top-0" style={{ zIndex: 2 }}>
+            <Wave fill={PREV_BG} flip height={80} amplitude={14} wavelength={420} speedSeconds={18} phase={Math.PI / 2} />
           </div>
-        </div>
-      </div>
-
+          {/* Bottom wave — next section dark green rises up into bridge */}
+          <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 2 }}>
+            <Wave fill={NEXT_BG} height={80} amplitude={14} wavelength={420} speedSeconds={16} />
+          </div>
+        </>
+      }
+    >
       {/* 6 Diving Bubbles */}
       {bubbles.map((b) => (
         <div
           key={b.src}
           className="absolute"
-          style={{ left: b.x, top: b.y, width: b.size, height: b.size }}
+          style={{ left: b.x, top: b.y, width: b.size, height: b.size, zIndex: 3 }}
         >
           <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/${b.src}.svg`} />
         </div>
@@ -53,7 +55,7 @@ export default function Bridge() {
       {/* S4 Text Content at (330, 140) 780w, items-center */}
       <div
         className="absolute flex flex-col items-center overflow-clip"
-        style={{ left: 330, top: 140, width: 780, gap: 16 }}
+        style={{ left: 330, top: 140, width: 780, gap: 16, zIndex: 3 }}
       >
         <p
           className="font-quote italic text-center whitespace-nowrap"
@@ -74,14 +76,14 @@ export default function Bridge() {
           Bãi biển chưa bị xói lở.
         </p>
 
-        {/* Divider Line — Figma: outer h=0, inner inset [-2 0 0 0] → renders 56×2px */}
+        {/* Divider Line */}
         <div className="relative" style={{ width: 56, height: 0 }}>
           <div className="absolute" style={{ top: -2, left: 0, right: 0, bottom: 0, height: 2 }}>
             <img alt="" className="block w-full h-full" src={`${A}/imgLine.svg`} />
           </div>
         </div>
 
-        {/* Big closing text — color is OCEAN PRIMARY teal, not dark ink */}
+        {/* Big closing text */}
         <div
           className="font-display font-bold text-center whitespace-nowrap"
           style={{ color: '#2a9b97', fontSize: 52, letterSpacing: '-0.8px', lineHeight: 0 }}
@@ -91,15 +93,6 @@ export default function Bridge() {
           <p style={{ lineHeight: 1.18 }}>chưa bao giờ nhìn thấy.</p>
         </div>
       </div>
-
-      {/* Bottom WaveDivider — at bottom, 1440×80, fills with S5 dark green color */}
-      <div className="absolute flex flex-col" style={{ left: 0, bottom: 0, width: 1440, height: 80 }}>
-        <div className="relative w-full h-full overflow-clip">
-          <div className="absolute" style={{ left: 0, right: 0, top: '31.77%', bottom: 0 }}>
-            <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/imgVector.svg`} />
-          </div>
-        </div>
-      </div>
-    </section>
+    </FrameSection>
   );
 }

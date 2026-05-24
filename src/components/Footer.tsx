@@ -11,8 +11,8 @@ type FooterProps = {
 export default function Footer({ height = 300 }: FooterProps) {
   return (
     <footer
-      className="relative w-[1440px] bg-ink-bgdark text-ink-white px-[120px] pt-[56px] pb-[56px] flex flex-col items-center"
-      style={{ height }}
+      className="relative w-full bg-ink-bgdark text-ink-white pt-[56px] pb-[56px] flex flex-col items-center"
+      style={{ height, minWidth: 1440, paddingLeft: 'max(120px, calc((100% - 1200px) / 2))', paddingRight: 'max(120px, calc((100% - 1200px) / 2))' }}
     >
       {/* Top Row: Logo + Partners */}
       <div className="w-[1200px] flex items-start justify-between">

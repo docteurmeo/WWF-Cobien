@@ -2,6 +2,8 @@
  * S3 Three Cards — 1440×1026 at y=2010. Pixel-perfect from Figma node 54:17.
  * Real assets in /public/assets/s3cards/
  */
+import FrameSection from '@/components/FrameSection';
+
 const A = '/WWF-Cobien/assets/s3cards';
 
 type CardProps = {
@@ -94,7 +96,7 @@ function Card({ imgSrc, labelImg, labelText, title, body, cta, ctaColor, x, y, r
 
 export default function ThreeCards() {
   return (
-    <section className="relative" style={{ width: 1440, height: 1026, background: '#f8f5ef', overflow: 'hidden' }}>
+    <FrameSection height={1026} background="#f8f5ef">
       {/* Section title at (120, 128) */}
       <div
         className="absolute font-display font-bold whitespace-nowrap"
@@ -183,6 +185,6 @@ export default function ThreeCards() {
       <div className="absolute" style={{ left: 493, top: 824, width: 184, height: 163 }}>
         <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.svg`} />
       </div>
-    </section>
+    </FrameSection>
   );
 }
