@@ -171,6 +171,260 @@ body {
   }
 }
 
+/* === Map S2 landscape ambient animations — qua data-name selectors ===
+       Áp dụng vào figma-generated Map.tsx mà không sửa file. */
+
+@keyframes tree-sway { 0%,100% { transform: rotate(-1.5deg); } 50% { transform: rotate(2deg); } }
+@keyframes palm-sway { 0%,100% { transform: rotate(-1deg) scaleY(1); } 50% { transform: rotate(1.5deg) scaleY(1.015); } }
+@keyframes grass-sway-map { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3.5deg); } }
+@keyframes kelp-sway-map { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(3deg); } }
+@keyframes bird-fly {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  25%     { transform: translate(18px,-5px) rotate(3deg); }
+  50%     { transform: translate(36px,0) rotate(-1deg); }
+  75%     { transform: translate(18px,4px) rotate(2deg); }
+}
+@keyframes water-ripple { 0%,100% { opacity: 0.78; transform: scale(1); } 50% { opacity: 1; transform: scale(1.025); } }
+@keyframes boat-bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-3px) rotate(1.5deg); } }
+
+[data-name="Cây 1"], [data-name="Cây 2"], [data-name="Cây 3"], [data-name="Cây 4"] {
+  animation: tree-sway 5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+[data-name="Cây 2"] { animation-duration: 6.2s; animation-delay: -1.4s; }
+[data-name="Cây 3"] { animation-duration: 4.6s; animation-delay: -2.8s; }
+[data-name="Cây 4"] { animation-duration: 5.5s; animation-delay: -2.1s; }
+
+[data-name="Dừa 1"] {
+  animation: palm-sway 8s ease-in-out infinite;
+  animation-delay: var(--palm-delay, 0s);
+  transform-origin: 50% 100%;
+}
+[data-name="Dừa 1"]:nth-of-type(even) { --palm-delay: -3s; animation-duration: 9.5s; }
+
+[data-name="Cỏ 1"], [data-name="Cỏ 2"], [data-name="Cỏ 3"] {
+  animation: grass-sway-map 3.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+[data-name="Cỏ 2"] { animation-duration: 4.2s; animation-delay: -1.5s; }
+[data-name="Cỏ 3"] { animation-duration: 3.2s; animation-delay: -0.8s; }
+
+[data-name="Cỏ biển dài"],
+[data-name="Cỏ biển trònpsd"],
+[data-name^="Nhúm cỏ biển"] {
+  animation: kelp-sway-map 5.2s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  filter: url(#water-sway);
+}
+[data-name="Nhúm cỏ biển 2"] { animation-duration: 6s; animation-delay: -2s; }
+[data-name="Nhúm cỏ biển tròn tròn"] { animation-duration: 4.8s; animation-delay: -1.2s; }
+[data-name="Nhúm cỏ biển tròn tròn 2"] { animation-duration: 5.6s; animation-delay: -3s; }
+[data-name="Nhúm cỏ biển tròn tròn 3"] { animation-duration: 4.4s; animation-delay: -0.6s; }
+
+[data-name="Chim ens"] {
+  animation: bird-fly 18s ease-in-out infinite;
+  transform-origin: center;
+}
+[data-name="Chim nhỏ"] {
+  animation: bird-fly 11s ease-in-out infinite;
+  transform-origin: center;
+}
+[data-name="Chim nhỏ"]:nth-of-type(2n) { animation-delay: -5s; animation-duration: 13s; }
+
+[data-name="Songs"] {
+  animation: water-ripple 7s ease-in-out infinite;
+  transform-origin: center;
+  mix-blend-mode: multiply;
+}
+[data-name="Songs"]:nth-of-type(2n) { animation-duration: 8.5s; animation-delay: -2.4s; }
+[data-name="Songs"]:nth-of-type(3n) { animation-duration: 6s; animation-delay: -3.6s; }
+
+[data-name="Thuyền"] {
+  animation: boat-bob 3.5s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+
+/* === Location pins overlay (Group A — clickable + info popup) === */
+.location-pin {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 5;
+  color: var(--pin-tone, #1a7f7c);
+}
+.pin-dot {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.28);
+  transition: transform 0.28s cubic-bezier(0.34, 1.3, 0.64, 1);
+  z-index: 2;
+}
+.pin-ring {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  animation: pin-pulse 2.6s ease-out infinite;
+  z-index: 1;
+}
+.pin-ring-2 { animation-delay: 1.3s; }
+@keyframes pin-pulse {
+  0%   { transform: scale(0.6); opacity: 0.55; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+.location-pin:hover .pin-dot { transform: scale(1.3); }
+.location-pin.is-active .pin-dot { transform: scale(1.45); background: #e86b35; }
+.location-pin:hover .pin-ring { animation-play-state: paused; opacity: 0.7; transform: scale(1.5); }
+
+.pin-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(3px);
+  padding: 5px 11px;
+  background: #1a2e2d;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  z-index: 3;
+}
+.pin-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-left: -4px;
+  border: 4px solid transparent;
+  border-top-color: #1a2e2d;
+}
+.location-pin:hover .pin-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+.location-pin.is-active .pin-tooltip { opacity: 0; }
+
+/* === Info card popover — polaroid style theo collage DNA === */
+.location-card {
+  position: absolute;
+  z-index: 9;
+  width: 280px;
+  padding: 14px 16px 18px;
+  background: #fff;
+  box-shadow: 0 22px 44px rgba(13,38,33,0.24), 0 6px 14px rgba(13,38,33,0.12);
+  transform-origin: left center;
+  animation: card-pop 0.32s cubic-bezier(0.34, 1.35, 0.64, 1) both;
+  /* default: bên phải pin, center theo Y */
+  margin-left: 18px;
+  margin-top: -75px;
+}
+.location-card.flip-h {
+  margin-left: -298px;  /* width + gap */
+  transform-origin: right center;
+}
+.location-card.flip-v-top    { margin-top: 12px; }
+.location-card.flip-v-bottom { margin-top: -160px; }
+
+.location-card::before {
+  /* paper torn-edge accent ở góc trên — gợi xé giấy */
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--card-tone, #1a7f7c);
+  clip-path: polygon(0 0, 8% 100%, 16% 0, 24% 100%, 32% 0, 40% 100%, 48% 0, 56% 100%, 64% 0, 72% 100%, 80% 0, 88% 100%, 100% 0);
+}
+
+@keyframes card-pop {
+  0%   { opacity: 0; transform: scale(0.88) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-1deg); }
+}
+.location-card.flip-h {
+  animation-name: card-pop-right;
+}
+@keyframes card-pop-right {
+  0%   { opacity: 0; transform: scale(0.88) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(1deg); }
+}
+
+.location-card-close {
+  position: absolute;
+  top: 6px; right: 8px;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; line-height: 1;
+  background: transparent; border: 0; color: #98a8a4;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.location-card-close:hover { color: #1a2e2d; transform: rotate(90deg); }
+
+.location-card-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  color: #fff;
+  font-family: 'Geologica', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  clip-path: polygon(2% 0%, 12% 30%, 24% 0%, 38% 25%, 52% 0%, 65% 28%, 78% 0%, 90% 25%, 100% 0%, 98% 100%, 86% 75%, 72% 100%, 58% 75%, 44% 100%, 30% 75%, 16% 100%, 2% 75%, 0% 100%);
+}
+
+.location-card-name {
+  margin: 0 0 8px;
+  font-family: 'Geologica', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #1a2e2d;
+  letter-spacing: -0.3px;
+}
+
+.location-card-desc {
+  margin: 0 0 14px;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #5a7370;
+}
+
+.location-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: 'Geologica', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-name="Cây 1"], [data-name="Cây 2"], [data-name="Cây 3"], [data-name="Cây 4"],
+  [data-name="Dừa 1"], [data-name="Cỏ 1"], [data-name="Cỏ 2"], [data-name="Cỏ 3"],
+  [data-name="Cỏ biển dài"], [data-name="Cỏ biển trònpsd"], [data-name^="Nhúm cỏ biển"],
+  [data-name="Chim ens"], [data-name="Chim nhỏ"], [data-name="Songs"], [data-name="Thuyền"],
+  .pin-ring, .location-card { animation: none; filter: none; }
+}
+
 /* === Bubble animations — gợi cảm giác đại dương đang sống ===
        `.bubble-cluster` (gentle breathe + sway): cho ảnh cluster lớn (SVG group)
        `.bubble-rise` (ascend + fade out, infinite): cho bubble cá nhân nhỏ

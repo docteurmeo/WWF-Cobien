@@ -1,4 +1,4 @@
-import MapFigma from '@/pages/figma-generated/Map';
+import MapInteractive from './MapInteractive';
 import FrameSection from '@/components/FrameSection';
 
 /**
@@ -29,7 +29,7 @@ export default function IslandMap() {
 
       {/* Illustrated Map at (120, 267) 1200×676 */}
       <div className="absolute" style={{ left: 120, top: 267, width: 1200, height: 676 }}>
-        <MapFigma />
+        <MapInteractive />
       </div>
     </FrameSection>
   );
