@@ -43,7 +43,9 @@ body {
 
 /* === Seagrass field at section bottom — fixed height, repeat-x.
        Width fills viewport; height stays 211px regardless of viewport width.
-       Image tiles horizontally so wider viewports show more blades. === */
+       Image tiles horizontally so wider viewports show more blades.
+       Combine SVG filter (real water refraction) + outer transform sway
+       (gentle overall rocking) — 2 layer effect cảm giác cỏ thật uốn dòng. */
 .seagrass-field {
   position: absolute;
   left: 0;
@@ -54,6 +56,26 @@ body {
   background-repeat: repeat-x;
   background-size: 1440px 211px;
   pointer-events: none;
+  filter: url(#water-sway);
+  animation: seagrass-rock 11s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  will-change: transform, filter;
+}
+
+.seagrass-field.deep {
+  filter: url(#water-sway-deep);
+  animation-duration: 13s;
+}
+
+@keyframes seagrass-rock {
+  0%, 100% { transform: skewX(0deg) translateY(0); }
+  25%      { transform: skewX(0.6deg) translateY(-1px); }
+  50%      { transform: skewX(-0.4deg) translateY(0.5px); }
+  75%      { transform: skewX(0.5deg) translateY(-0.5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seagrass-field { animation: none; filter: none; }
 }
 
 /* === Bubble animations — gợi cảm giác đại dương đang sống ===

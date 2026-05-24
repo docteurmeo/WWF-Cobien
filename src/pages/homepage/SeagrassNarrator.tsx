@@ -20,7 +20,7 @@ export default function SeagrassNarrator() {
       background="#225322"
       fullBleed={
         <div
-          className="seagrass-field"
+          className="seagrass-field deep"
           style={{
             bottom: 0,
             height: 164,
