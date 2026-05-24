@@ -121,6 +121,93 @@ body {
   .bubble-up, .bubble-sway { animation: none; }
 }
 
+/* === Sea creature animations — cut-paper drift, mỗi loài 1 personality ===
+       Áp dụng vào wrapper div (KHÔNG đụng inline transform của <img>).
+       Hover dùng `scale:` longhand → compose với animated `transform:` mà
+       không ghi đè (modern browsers: Chrome 104+/FF 72+/Safari 14.1+). */
+
+/* Rùa: drift sâu, weightless, lướt theo dòng */
+@keyframes drift-swim {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25%      { transform: translate(8px, -6px) rotate(1.2deg); }
+  50%      { transform: translate(20px, 4px) rotate(-1deg); }
+  75%      { transform: translate(6px, 10px) rotate(2deg); }
+}
+
+/* Cá lớn: glide ngang 2-phase + tail wiggle nhẹ */
+@keyframes glide-swim {
+  0%, 100% { transform: translate(0, 0) rotate(-1.5deg); }
+  20%      { transform: translate(-10px, 3px) rotate(2.5deg); }
+  40%      { transform: translate(-26px, -2px) rotate(-2deg); }
+  60%      { transform: translate(-6px, 4px) rotate(3deg); }
+  80%      { transform: translate(16px, -3px) rotate(-2.5deg); }
+}
+
+/* Cá nhỏ: dart nhanh + pause + tilt */
+@keyframes quick-dart {
+  0%, 8%   { transform: translate(0, 0) rotate(0deg); }
+  20%      { transform: translate(-14px, -2px) rotate(-5deg); }
+  35%, 50% { transform: translate(-14px, -2px) rotate(-5deg); }
+  65%      { transform: translate(6px, 2px) rotate(8deg); }
+  100%     { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Cua: shuffle ngang giật cục — dùng steps() để jerky như cua thật */
+@keyframes crab-shuffle {
+  0%   { transform: translateX(0); }
+  16%  { transform: translateX(-4px); }
+  33%  { transform: translateX(-10px); }
+  50%  { transform: translateX(-10px); }
+  66%  { transform: translateX(-5px); }
+  83%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* Tôm: drift dài + 1 cú flick đuôi đột ngột giữa cycle */
+@keyframes shrimp-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20%      { transform: translate(-3px, 1px) rotate(-1.5deg); }
+  40%      { transform: translate(3px, 0) rotate(2deg); }
+  60%      { transform: translate(5px, -1px) rotate(0.5deg); }
+  72%      { transform: translate(-14px, 2px) rotate(-5deg); }
+  82%      { transform: translate(-2px, 0) rotate(1deg); }
+}
+
+/* Cỏ biển lá: uốn theo dòng nước, origin gốc lá */
+@keyframes kelp-sway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50%      { transform: rotate(3deg); }
+}
+
+.creature-turtle     { animation: drift-swim 10s ease-in-out infinite; transform-origin: center; }
+.creature-fish-big   { animation: glide-swim 7s ease-in-out infinite;   transform-origin: center; }
+.creature-fish-small { animation: quick-dart 5.5s ease-in-out infinite; transform-origin: center; }
+.creature-crab       { animation: crab-shuffle 5s steps(6, end) infinite; transform-origin: center; }
+.creature-shrimp     { animation: shrimp-drift 8s ease-in-out infinite; transform-origin: right center; }
+.creature-kelp       {
+  animation: kelp-sway var(--kelp-dur, 7s) ease-in-out infinite;
+  animation-delay: var(--kelp-delay, 0s);
+  transform-origin: 50% 100%;
+}
+
+.creature-turtle, .creature-fish-big, .creature-fish-small,
+.creature-crab, .creature-shrimp, .creature-kelp {
+  will-change: transform;
+  transition: scale 0.45s ease-out;
+  cursor: pointer;
+}
+
+/* Hover wake-up: nudge nhẹ scale compose với animation qua individual transform */
+.creature-turtle:hover, .creature-fish-big:hover, .creature-fish-small:hover,
+.creature-crab:hover, .creature-shrimp:hover, .creature-kelp:hover {
+  scale: 1.06;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creature-turtle, .creature-fish-big, .creature-fish-small,
+  .creature-crab, .creature-shrimp, .creature-kelp { animation: none; }
+}
+
 /* === Smooth scroll === */
 html {
   scroll-behavior: smooth;

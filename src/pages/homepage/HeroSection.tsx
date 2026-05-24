@@ -40,7 +40,7 @@ export default function HeroSection() {
       }
     >
       {/* Turtle silhouette at (50, 668) 290×182 — sits ABOVE wave via DOM order */}
-      <div className="absolute" style={{ left: 50, top: 668, width: 290, height: 182, zIndex: 3 }}>
+      <div className="absolute creature-turtle" style={{ left: 50, top: 668, width: 290, height: 182, zIndex: 3 }}>
         <img alt="" className="block w-full h-full object-cover" src={`${A}/img202605211045051.png`} />
       </div>
 
@@ -129,8 +129,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Fish at (620, 107) 245×107 */}
-      <div className="absolute" style={{ left: 620, top: 107, width: 245, height: 107 }}>
+      {/* Fish at (620, 107) 245×107 — glide swim */}
+      <div className="absolute creature-fish-big" style={{ left: 620, top: 107, width: 245, height: 107 }}>
         <img alt="" className="block w-full h-full object-cover" src={`${A}/img202605211044401.png`} />
       </div>
 

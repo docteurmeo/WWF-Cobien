@@ -77,33 +77,46 @@ export default function SeagrassNarrator() {
         </div>
       </div>
 
-      {/* Cỏ biển dài background illustration at ~28.78% inset */}
-      <div className="absolute" style={{ left: 288, top: 236, width: 233, height: 233 }}>
+      {/* Cỏ biển dài — kelp sway origin gốc lá */}
+      <div
+        className="absolute creature-kelp"
+        style={{ left: 288, top: 236, width: 233, height: 233, ['--kelp-dur' as string]: '8s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/imgCBinDai.png`} />
       </div>
 
-      {/* Cỏ biển trònpsd at ~14.35% inset (mirrored, rotated 5.57°) */}
+      {/* Cỏ biển tròn (mirrored + tilt) — kelp sway, transform tĩnh ở outer, animation ở inner */}
       <div
         className="absolute"
         style={{ left: 70, top: 118, width: 155, height: 171, transform: 'scaleX(-1) rotate(5.57deg)' }}
       >
-        <img alt="" className="block w-full h-full" src={`${A}/imgCBinTronpsd.png`} />
+        <div
+          className="creature-kelp"
+          style={{ width: '100%', height: '100%', ['--kelp-dur' as string]: '6.5s', ['--kelp-delay' as string]: '-2s' } as React.CSSProperties}
+        >
+          <img alt="" className="block w-full h-full" src={`${A}/imgCBinTronpsd.png`} />
+        </div>
       </div>
 
-      {/* Fish at (557.62, 534.66) rotated 15° */}
+      {/* Cá nhỏ — quick dart, outer wrapper animate, inner giữ rotate(15°) */}
       <div
-        className="absolute flex items-center justify-center"
+        className="absolute creature-fish-small"
         style={{ left: 557.62, top: 534.66, width: 89.767, height: 70.675 }}
       >
-        <div style={{ transform: 'rotate(15deg)' }}>
-          <div className="relative" style={{ width: 79, height: 52 }}>
-            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLayer1.svg`} />
+        <div className="flex items-center justify-center w-full h-full">
+          <div style={{ transform: 'rotate(15deg)' }}>
+            <div className="relative" style={{ width: 79, height: 52 }}>
+              <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/imgLayer1.svg`} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Layer_1 small at (1211, 108) 103.67×94.34 */}
-      <div className="absolute" style={{ left: 1211, top: 108, width: 103.67, height: 94.34 }}>
+      {/* Coral/Layer2 — kelp sway nhẹ + chậm */}
+      <div
+        className="absolute creature-kelp"
+        style={{ left: 1211, top: 108, width: 103.67, height: 94.34, ['--kelp-dur' as string]: '9s', ['--kelp-delay' as string]: '-3s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/imgLayer2.svg`} />
       </div>
 

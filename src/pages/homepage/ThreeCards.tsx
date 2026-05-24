@@ -107,8 +107,8 @@ export default function ThreeCards() {
         <p style={{ lineHeight: 1.08 }}>không chỉ để ghé qua.</p>
       </div>
 
-      {/* Cua at (1128, 108) 165×129 */}
-      <div className="absolute" style={{ left: 1128, top: 108, width: 165, height: 129 }}>
+      {/* Cua at (1128, 108) 165×129 — shuffle ngang giật cục (steps) */}
+      <div className="absolute creature-crab" style={{ left: 1128, top: 108, width: 165, height: 129 }}>
         <img alt="" className="block w-full h-full" src={`${A}/imgCua.svg`} />
       </div>
 
@@ -189,8 +189,8 @@ export default function ThreeCards() {
         labelLeft={19.92}
       />
 
-      {/* Layer_1 decoration at (493, 824) 184×163 */}
-      <div className="absolute" style={{ left: 493, top: 824, width: 184, height: 163 }}>
+      {/* Tôm at (493, 824) 184×163 — drift + occasional tail flick */}
+      <div className="absolute creature-shrimp" style={{ left: 493, top: 824, width: 184, height: 163 }}>
         <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.svg`} />
       </div>
     </FrameSection>
