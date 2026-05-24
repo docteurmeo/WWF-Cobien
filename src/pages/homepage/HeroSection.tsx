@@ -1,5 +1,6 @@
 import FrameSection from '@/components/FrameSection';
 import Wave from '@/components/Wave';
+import BubbleField from '@/components/BubbleField';
 
 /**
  * S1 Hero — 1440×920 at y=100. Pixel-perfect from Figma node 51:14.
@@ -43,13 +44,18 @@ export default function HeroSection() {
         <img alt="" className="block w-full h-full object-cover" src={`${A}/img202605211045051.png`} />
       </div>
 
-      {/* CO₂ Bubble cluster at (200, 80) 738×394 — gentle breathe animation */}
-      <div
-        className="absolute bubble-cluster"
-        style={{ left: 200, top: 80, width: 738, height: 394, ['--bub-dur' as string]: '9s' } as React.CSSProperties}
-      >
-        <img alt="" className="block w-full h-full" src={`${A}/imgCoBubble.svg`} />
-      </div>
+      {/* Bubble field — code-generated, nổi từ đáy vùng (200,80→738×394) lên,
+          sway sine, fade in/out, scale phồng dần — gợi CO₂ thực */}
+      <BubbleField
+        width={738}
+        height={394}
+        count={20}
+        sizeRange={[10, 32]}
+        durationRange={[7, 14]}
+        fill="#7DD3D0"
+        seed={11}
+        style={{ left: 200, top: 80 }}
+      />
 
       {/* Big photo at (764, 75) 540×490 rotated -1.5° */}
       <div

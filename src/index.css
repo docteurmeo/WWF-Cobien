@@ -89,6 +89,38 @@ body {
   .bubble-cluster, .bubble-rise { animation: none; }
 }
 
+/* === BubbleField — code-generated bubbles nổi từ đáy + sway sine ===
+       2-layer compose: outer .bubble-up làm rise + scale + opacity,
+       inner .bubble-sway làm wiggle ngang ±--bf-sway px.
+       1 cặp keyframes, scale ra N instance qua CSS vars. */
+@keyframes bubble-up-rise {
+  0%   { transform: translateY(0) scale(0.55); opacity: 0; }
+  8%   { opacity: var(--bf-op, 0.7); }
+  92%  { opacity: var(--bf-op, 0.7); }
+  100% { transform: translateY(calc(-1 * var(--bf-rise, 400px))) scale(1.08); opacity: 0; }
+}
+
+@keyframes bubble-up-sway {
+  0%, 100% { transform: translateX(calc(-1 * var(--bf-sway, 18px))); }
+  50%      { transform: translateX(var(--bf-sway, 18px)); }
+}
+
+.bubble-up {
+  animation: bubble-up-rise var(--bf-dur, 9s) linear infinite;
+  animation-delay: var(--bf-delay, 0s);
+  will-change: transform, opacity;
+}
+
+.bubble-sway {
+  animation: bubble-up-sway var(--bf-sway-dur, 3.4s) ease-in-out infinite;
+  animation-delay: var(--bf-sway-delay, 0s);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble-up, .bubble-sway { animation: none; }
+}
+
 /* === Smooth scroll === */
 html {
   scroll-behavior: smooth;

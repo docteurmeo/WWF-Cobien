@@ -3,6 +3,7 @@
  * Real assets in /public/assets/s3cards/
  */
 import FrameSection from '@/components/FrameSection';
+import BubbleField from '@/components/BubbleField';
 
 const A = '/WWF-Cobien/assets/s3cards';
 
@@ -111,13 +112,17 @@ export default function ThreeCards() {
         <img alt="" className="block w-full h-full" src={`${A}/imgCua.svg`} />
       </div>
 
-      {/* Group 1 bubble cluster at (920, 140) 428×148 — gentle breathe */}
-      <div
-        className="absolute bubble-cluster"
-        style={{ left: 920, top: 140, width: 428, height: 148, ['--bub-dur' as string]: '7.5s', ['--bub-delay' as string]: '1.2s' } as React.CSSProperties}
-      >
-        <img alt="" className="block w-full h-full" src={`${A}/imgGroup1.svg`} />
-      </div>
+      {/* Bubble field — vùng (920,140→428×148), bubble nhỏ + thưa hơn */}
+      <BubbleField
+        width={428}
+        height={148}
+        count={10}
+        sizeRange={[6, 20]}
+        durationRange={[5, 10]}
+        fill="#7DD3D0"
+        seed={23}
+        style={{ left: 920, top: 140 }}
+      />
 
       {/* Section Label "Khám phá cù lao chàm" at (120, 83) */}
       <div className="absolute" style={{ left: 120, top: 83, width: 206, height: 33 }}>

@@ -1,5 +1,6 @@
 import FrameSection from '@/components/FrameSection';
 import Wave from '@/components/Wave';
+import BubbleField from '@/components/BubbleField';
 
 /**
  * S4 Bridge — 1440×650 at y=3036. Pixel-perfect from Figma node 55:2.
@@ -13,15 +14,6 @@ import Wave from '@/components/Wave';
 const A = '/WWF-Cobien/assets/s4';
 const PREV_BG = '#f8f5ef'; // ThreeCards bg
 const NEXT_BG = '#225322'; // SeagrassNarrator bg
-
-const bubbles = [
-  { src: 'imgDivingBubble1', x: 180, y: 200, size: 24 },
-  { src: 'imgDivingBubble2', x: 280, y: 300, size: 16 },
-  { src: 'imgDivingBubble3', x: 1180, y: 160, size: 28 },
-  { src: 'imgDivingBubble4', x: 1280, y: 260, size: 20 },
-  { src: 'imgDivingBubble5', x: 820, y: 380, size: 14 },
-  { src: 'imgDivingBubble6', x: 480, y: 420, size: 22 },
-];
 
 export default function Bridge() {
   return (
@@ -38,28 +30,23 @@ export default function Bridge() {
           <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 2 }}>
             <Wave fill={NEXT_BG} height={80} amplitude={14} wavelength={420} speedSeconds={16} />
           </div>
+          {/* Diving bubbles — nổi từ đáy section (1440x650) lên đỉnh,
+              dày hơn 2 section khác vì đây là khoảnh khắc "lặn xuống" */}
+          <div className="absolute left-0 right-0 bottom-0" style={{ height: 650, zIndex: 3 }}>
+            <BubbleField
+              width={1440}
+              height={570}
+              count={26}
+              sizeRange={[10, 28]}
+              durationRange={[8, 16]}
+              fill="#7DD3D0"
+              seed={42}
+              style={{ left: '50%', transform: 'translateX(-50%)', bottom: 0 }}
+            />
+          </div>
         </>
       }
     >
-      {/* 6 Diving Bubbles — staggered ascend, lặp lại tạo cảm giác bọt liên tục */}
-      {bubbles.map((b, i) => (
-        <div
-          key={b.src}
-          className="absolute bubble-rise"
-          style={{
-            left: b.x,
-            top: b.y,
-            width: b.size,
-            height: b.size,
-            zIndex: 3,
-            ['--bub-dur' as string]: `${6 + (i % 3) * 1.4}s`,
-            ['--bub-delay' as string]: `${i * 0.9}s`,
-            ['--bub-op' as string]: 0.85 + (i % 2) * 0.1,
-          } as React.CSSProperties}
-        >
-          <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/${b.src}.svg`} />
-        </div>
-      ))}
 
       {/* S4 Text Content at (330, 140) 780w, items-center */}
       <div
