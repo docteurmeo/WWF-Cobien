@@ -16,15 +16,17 @@ Website bảo tồn cỏ biển kết hợp du lịch bền vững tại Cù Lao
 
 ## 3 trang demo
 
-| Route | Page | Frame Figma | Trạng thái assets |
+| Route | Page | Frame Figma | Trạng thái |
 |---|---|---|---|
-| `/#/` | Homepage | 🏠 Homepage — 1440px (6423px) | ✅ Real assets (137 files) |
-| `/#/co-bien/` | Cỏ Biển | 🌿 Cỏ Biển — 1440px (9772px) | ⏳ Vẫn dùng SVG draft |
-| `/#/kham-pha/o-dau/` | Ở Đâu | 🏡 Ở Đâu — 1440px (9340px) | ⏳ Vẫn dùng SVG draft |
+| `/#/` | Homepage | 🏠 Homepage — 1440px (6423px) | ✅ **DONE** — assets thật + responsive ≥1440 + motion + interactive map + hover |
+| `/#/co-bien/` | Cỏ Biển | 🌿 Cỏ Biển — 1440px (9772px) | ⏳ Vẫn dùng SVG draft, chưa rebuild |
+| `/#/kham-pha/o-dau/` | Ở Đâu | 🏡 Ở Đâu — 1440px (9340px) | ⏳ Vẫn dùng SVG draft, chưa rebuild |
 
-## Pixel-perfect 1440px desktop
+## Responsive desktop 1440 → 1920+
 
-Thiết kế bám sát Figma từng pixel ở viewport 1440px. Responsive (mobile/tablet) sẽ làm trong v2.
+Body `min-width: 1440px` (baseline). Pattern `<FrameSection>` wrapper: section `width: 100%`, background tràn viewport edge, content inner 1440 grid centered. Mobile/tablet sẽ làm v2.
+
+Wave dividers code-generated (`<Wave>` component, ResizeObserver) — **height cố định** dù viewport rộng bao nhiêu, seamless loop. Không scale SVG height theo viewport (tránh bug rùa/cỏ bị che).
 
 ## Setup
 
@@ -47,15 +49,20 @@ npm run build    # production build → dist/
 
 ```
 src/
-├── components/         Shared: Nav, Footer, Logo, TornTag, Bubble, Creature, ...
+├── components/         Shared:
+│   ├── Nav, Footer, Logo, TornTag
+│   ├── FrameSection.tsx     Wrapper responsive: full-width bg + 1440 grid centered + fullBleed slot
+│   ├── Wave.tsx              Code-generated wave (ResizeObserver, fixed height, seamless loop)
+│   ├── BubbleField.tsx       Pure code bubbles (solid SVG circles, 2-layer rise+sway, seeded PRNG)
+│   ├── WaterFilters.tsx      Global SVG <feTurbulence>+<feDisplacementMap> filters cho cỏ biển uốn dòng nước
+│   └── Creature, Bubble      (deprecated, không dùng nữa)
 ├── pages/
-│   ├── Homepage.tsx + homepage/    (Hero, IslandMap, ThreeCards, Bridge, SeagrassNarrator, Community, DualCTA)
+│   ├── Homepage.tsx + homepage/    (HeroSection, IslandMap, MapInteractive, ThreeCards, Bridge, SeagrassNarrator, Community, DualCTA)
 │   ├── CoBien.tsx + cobien/        (Hero, ToiLa, ChiecNoi, MatXich, GiuCat, Carbon, SoLieu, NguyenNhan, BaoTon, Ket, CtaKep)
 │   ├── ODau.tsx + odau/             (Hero, DinhNghia, HaiVung, Timeline, Testimonials, YNghia, ThucTien, QuanhCho, DualCTA)
-│   └── figma-generated/             Auto-generated TSX từ Figma get_design_context
-├── styles/             (none — tailwind only)
+│   └── figma-generated/             Auto-generated TSX từ Figma — KHÔNG SỬA (animate qua CSS attr selectors trên data-name)
 ├── main.tsx            HashRouter setup
-└── index.css           Tailwind + base reset
+└── index.css           Tailwind + animations (bubble, creature, kelp, hover patterns, map ambient, location pin)
 
 public/
 ├── assets/             SVG + JPG + PNG từ Figma (137+ files)
@@ -102,6 +109,32 @@ node scripts/fix-code-refs.mjs
 - **Cut-paper illustrations:** SVG với white stroke (turtle, fish, crab, leaves, bubbles)
 - **Hexagon badge:** Coral hex với "35×" cho data signature
 - **Wave dividers:** SVG vectors thật từ Figma
+
+---
+
+## Motion & Interactivity (Homepage)
+
+### Bubble field — `<BubbleField>`
+Pure code SVG circles solid teal. 2-layer: outer `rise` translateY + scale + fade, inner `sway` translateX sine. Seeded Mulberry32 PRNG → deterministic, SSR-safe. Áp dụng Hero (18), ThreeCards (9), Bridge (22 nằm GIỮA top+bottom wave để không bị clip).
+
+### Sea creature animations (6 personality)
+- `.creature-turtle` drift weightless 10s · `.creature-fish-big` glide 2-phase 7s · `.creature-fish-small` quick dart 5.5s
+- `.creature-crab` **steps(6) JERKY** ngang — khác mọi loài khác để gợi cua bò thật
+- `.creature-shrimp` drift + 1 flick đuôi · `.creature-kelp` rotate origin gốc lá, mỗi lá lệch pha qua CSS vars
+- Hover wake-up: `scale: 1.06` longhand compose với animated `transform:` không ghi đè (modern browsers)
+
+### Cỏ biển uốn dòng nước — `<WaterFilters>` + `.seagrass-field`
+SVG `<feTurbulence>` + `<feDisplacementMap>` animated `baseFrequency` qua `<animate>` element + CSS skew sine outer. **2-layer**: filter làm per-pixel refraction (mỗi lá uốn khác nhau), skew làm body rocking. Áp dụng S1 + S5.
+
+### S2 Map interactive — `<MapInteractive>`
+Wrap quanh `<Map>` figma-gen **không sửa file**. 13 location pins overlay absolute %, click → popover polaroid 280px direction-aware flip (left/right + top/middle/bottom). Cảnh quan ambient (cây/cỏ/dừa/chim/sóng/thuyền/cỏ biển) animate qua CSS attr selectors `[data-name="..."]` — mỗi loại có personality riêng (cây nặng chậm, cỏ nhẹ nhanh, chim drift translate, sóng ripple opacity+scale, thuyền bob theo sóng).
+
+### Hover patterns (4 utility classes — 13 vị trí áp dụng)
+- `.btn-primary-hover` — paper lift scale 1.04 + Y -2px + brightness 1.09 + shadow expand + `<span class="arrow-nudge">` translate +6px (filled CTAs)
+- `.link-draw-hover` — underline scaleX 0→1 từ trái draw-in + color teal (text links + Nav + Footer)
+- `.card-lift-hover` (compose 3) — `.card-lift-inner` rotate→0° + lift -6px (qua CSS vars `--rot`/`--lift` không cần `!important`) · `.card-lift-photo` Ken Burns scale 1.05 · `.card-lift-tag` torn wiggle -2° origin 20%
+- `.panel-hover-group` — dark overlay 0.4→0.22 (DualCTA panels)
+- `prefers-reduced-motion` → tắt toàn bộ animation + filter
 
 ---
 
