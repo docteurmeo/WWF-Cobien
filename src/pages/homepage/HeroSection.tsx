@@ -43,8 +43,11 @@ export default function HeroSection() {
         <img alt="" className="block w-full h-full object-cover" src={`${A}/img202605211045051.png`} />
       </div>
 
-      {/* CO₂ Bubble cluster at (200, 80) 738×394 */}
-      <div className="absolute" style={{ left: 200, top: 80, width: 738, height: 394 }}>
+      {/* CO₂ Bubble cluster at (200, 80) 738×394 — gentle breathe animation */}
+      <div
+        className="absolute bubble-cluster"
+        style={{ left: 200, top: 80, width: 738, height: 394, ['--bub-dur' as string]: '9s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/imgCoBubble.svg`} />
       </div>
 

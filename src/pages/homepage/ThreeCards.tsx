@@ -111,8 +111,11 @@ export default function ThreeCards() {
         <img alt="" className="block w-full h-full" src={`${A}/imgCua.svg`} />
       </div>
 
-      {/* Group 1 bubble cluster at (920, 140) 428×148 */}
-      <div className="absolute" style={{ left: 920, top: 140, width: 428, height: 148 }}>
+      {/* Group 1 bubble cluster at (920, 140) 428×148 — gentle breathe */}
+      <div
+        className="absolute bubble-cluster"
+        style={{ left: 920, top: 140, width: 428, height: 148, ['--bub-dur' as string]: '7.5s', ['--bub-delay' as string]: '1.2s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/imgGroup1.svg`} />
       </div>
 

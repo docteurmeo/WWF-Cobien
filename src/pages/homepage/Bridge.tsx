@@ -41,12 +41,21 @@ export default function Bridge() {
         </>
       }
     >
-      {/* 6 Diving Bubbles */}
-      {bubbles.map((b) => (
+      {/* 6 Diving Bubbles — staggered ascend, lặp lại tạo cảm giác bọt liên tục */}
+      {bubbles.map((b, i) => (
         <div
           key={b.src}
-          className="absolute"
-          style={{ left: b.x, top: b.y, width: b.size, height: b.size, zIndex: 3 }}
+          className="absolute bubble-rise"
+          style={{
+            left: b.x,
+            top: b.y,
+            width: b.size,
+            height: b.size,
+            zIndex: 3,
+            ['--bub-dur' as string]: `${6 + (i % 3) * 1.4}s`,
+            ['--bub-delay' as string]: `${i * 0.9}s`,
+            ['--bub-op' as string]: 0.85 + (i % 2) * 0.1,
+          } as React.CSSProperties}
         >
           <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/${b.src}.svg`} />
         </div>
