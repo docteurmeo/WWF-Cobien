@@ -28,22 +28,25 @@ function Portrait({ imgSrc, labelImg, labelText, labelW, quote, x, y, containerW
   const photoH = cardH === 440 ? 320 : 280;
   return (
     <div
-      className="absolute flex items-center justify-center"
+      className="absolute flex items-center justify-center card-lift-hover"
       style={{ left: x, top: y, width: containerW, height: containerH }}
     >
-      <div style={{ transform: `rotate(${rotate}deg)` }}>
+      <div
+        className="card-lift-inner"
+        style={{ ['--rot' as string]: `${rotate}deg`, ['--lift' as string]: '0px' } as React.CSSProperties}
+      >
         <div
           className="bg-white relative overflow-clip rounded-[2px]"
           style={{ width: cardW, height: cardH, boxShadow: '0px 16px 36px 0px rgba(13,38,33,0.14)' }}
         >
-          {/* Photo */}
-          <div className="absolute" style={{ left: 8, top: 8, width: cardW - 16, height: photoH, background: '#b8ccba' }}>
-            <img alt="" className="absolute inset-0 w-full h-full object-cover" src={imgSrc} />
+          {/* Photo — Ken Burns zoom on hover */}
+          <div className="absolute overflow-hidden" style={{ left: 8, top: 8, width: cardW - 16, height: photoH, background: '#b8ccba' }}>
+            <img alt="" className="absolute inset-0 w-full h-full object-cover card-lift-photo" src={imgSrc} />
           </div>
 
-          {/* Torn-tag Label */}
+          {/* Torn-tag Label — wiggle on hover */}
           <div
-            className="absolute flex items-center justify-center"
+            className="absolute flex items-center justify-center card-lift-tag"
             style={{
               left: labelLeft,
               top: labelTop,
@@ -202,12 +205,12 @@ export default function Community() {
           </div>
         </div>
 
-        <p
-          className="font-display font-semibold text-center whitespace-pre"
+        <button
+          className="font-display font-semibold text-center whitespace-pre link-draw-hover bg-transparent border-0 p-0 cursor-pointer"
           style={{ color: '#2a9b97', fontSize: 15, lineHeight: 1, letterSpacing: '0.5px' }}
         >
-          {'Gặp người dân đảo  →'}
-        </p>
+          Gặp người dân đảo <span className="arrow-nudge">→</span>
+        </button>
       </div>
     </FrameSection>
   );

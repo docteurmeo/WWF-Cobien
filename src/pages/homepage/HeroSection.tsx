@@ -177,9 +177,9 @@ export default function HeroSection() {
           Khám phá Cù Lao Chàm, từ Nhà của biển.
         </p>
 
-        {/* CTA Button */}
-        <div
-          className="flex items-center font-display font-medium text-white whitespace-nowrap rounded-[2px] overflow-clip"
+        {/* CTA Button — orange filled, arrow ↓ bounce on hover */}
+        <button
+          className="flex items-center font-display font-medium text-white whitespace-nowrap rounded-[2px] overflow-clip btn-primary-hover arrow-down cursor-pointer"
           style={{
             background: '#e86b35',
             gap: 8,
@@ -194,8 +194,8 @@ export default function HeroSection() {
           }}
         >
           <p>Khám phá hòn đảo</p>
-          <p> ↓</p>
-        </div>
+          <p className="arrow-nudge">↓</p>
+        </button>
       </div>
 
       {/* Scroll hint centered at top 886 */}

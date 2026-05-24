@@ -201,11 +201,12 @@ export default function SeagrassNarrator() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div
-          className="flex items-center font-display font-medium text-white rounded-[2px] overflow-clip"
+        {/* CTA — paper lift + arrow nudge */}
+        <button
+          className="flex items-center font-display font-medium text-white rounded-[2px] overflow-clip btn-primary-hover cursor-pointer"
           style={{
             background: '#e86b35',
+            gap: 8,
             paddingLeft: 28,
             paddingRight: 28,
             paddingTop: 16,
@@ -216,8 +217,9 @@ export default function SeagrassNarrator() {
             boxShadow: '0px 8px 20px 0px rgba(41,153,150,0.35)',
           }}
         >
-          <p className="whitespace-pre">{'Câu chuyện của tôi  →'}</p>
-        </div>
+          <p className="whitespace-pre">Câu chuyện của tôi</p>
+          <span className="arrow-nudge">→</span>
+        </button>
       </div>
     </FrameSection>
   );

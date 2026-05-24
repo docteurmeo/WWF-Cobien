@@ -17,9 +17,9 @@ export default function DualCTA() {
       background="#e8d5b0"
       fullBleed={
         <>
-          {/* LEFT half — fills left 50vw at any viewport ≥1440 */}
+          {/* LEFT half — group hover: ảnh sáng lên khi hover (overlay 0.4→0.22) */}
           <div
-            className="absolute top-0 bottom-0"
+            className="absolute top-0 bottom-0 panel-hover-group"
             style={{
               left: 0,
               width: '50%',
@@ -28,11 +28,11 @@ export default function DualCTA() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.4)' }} />
+            <div className="absolute inset-0 panel-overlay" style={{ background: 'rgba(0,0,0,0.4)' }} />
           </div>
-          {/* RIGHT half — fills right 50vw */}
+          {/* RIGHT half — group hover lighter (0.27→0.13) */}
           <div
-            className="absolute top-0 bottom-0"
+            className="absolute top-0 bottom-0 panel-hover-group"
             style={{
               left: '50%',
               width: '50%',
@@ -41,7 +41,7 @@ export default function DualCTA() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.27)' }} />
+            <div className="absolute inset-0 panel-overlay panel-overlay-light" style={{ background: 'rgba(0,0,0,0.27)' }} />
           </div>
         </>
       }
@@ -78,25 +78,28 @@ export default function DualCTA() {
           <p style={{ lineHeight: 1.15 }}>để giữ lại.</p>
         </div>
 
-        {/* CTA Left */}
-        <div
-          className="flex items-center overflow-clip rounded-[2px]"
+        {/* CTA Left — teal primary */}
+        <button
+          className="flex items-center overflow-clip rounded-[2px] btn-primary-hover cursor-pointer"
           style={{
             background: '#1a7f7c',
+            gap: 8,
             paddingLeft: 28,
             paddingRight: 28,
             paddingTop: 15,
             paddingBottom: 15,
             boxShadow: '0px 8px 16px 0px rgba(26,128,125,0.35)',
+            border: 0,
           }}
         >
           <p
             className="font-display font-medium text-white whitespace-pre"
             style={{ fontSize: 14, lineHeight: 1, letterSpacing: '0.5px' }}
           >
-            {'Đọc câu chuyện cỏ biển  →'}
+            Đọc câu chuyện cỏ biển
           </p>
-        </div>
+          <span className="arrow-nudge text-white" style={{ fontSize: 14 }}>→</span>
+        </button>
       </div>
 
       {/* RIGHT Tourism Block (770, 70) 588×440 */}
@@ -131,25 +134,28 @@ export default function DualCTA() {
           <p style={{ lineHeight: 1.15 }}>lâu hơn một ngày.</p>
         </div>
 
-        {/* CTA Right */}
-        <div
-          className="flex items-center overflow-clip rounded-[2px]"
+        {/* CTA Right — orange primary */}
+        <button
+          className="flex items-center overflow-clip rounded-[2px] btn-primary-hover cursor-pointer"
           style={{
             background: '#e86b35',
+            gap: 8,
             paddingLeft: 28,
             paddingRight: 28,
             paddingTop: 15,
             paddingBottom: 15,
             boxShadow: '0px 8px 16px 0px rgba(232,107,54,0.35)',
+            border: 0,
           }}
         >
           <p
             className="font-display font-medium text-white whitespace-pre"
             style={{ fontSize: 14, lineHeight: 1, letterSpacing: '0.5px' }}
           >
-            {'Khám phá Cù Lao Chàm  →'}
+            Khám phá Cù Lao Chàm
           </p>
-        </div>
+          <span className="arrow-nudge text-white" style={{ fontSize: 14 }}>→</span>
+        </button>
       </div>
     </FrameSection>
   );

@@ -31,7 +31,7 @@ export default function Nav() {
       <div className="absolute left-[409px] top-[38px] w-[519px] h-[24px] flex items-center justify-between font-display">
         <Link
           to="/co-bien/"
-          className={`text-[15px] leading-[23px] ${activeFor('cobien') ? 'text-ocean-primary font-semibold' : 'text-ink-main opacity-80'}`}
+          className={`text-[15px] leading-[23px] link-draw-hover ${activeFor('cobien') ? 'text-ocean-primary font-semibold' : 'text-ink-main opacity-80'}`}
         >
           Cỏ Biển
         </Link>
@@ -61,8 +61,8 @@ export default function Nav() {
       </div>
 
       {/* Nav CTA at x=1143, y=31, w=177, h=38 */}
-      <button className="absolute left-[1143px] top-[31px] w-[177px] h-[38px] bg-ocean-primary rounded-[2px] flex items-center justify-center hover:bg-ocean-deep transition-colors">
-        <span className="text-cta-btn text-ink-white">Khám phá ngay  →</span>
+      <button className="absolute left-[1143px] top-[31px] w-[177px] h-[38px] bg-ocean-primary rounded-[2px] flex items-center justify-center btn-primary-hover">
+        <span className="text-cta-btn text-ink-white">Khám phá ngay <span className="arrow-nudge">→</span></span>
       </button>
       </div>
     </nav>

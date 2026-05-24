@@ -42,7 +42,7 @@ export default function Footer({ height = 300 }: FooterProps) {
       {/* Footer Nav Links */}
       <div className="w-[1200px] flex justify-center gap-9 mt-7">
         {['Cỏ Biển', 'Cù Lao Chàm', 'Khám Phá', 'Ở Đâu', 'Ăn Gì', 'Hành Động', 'Tài Nguyên'].map((link) => (
-          <a key={link} href="#" className="text-nav-link text-ink-white opacity-50 hover:opacity-90">
+          <a key={link} href="#" className="text-nav-link text-ink-white opacity-50 link-draw-hover">
             {link}
           </a>
         ))}

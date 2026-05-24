@@ -26,24 +26,27 @@ type CardProps = {
 function Card({ imgSrc, labelImg, labelText, title, body, cta, ctaColor, x, y, rotate, labelW, labelLeft, labelRotate = 0 }: CardProps) {
   return (
     <div
-      className="absolute flex items-center justify-center"
+      className="absolute flex items-center justify-center card-lift-hover"
       style={{ left: x, top: y, width: rotate < 0 ? 373.489 : rotate < 1 ? 364.524 : 376.156, height: 530 }}
     >
-      <div style={{ transform: `rotate(${rotate}deg)` }}>
+      <div
+        className="card-lift-inner"
+        style={{ ['--rot' as string]: `${rotate}deg`, ['--lift' as string]: '0px' } as React.CSSProperties}
+      >
         <div
           className="bg-white relative overflow-clip rounded-[2px]"
           style={{ width: 360, height: 520, boxShadow: '0px 18px 40px 0px rgba(13,38,33,0.13)' }}
         >
-          {/* Photo Frame */}
+          {/* Photo Frame — Ken Burns zoom on card hover */}
           <div className="absolute bg-white overflow-clip" style={{ left: 6, top: 6, width: 348, height: 252 }}>
-            <div className="absolute" style={{ left: 4, top: 4, width: 340, height: 244, background: '#b8ccba' }}>
+            <div className="absolute card-lift-photo" style={{ left: 4, top: 4, width: 340, height: 244, background: '#b8ccba' }}>
               <img alt="" className="absolute inset-0 w-full h-full object-cover" src={imgSrc} />
             </div>
           </div>
 
-          {/* Torn-tag Label */}
+          {/* Torn-tag Label — wiggle 2° on hover */}
           <div
-            className="absolute flex items-center justify-center"
+            className="absolute flex items-center justify-center card-lift-tag"
             style={{
               left: labelLeft,
               top: 238,
@@ -83,10 +86,10 @@ function Card({ imgSrc, labelImg, labelText, title, body, cta, ctaColor, x, y, r
               {body}
             </p>
             <p
-              className="font-display font-semibold whitespace-pre-wrap"
+              className="font-display font-semibold whitespace-pre-wrap link-draw-hover"
               style={{ color: ctaColor, fontSize: 15, lineHeight: 1, letterSpacing: '0.5px' }}
             >
-              {cta}
+              {cta.replace(/\s*→\s*$/, '')} <span className="arrow-nudge">→</span>
             </p>
           </div>
         </div>
