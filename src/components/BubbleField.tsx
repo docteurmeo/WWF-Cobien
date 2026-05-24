@@ -120,16 +120,7 @@ export default function BubbleField({
             } as React.CSSProperties}
           >
             <svg width="100%" height="100%" viewBox="0 0 24 24" style={{ display: 'block' }}>
-              <defs>
-                <radialGradient id={`bf-grad-${seed}-${b.i}`} cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.85" />
-                  <stop offset="55%" stopColor={fill} stopOpacity="0.35" />
-                  <stop offset="100%" stopColor={fill} stopOpacity="0.15" />
-                </radialGradient>
-              </defs>
-              <circle cx="12" cy="12" r="10.5" fill={`url(#bf-grad-${seed}-${b.i})`} stroke="#fff" strokeOpacity="0.7" strokeWidth="0.8" />
-              {/* highlight chấm sáng */}
-              <circle cx="8.5" cy="8" r="2.2" fill="#fff" fillOpacity="0.85" />
+              <circle cx="12" cy="12" r="11" fill={fill} />
             </svg>
           </span>
         </span>

@@ -49,9 +49,9 @@ export default function HeroSection() {
       <BubbleField
         width={738}
         height={394}
-        count={20}
-        sizeRange={[10, 32]}
-        durationRange={[7, 14]}
+        count={18}
+        sizeRange={[20, 56]}
+        durationRange={[8, 16]}
         fill="#7DD3D0"
         seed={11}
         style={{ left: 200, top: 80 }}

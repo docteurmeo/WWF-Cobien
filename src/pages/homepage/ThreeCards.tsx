@@ -116,9 +116,9 @@ export default function ThreeCards() {
       <BubbleField
         width={428}
         height={148}
-        count={10}
-        sizeRange={[6, 20]}
-        durationRange={[5, 10]}
+        count={9}
+        sizeRange={[14, 36]}
+        durationRange={[6, 11]}
         fill="#7DD3D0"
         seed={23}
         style={{ left: 920, top: 140 }}

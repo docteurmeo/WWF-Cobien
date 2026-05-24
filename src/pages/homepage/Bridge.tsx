@@ -36,9 +36,9 @@ export default function Bridge() {
             <BubbleField
               width={1440}
               height={570}
-              count={26}
-              sizeRange={[10, 28]}
-              durationRange={[8, 16]}
+              count={22}
+              sizeRange={[18, 48]}
+              durationRange={[9, 17]}
               fill="#7DD3D0"
               seed={42}
               style={{ left: '50%', transform: 'translateX(-50%)', bottom: 0 }}
