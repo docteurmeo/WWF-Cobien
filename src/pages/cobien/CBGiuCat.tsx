@@ -1,96 +1,99 @@
-import TornTag from '@/components/TornTag';
-import PhotoFrame from '@/components/PhotoFrame';
+import FrameSection from '@/components/FrameSection';
 
 /**
- * S4 Giữ cát — 1440×852 at y=3596.
- * Light off-white bg.
- * Label at (120, 67) — "VAI TRÒ 03 · KỸ SƯ BỜ BIỂN"
- * Title at (120, 120) 452×112 — "Giữ cát. Giữ nước. Giữ bờ."
- * Left S4 Text (120, 258) 588×470.
- * Right Diagram: Cross-section roots (760, 120) 574×574.
+ * S4 Giữ cát, giữ nước, giữ bờ — 1440×852 at y=3596. Figma node 129:1218.
+ * Gradient bg sand-light → white. Text left + cross-section diagram card right rotate -1.5°.
  */
+const A = '/WWF-Cobien/assets/cobien/s4';
+const S4_H = 852;
+
 export default function CBGiuCat() {
   return (
-    <section className="relative w-[1440px] h-[852px] bg-ink-offwhite overflow-hidden">
-      {/* Label */}
-      <div className="absolute" style={{ left: 120, top: 67 }}>
-        <TornTag bg="bg-green-mid">VAI TRÒ 03 · KỸ SƯ BỜ BIỂN</TornTag>
+    <FrameSection
+      height={S4_H}
+      background="linear-gradient(180deg, #F5EDD8 0%, #FFFFFF 100%)"
+    >
+      {/* Label tag (120, 67) 210×33 */}
+      <div className="absolute" style={{ left: 120, top: 67, width: 210, height: 33, zIndex: 4 }}>
+        <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/label.svg`} />
+        <div className="absolute inset-0 flex items-center justify-center" style={{ paddingLeft: 16, paddingRight: 16 }}>
+          <p
+            className="font-display font-semibold text-white uppercase whitespace-nowrap"
+            style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px', margin: 0, marginTop: 0.5 }}
+          >
+            VAI TRÒ 03 · KỸ SƯ BỜ BIỂN
+          </p>
+        </div>
       </div>
 
-      {/* Title */}
-      <h2
-        className="absolute font-display font-bold text-ink-main"
-        style={{ left: 120, top: 120, width: 600, fontSize: 52, lineHeight: '108%', letterSpacing: '-0.8px' }}
+      {/* Headline (120, 120) */}
+      <div
+        className="absolute font-display font-bold"
+        style={{ left: 120, top: 120, color: '#1A2E2D', fontSize: 52, letterSpacing: '-0.8px', zIndex: 4 }}
       >
-        Giữ cát.<br />
-        Giữ nước.<br />
-        Giữ bờ.
-      </h2>
+        <p style={{ lineHeight: 1.08, margin: 0 }}>Giữ cát. Giữ nước.</p>
+        <p style={{ lineHeight: 1.08, margin: 0 }}>Giữ bờ.</p>
+      </div>
 
-      {/* === LEFT S4 Text (120, 258) 588×470 === */}
-      <div className="absolute" style={{ left: 120, top: 258, width: 588 }}>
-        <p className="font-quote text-ocean-deep" style={{ fontSize: 20, lineHeight: '150%' }}>
+      {/* Text block (120, 258) 588w */}
+      <div className="absolute flex flex-col" style={{ left: 120, top: 258, width: 588, gap: 18, zIndex: 4 }}>
+        <p className="font-quote italic" style={{ color: '#1A7F7C', fontSize: 22, lineHeight: 1.55, margin: 0 }}>
           "Dưới lớp lá mềm bạn nhìn thấy là một hệ rễ bám chặt vào nền cát."
         </p>
-        <p className="font-body text-ink-muted mt-7" style={{ fontSize: 16, lineHeight: '172%' }}>
-          Chính cấu trúc ấy khiến cỏ biển được xem như một "kỹ sư hệ sinh thái" của vùng ven bờ. Những bộ rễ nhỏ đó giữ lại trầm tích, làm chậm dòng chảy, giảm bớt năng lượng của sóng trước khi chúng tác động vào bờ. Nền đáy ổn định hơn. Cát ít bị cuốn đi hơn. Với những đảo nhỏ như Cù Lao Chàm — đó là một lớp bảo vệ tự nhiên trước nguy cơ xói lở mà không có công trình nào thay thế được.
-        </p>
-        <p className="font-body text-ink-main mt-7" style={{ fontSize: 16, lineHeight: '170%', opacity: 0.85 }}>
+        <div className="font-display font-normal" style={{ color: '#5A7370', fontSize: 16, lineHeight: '24px' }}>
+          <p style={{ margin: 0 }}>
+            Chính cấu trúc ấy khiến cỏ biển được xem như một "kỹ sư hệ sinh thái" của vùng ven bờ. Những bộ rễ nhỏ giữ lại trầm tích, làm chậm dòng chảy và giảm bớt năng lượng của sóng trước khi chúng tác động vào bờ. Nhờ vậy, nền đáy ổn định hơn, cát ít bị cuốn đi hơn. Với những đảo nhỏ như Cù Lao Chàm, đó là một lớp bảo vệ tự nhiên rất quan trọng trước nguy cơ xói lở.
+          </p>
+          <p style={{ margin: 0, height: 24 }}>&nbsp;</p>
+          <p style={{ margin: 0 }}>
+            Cỏ biển cũng góp phần làm cho nước biển trong hơn. Khi dòng nước đi qua thảm cỏ, các hạt bùn mịn lắng xuống đáy. Một phần dinh dưỡng dư thừa như nitơ hay phốt-pho cũng được hấp thụ bớt. Nước trong hơn, ánh sáng xuống được sâu hơn, và nhiều hệ sinh thái khác dưới biển cũng nhờ đó mà được hưởng lợi.
+          </p>
+        </div>
+        <p className="font-quote italic" style={{ color: '#1A7F7C', fontSize: 22, lineHeight: 1.55, margin: 0 }}>
           Những điều ấy âm thầm diễn ra mỗi ngày. Chính vì lặng lẽ nên đôi khi người ta quên mất rằng có một phần của hòn đảo đang được giữ lại từ dưới đáy biển.
         </p>
       </div>
 
-      {/* === RIGHT Diagram: Cross-section roots (760, 120) 574×574 === */}
-      <div
-        className="absolute bg-ink-white rounded-[2px] shadow-card overflow-hidden"
-        style={{ left: 760, top: 120, width: 574, height: 574, transform: 'rotate(1.5deg)' }}
-      >
-        {/* Top half — water/leaves */}
-        <div className="absolute bg-ocean-mid" style={{ left: 12, top: 12, width: 550, height: 290 }}>
-          {/* Annotation top */}
-          <div className="absolute z-10 text-tag-up uppercase text-ink-white" style={{ left: 24, top: 24 }}>LÁ — quang hợp</div>
-
-          {/* Leaves silhouette */}
-          <svg viewBox="0 0 550 290" width="550" height="290" className="absolute inset-0">
-            {[
-              { x: 80, y: 50, w: 40, h: 200, rot: -8 },
-              { x: 160, y: 40, w: 42, h: 220, rot: 12 },
-              { x: 260, y: 50, w: 38, h: 200, rot: -6 },
-              { x: 360, y: 45, w: 44, h: 215, rot: 8 },
-              { x: 460, y: 55, w: 40, h: 195, rot: -10 },
-            ].map((b, i) => (
-              <g key={i} transform={`translate(${b.x} ${b.y}) rotate(${b.rot})`}>
-                <path
-                  d={`M ${b.w / 2} 0 Q ${b.w} ${b.h * 0.3} ${b.w * 0.75} ${b.h * 0.55} Q ${b.w * 0.5} ${b.h * 0.8} ${b.w / 2} ${b.h} Q ${b.w * 0.4} ${b.h * 0.8} ${b.w * 0.25} ${b.h * 0.55} Q 0 ${b.h * 0.3} ${b.w / 2} 0 Z`}
-                  fill="#3D8B3D"
-                  stroke="#fff"
-                  strokeWidth="3"
-                  opacity="0.8"
-                />
-              </g>
-            ))}
-          </svg>
-        </div>
-
-        {/* Water/Sand separator line */}
-        <div className="absolute" style={{ left: 12, top: 302, width: 550, height: 2, background: '#C9B48A' }} />
-
-        {/* Bottom half — sand + roots */}
-        <div className="absolute bg-sand-dark" style={{ left: 12, top: 304, width: 550, height: 258 }}>
-          {/* Vertical roots */}
-          {[80, 170, 280, 380, 470].map((x, i) => (
-            <div
-              key={i}
-              className="absolute bg-green-deep opacity-85 rounded-sm"
-              style={{ left: x, top: 8, width: 4, height: 140 + (i % 3) * 30 }}
-            />
-          ))}
-          {/* Annotation bottom */}
-          <div className="absolute text-tag-up uppercase text-green-deep" style={{ left: 25, top: 218 }}>
-            RỄ — giữ cát, chống xói lở
+      {/* Diagram card right (760, 105.34) 560×560 rotate -1.5° */}
+      <div className="absolute" style={{ left: 760, top: 105.34, width: 574.467, height: 574.467, zIndex: 5 }}>
+        <div className="card-lift-hover flex items-center justify-center w-full h-full">
+          <div
+            style={{
+              transform: 'rotate(-1.5deg)',
+              width: 560,
+              height: 560,
+              background: '#FFFFFF',
+              borderRadius: 2,
+              boxShadow: '0 18px 40px rgba(13,38,33,0.16)',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            {/* Cross-section photo */}
+            <div style={{ position: 'absolute', left: 12, top: 12, width: 536, height: 534.796, overflow: 'hidden' }}>
+              <img
+                alt=""
+                src={`${A}/diagram-cross-section.jpg`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+              />
+            </div>
+            {/* Top label LÁ — quang hợp (green) */}
+            <p
+              className="absolute font-display font-semibold uppercase whitespace-nowrap"
+              style={{ left: 24, top: 24, color: '#3D8B3D', fontSize: 12, lineHeight: 1, letterSpacing: '1px', opacity: 0.92, margin: 0 }}
+            >
+              LÁ — quang hợp
+            </p>
+            {/* Bottom label RỄ — giữ cát (white) */}
+            <p
+              className="absolute font-display font-semibold uppercase text-white whitespace-nowrap"
+              style={{ left: 25.44, top: 518.16, fontSize: 12, lineHeight: 1, letterSpacing: '1px', margin: 0 }}
+            >
+              RỄ — giữ cát, chống xói lở
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </FrameSection>
   );
 }

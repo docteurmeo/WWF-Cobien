@@ -1,94 +1,170 @@
-import TornTag from '@/components/TornTag';
-import HexBadge from '@/components/HexBadge';
-import RippleCircles from '@/components/RippleCircles';
-import WaveDivider from '@/components/WaveDivider';
-import Bubble from '@/components/Bubble';
+import FrameSection from '@/components/FrameSection';
+import Wave from '@/components/Wave';
 
 /**
- * S5 Một kho carbon xanh — 1440×750 at y=4448. DARK collage moment.
- * ⬡ Hex 35× at (285, 287) 187×187.
- * 🏷 HIỆU SUẤT CARBON at (261, 469) 187×38.
- * S5 Text Content (732, 80) 588×555.
- * WaveDivider at y=670.
+ * S5 Một kho carbon xanh — 1440×750 at y=4448. Figma node 129:1232.
+ * Very dark navy left → deep teal right (LEFT-RIGHT gradient).
+ * Carbon signature: hexagon 35× rotate 6° + 4 concentric ripples + 6 CO₂ particles + photo underlay.
+ * Wave bottom transitions into S6 light cream.
  */
+const A = '/WWF-Cobien/assets/cobien/s5';
+const S5_H = 750;
+const S6_BG = '#E8D5B0'; // S6 Sand Mid (confirmed get_design_context)
+
+const CO2 = [
+  { src: 'co2-1.svg', left: 330, top: 260, size: 32 },
+  { src: 'co2-2.svg', left: 400, top: 240, size: 24 },
+  { src: 'co2-3.svg', left: 440, top: 280, size: 20 },
+  { src: 'co2-4.svg', left: 290, top: 210, size: 28 },
+  { src: 'co2-5.svg', left: 480, top: 200, size: 16 },
+  { src: 'co2-3.svg', left: 260, top: 280, size: 20 },
+];
+
 export default function CBCarbon() {
   return (
-    <section className="relative w-[1440px] h-[750px] overflow-hidden">
-      {/* Dark gradient */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(180deg, #061B19 0%, #102E2B 55%, #1A4A47 100%)',
-        }}
-      />
-
-      {/* Light shafts */}
-      <div
-        className="absolute"
-        style={{ left: 200, top: -100, width: 160, height: 1000, background: 'rgba(255,255,255,0.05)', transform: 'rotate(-15deg)' }}
-      />
-      <div
-        className="absolute"
-        style={{ left: 700, top: -150, width: 180, height: 1100, background: 'rgba(255,255,255,0.05)', transform: 'rotate(8deg)' }}
-      />
-
-      {/* Wave silhouettes */}
-      <div className="absolute rounded-full" style={{ left: -130, top: 0, width: 1700, height: 200, background: 'rgba(26,127,124,0.20)', border: '2px solid rgba(255,255,255,0.30)' }} />
-      <div className="absolute rounded-full" style={{ left: -155, top: 580, width: 1750, height: 240, background: 'rgba(58,172,168,0.30)', border: '3px solid rgba(255,255,255,0.30)' }} />
-
-      {/* Ripple circles around hex */}
-      <RippleCircles centerX={285 + 93} centerY={287 + 93} radii={[110, 165, 225]} color="#E86B35" />
-
-      {/* Hex 35× badge (285, 287) 187×187 */}
-      <div className="absolute" style={{ left: 285, top: 287 }}>
-        <HexBadge size={187} number="35×" caption="CARBON" fill="#E86B35" rotate={-6} />
+    <FrameSection
+      height={S5_H}
+      background="linear-gradient(90deg, #061B19 0%, #102E2B 55%, #1A4A47 100%)"
+      fullBleed={
+        <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 6 }}>
+          <Wave fill={S6_BG} height={80} amplitude={14} wavelength={420} speedSeconds={18} />
+        </div>
+      }
+    >
+      {/* Background photo underlay (172, 181) 436×408 */}
+      <div className="absolute" style={{ left: 172, top: 181, width: 436, height: 408, zIndex: 1, opacity: 0.55 }}>
+        <img alt="" className="block w-full h-full object-cover" src={`${A}/bg-photo.jpg`} />
       </div>
 
-      {/* CO₂ bubbles rising from hex */}
-      <Bubble size={20} fillOpacity={0.35} className="absolute" style={{ left: 330, top: 220 }} />
-      <Bubble size={14} fillOpacity={0.35} className="absolute" style={{ left: 400, top: 180 }} />
-      <Bubble size={16} fillOpacity={0.35} className="absolute" style={{ left: 260, top: 160 }} />
-
-      {/* HIỆU SUẤT CARBON tag at (261, 469) */}
-      <div className="absolute" style={{ left: 261, top: 469 }}>
-        <TornTag bg="bg-ocean-primary">HIỆU SUẤT CARBON</TornTag>
+      {/* Ripples — 4 concentric rings, opacity descending */}
+      <div className="absolute" style={{ left: 70, top: 90, width: 580, height: 580, opacity: 0.15, zIndex: 2 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/ripple4.png`} />
       </div>
-      <p
-        className="absolute font-body text-sand-mid"
-        style={{ left: 290, top: 506, width: 280, fontSize: 14, lineHeight: '150%', opacity: 0.85 }}
-      >
-        so với rừng nhiệt đới<br />trên cùng diện tích ⚠️
-      </p>
+      <div className="absolute" style={{ left: 135, top: 155, width: 450, height: 450, opacity: 0.25, zIndex: 2 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/ripple3.png`} />
+      </div>
+      <div className="absolute" style={{ left: 195, top: 215, width: 330, height: 330, opacity: 0.35, zIndex: 2 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/ripple2.png`} />
+      </div>
+      <div className="absolute" style={{ left: 250, top: 270, width: 220, height: 220, zIndex: 2 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/ripple1.svg`} />
+      </div>
 
-      {/* RIGHT — S5 Text Content (732, 80) 588×555 */}
-      <div className="absolute" style={{ left: 732, top: 80, width: 588 }}>
-        <TornTag bg="bg-coral">VAI TRÒ 04 · KHO CARBON XANH</TornTag>
-
-        <h2
-          className="font-display font-bold text-ink-white mt-7"
-          style={{ fontSize: 52, lineHeight: '108%', letterSpacing: '-0.8px' }}
+      {/* CO₂ particles */}
+      {CO2.map((c, i) => (
+        <div
+          key={i}
+          className="absolute"
+          style={{ left: c.left, top: c.top, width: c.size, height: c.size, zIndex: 3 }}
         >
-          Bể chứa carbon xanh<br />
-          của đại dương.
-        </h2>
+          <img alt="" className="block w-full h-full" src={`${A}/${c.src}`} />
+        </div>
+      ))}
 
-        <p className="font-quote text-ocean-light mt-9" style={{ fontSize: 20, lineHeight: '150%' }}>
-          "Có một điều ít ai biết qua những chuyến đi ngắn."
-        </p>
-
-        <p className="font-body text-sand-mid mt-9" style={{ fontSize: 16, lineHeight: '170%', opacity: 0.90 }}>
-          Những thảm cỏ biển cũng là một trong những "bể chứa carbon xanh" quan trọng của đại dương. Trong quá trình quang hợp, tôi hấp thụ CO₂ từ khí quyển. Một phần carbon ấy được giữ lại trong lá, trong thân ngầm, và đặc biệt trong lớp trầm tích nằm bên dưới — nơi nó có thể được lưu giữ trong hàng nghìn năm.
-        </p>
-
-        <div className="mt-7 mx-0" style={{ width: 48, height: 2, background: 'rgba(232,107,53,0.55)' }} />
-
-        <p className="font-quote text-ocean-light mt-7" style={{ fontSize: 22, lineHeight: '142%' }}>
-          Tôi là một phần nhỏ trong bức tranh rất lớn.<br />
-          Nhưng nếu mất đi, không dễ có thứ gì thay thế.
-        </p>
+      {/* Hexagon 35× CARBON badge (267, 287) 170×170 rotate 6° */}
+      <div
+        className="absolute flex items-center justify-center"
+        style={{ left: 267, top: 287, width: 186.839, height: 186.839, zIndex: 4 }}
+      >
+        <div
+          className="card-lift-hover"
+          style={{ transform: 'rotate(6deg)', width: 170, height: 170, position: 'relative' }}
+        >
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/hexagon.svg`} />
+          <p
+            className="absolute font-display font-black text-white text-center"
+            style={{ left: 0, top: 48.5, width: '100%', fontSize: 64, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0 }}
+          >
+            35×
+          </p>
+          <p
+            className="absolute font-display font-semibold text-white uppercase text-center"
+            style={{ left: 0, top: 115, width: '100%', fontSize: 12, lineHeight: 1, letterSpacing: '1px', opacity: 0.85, margin: 0 }}
+          >
+            CARBON
+          </p>
+        </div>
       </div>
 
-      <WaveDivider fill="#FFFFFF" className="absolute" style={{ left: 0, top: 670 }} />
-    </section>
+      {/* HIỆU SUẤT CARBON torn polygon tag (260, 469) 186×28 rotate 3° */}
+      <div className="absolute" style={{ left: 260, top: 469, width: 187.21, height: 37.696, zIndex: 5 }}>
+        <div
+          className="flex items-center justify-center w-full h-full"
+        >
+          <div style={{ transform: 'rotate(3deg)', width: 186, height: 28, position: 'relative' }}>
+            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/torn-polygon.svg`} />
+            <p
+              className="absolute font-display font-semibold text-white uppercase whitespace-nowrap"
+              style={{ left: 18, top: 9, fontSize: 12, lineHeight: 1, letterSpacing: '1px', margin: 0 }}
+            >
+              HIỆU SUẤT CARBON
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Sub caption (288.47, 506) rotate 3° */}
+      <div className="absolute" style={{ left: 288.47, top: 506, width: 123.717, height: 42.336, zIndex: 5 }}>
+        <div className="flex items-center justify-center w-full h-full">
+          <div
+            style={{
+              transform: 'rotate(3deg)',
+              color: '#E8D5B0',
+              fontFamily: 'Geologica, sans-serif',
+              fontSize: 12,
+              letterSpacing: '0.2px',
+              opacity: 0.85,
+            }}
+          >
+            <p style={{ lineHeight: 1.5, margin: 0 }}>so với rừng nhiệt đới</p>
+            <p style={{ lineHeight: 1.5, margin: 0 }}>trên cùng diện tích</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Text right (732, 80) 588w */}
+      <div className="absolute flex flex-col" style={{ left: 732, top: 80, width: 588, gap: 22, zIndex: 5 }}>
+        <div className="relative" style={{ width: 252, height: 33 }}>
+          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/label.svg`} />
+          <div className="absolute inset-0 flex items-center justify-center" style={{ paddingLeft: 16, paddingRight: 16 }}>
+            <p
+              className="font-display font-semibold text-white uppercase whitespace-nowrap"
+              style={{ fontSize: 12, lineHeight: 1, letterSpacing: '1px', margin: 0, marginTop: 0.5 }}
+            >
+              VAI TRÒ 04 · KHO CARBON XANH
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="font-display font-bold text-white"
+          style={{ fontSize: 52, letterSpacing: '-0.8px' }}
+        >
+          <p style={{ lineHeight: 1.08, margin: 0 }}>Bể chứa carbon xanh</p>
+          <p style={{ lineHeight: 1.08, margin: 0 }}>của đại dương.</p>
+        </div>
+
+        <div
+          className="font-quote italic"
+          style={{ color: '#DEFAF7', fontSize: 20 }}
+        >
+          <p style={{ lineHeight: 1.42, margin: 0 }}>"Có một điều ít ai biết</p>
+          <p style={{ lineHeight: 1.42, margin: 0 }}>qua những chuyến đi ngắn."</p>
+        </div>
+
+        <div
+          className="font-display font-normal"
+          style={{ color: '#E8D5B0', fontSize: 16, lineHeight: '24px', opacity: 0.9 }}
+        >
+          <p style={{ margin: 0 }}>
+            Những thảm cỏ biển cũng là một trong những "bể chứa carbon xanh" quan trọng của đại dương. Trong quá trình quang hợp, cỏ biển hấp thụ CO2 từ khí quyển. Một phần carbon ấy được giữ lại trong lá, trong thân ngầm, và đặc biệt là trong lớp trầm tích nằm bên dưới. Khi những lớp trầm tích ấy ổn định trong thời gian dài, lượng carbon cũng được lưu giữ lại lâu dài.
+          </p>
+          <p style={{ margin: 0, height: 24 }}>&nbsp;</p>
+          <p style={{ margin: 0 }}>
+            Dù chỉ chiếm một phần nhỏ diện tích đại dương, các hệ sinh thái cỏ biển có khả năng lưu trữ carbon rất hiệu quả. Theo nhiều nghiên cứu, nếu so trên cùng diện tích, hiệu suất hấp thụ carbon của chúng có thể cao hơn nhiều hệ sinh thái trên cạn. Điều đó có nghĩa là một thảm cỏ biển còn khỏe có thể góp phần làm dịu đi những biến đổi lớn hơn của khí hậu, tác động tuần hoàn tới đời sống của những cộng đồng ven biển.
+          </p>
+        </div>
+      </div>
+    </FrameSection>
   );
 }

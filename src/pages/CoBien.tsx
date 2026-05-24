@@ -1,5 +1,6 @@
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import WaterFilters from '@/components/WaterFilters';
 import CBHero from './cobien/CBHero';
 import CBToiLa from './cobien/CBToiLa';
 import CBChiecNoi from './cobien/CBChiecNoi';
@@ -19,6 +20,7 @@ import CBCtaKep from './cobien/CBCtaKep';
 export default function CoBien() {
   return (
     <div className="page-frame bg-sand-light">
+      <WaterFilters />
       <Nav />
       <CBHero />
       <CBToiLa />
