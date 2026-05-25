@@ -55,7 +55,10 @@ export default function CBChiecNoi() {
         </div>
       </div>
 
-      {/* Small polaroid (328, 466) rotate 15° */}
+      {/* Small polaroid (328, 466) rotate 15° — 220×210.
+          Figma node 129:1157 ("Đội thuyền đánh cá trong vùng nước xanh lá") asset
+          được serve là PNG blank 3KB — designer chưa attach ảnh thật vào Figma.
+          Render placeholder bg #b8ccba + text note để user biết đây là pending photo. */}
       <div className="absolute" style={{ left: 328, top: 466, width: 266.856, height: 259.785, zIndex: 5 }}>
         <div className="card-lift-hover flex items-center justify-center w-full h-full">
           <div
@@ -70,8 +73,28 @@ export default function CBChiecNoi() {
               paddingRight: 6,
             }}
           >
-            <div style={{ width: '100%', height: 160, background: '#b8ccba', overflow: 'hidden' }}>
-              <img alt="" className="block w-full h-full object-cover" src={`${A}/photo-small.jpg`} />
+            <div
+              style={{
+                width: '100%',
+                height: 160,
+                background: '#b8ccba',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: 10,
+                  color: '#6B5C3E',
+                  opacity: 0.6,
+                  letterSpacing: '0.5px',
+                }}
+              >
+                [đội thuyền · ảnh chờ]
+              </span>
             </div>
           </div>
         </div>

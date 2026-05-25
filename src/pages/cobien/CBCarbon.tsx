@@ -31,9 +31,11 @@ export default function CBCarbon() {
         </div>
       }
     >
-      {/* Background photo underlay (172, 181) 436×408 — opacity 0.29 match Figma */}
-      <div className="absolute" style={{ left: 172, top: 181, width: 436, height: 408, zIndex: 1, opacity: 0.29 }}>
-        <img alt="" className="block w-full h-full object-cover" src={`${A}/bg-photo.jpg`} />
+      {/* Background photo underlay (172, 181) 436×408.
+          PNG transparent (tách nền) — KHÔNG convert sang JPEG kẻo mất alpha → vùng trong suốt thành đen.
+          Figma node 129:1233 opacity-29 nhưng PNG đã có alpha sẵn → render full opacity 1 cũng OK. */}
+      <div className="absolute" style={{ left: 172, top: 181, width: 436, height: 408, zIndex: 1 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/bg-photo.png`} style={{ objectFit: 'contain' }} />
       </div>
 
       {/* Ripples — 4 concentric rings, opacity descending */}

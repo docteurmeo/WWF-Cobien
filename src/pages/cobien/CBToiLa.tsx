@@ -34,48 +34,19 @@ export default function CBToiLa() {
               zIndex: 1,
             }}
           />
-          {/* Wave at bottom — fill = next section bg (S2 sand-light) */}
-          <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 2 }}>
+          {/* Wave at bottom — fill = next section bg (S2 sand-light).
+              zIndex: 11 để render TRÊN grid wrapper (z:10) — đè factoid coral box ở dưới
+              theo Figma DOM order. */}
+          <div className="absolute left-0 right-0 bottom-0" style={{ zIndex: 11 }}>
             <Wave fill={S2_BG} height={80} amplitude={14} wavelength={420} speedSeconds={18} />
           </div>
         </>
       }
     >
-      {/* Decorative seagrass — Cỏ biển tròn (top center, flipped + rotated, subtle) */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          left: 684,
-          top: 30,
-          width: 362,
-          height: 162,
-          transform: 'scaleX(-1) rotate(-24deg)',
-          opacity: 0.5,
-          zIndex: 1,
-        }}
-      >
-        <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-tron.png`} />
-      </div>
-
-      {/* Decorative seagrass — Cỏ biển dài (right side mid-bottom) */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          left: 1201,
-          top: 377,
-          width: 233,
-          height: 233,
-          opacity: 0.85,
-          zIndex: 2,
-        }}
-      >
-        <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-dai.png`} />
-      </div>
-
-      {/* S1 Text — left (120, 120) 588w */}
+      {/* S1 Text — left (120, 120) 588w. Bottom of grid stack (z:1) */}
       <div
         className="absolute flex flex-col"
-        style={{ left: 120, top: 120, width: 588, gap: 22, zIndex: 4 }}
+        style={{ left: 120, top: 120, width: 588, gap: 22, zIndex: 1 }}
       >
         {/* Torn-tag label — green */}
         <div className="relative" style={{ width: 154, height: 33 }}>
@@ -130,10 +101,10 @@ export default function CBToiLa() {
         </div>
       </div>
 
-      {/* Polaroid photo right (890.48, 132) rotate 2.5° — 400.519×382.314 frame */}
+      {/* Polaroid photo right (890.48, 132) rotate 2.5° — 400.519×382.314 frame. z:3 */}
       <div
         className="absolute"
-        style={{ left: 890, top: 132, width: 417, height: 399, zIndex: 5 }}
+        style={{ left: 890, top: 132, width: 417, height: 399, zIndex: 3 }}
       >
         <div
           className="card-lift-hover"
@@ -175,10 +146,43 @@ export default function CBToiLa() {
         </div>
       </div>
 
-      {/* Factoid Callout coral box (110.11, 559.92) rotate 5° — 340×178.995 */}
+      {/* Decorative seagrass — Cỏ biển tròn (top center, flipped + rotated, subtle).
+          z:4 — TRÊN polaroid (z:3) theo Figma DOM order */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          left: 684,
+          top: 30,
+          width: 362,
+          height: 162,
+          transform: 'scaleX(-1) rotate(-24deg)',
+          opacity: 0.5,
+          zIndex: 4,
+        }}
+      >
+        <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-tron.png`} />
+      </div>
+
+      {/* Decorative seagrass — Cỏ biển dài (right side mid-bottom). z:5 */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          left: 1201,
+          top: 377,
+          width: 233,
+          height: 233,
+          opacity: 0.85,
+          zIndex: 5,
+        }}
+      >
+        <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-dai.png`} />
+      </div>
+
+      {/* Factoid Callout coral box (110.11, 559.92) rotate 5° — 340×178.995.
+          z:2 (dưới polaroid và seagrass illustrations) để wave bottom (z:11 fullBleed) đè được */}
       <div
         className="absolute"
-        style={{ left: 110.11, top: 559.92, width: 354.307, height: 207.947, zIndex: 5 }}
+        style={{ left: 110.11, top: 559.92, width: 354.307, height: 207.947, zIndex: 2 }}
       >
         <div
           className="card-lift-hover"
