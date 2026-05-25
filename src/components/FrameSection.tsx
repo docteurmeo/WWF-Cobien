@@ -62,7 +62,11 @@ export default function FrameSection({
       {/* Layer 1: full-bleed (extends to viewport edges, behind grid) */}
       {fullBleed}
 
-      {/* Layer 2: grid-locked content (1440 centered) */}
+      {/* Layer 2: grid-locked content (1440 centered).
+          Explicit z-index: 10 to ensure content sits ABOVE any full-bleed z-indexed
+          items (gradient overlays, waves, photos). Without this, `transform`
+          creates a stacking context and fullBleed items with z:1/2 can render
+          on top of content (whose z-index values are trapped inside this context). */}
       <div
         className="absolute"
         style={{
@@ -71,6 +75,7 @@ export default function FrameSection({
           transform: 'translateX(-50%)',
           width: FRAME_W,
           height,
+          zIndex: 10,
         }}
       >
         {children}

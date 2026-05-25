@@ -71,7 +71,7 @@ export default function CBChiecNoi() {
             }}
           >
             <div style={{ width: '100%', height: 160, background: '#b8ccba', overflow: 'hidden' }}>
-              <img alt="" className="block w-full h-full object-cover" src={`${A}/photo-small.png`} />
+              <img alt="" className="block w-full h-full object-cover" src={`${A}/photo-small.jpg`} />
             </div>
           </div>
         </div>

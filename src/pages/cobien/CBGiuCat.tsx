@@ -69,12 +69,22 @@ export default function CBGiuCat() {
               position: 'relative',
             }}
           >
-            {/* Cross-section photo */}
+            {/* Cross-section photo — exact crop từ Figma:
+                img kích thước 252.18% × 168.5% container, offset -50.84% / -67.84%.
+                Cho phép xem 1 phần specific (mid-bottom) của ảnh diagram đầy đủ. */}
             <div style={{ position: 'absolute', left: 12, top: 12, width: 536, height: 534.796, overflow: 'hidden' }}>
               <img
                 alt=""
                 src={`${A}/diagram-cross-section.jpg`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+                style={{
+                  position: 'absolute',
+                  width: '252.18%',
+                  height: '168.5%',
+                  left: '-50.84%',
+                  top: '-67.84%',
+                  maxWidth: 'none',
+                  objectFit: 'cover',
+                }}
               />
             </div>
             {/* Top label LÁ — quang hợp (green) */}
