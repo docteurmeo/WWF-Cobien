@@ -65,10 +65,21 @@ export default function CBNguyenNhan() {
         </>
       }
     >
-      {/* Overlay illustration group (95.15, 229.98) 1310×465 */}
+      {/* Overlay illustration group (95.15, 229.98) 1310×465.
+          SVG chứa 25 sediment particles (bùn lơ lửng) — .bubble-cluster breathe+sway gentle
+          gợi cảm giác trầm tích float trong nước đục (nội dung section nói về "bùn mịn",
+          "nước đục", "trầm tích bị khuấy"). */}
       <div
-        className="absolute pointer-events-none"
-        style={{ left: 95.15, top: 229.98, width: 1310.072, height: 465.074, opacity: 0.6, zIndex: 1 }}
+        className="absolute pointer-events-none bubble-cluster"
+        style={{
+          left: 95.15,
+          top: 229.98,
+          width: 1310.072,
+          height: 465.074,
+          opacity: 0.6,
+          zIndex: 1,
+          ['--bub-dur' as string]: '11s',
+        } as React.CSSProperties}
       >
         <img alt="" className="block w-full h-full" src={`${A}/overlay-group.svg`} />
       </div>

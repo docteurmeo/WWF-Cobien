@@ -52,16 +52,30 @@ export default function CBCarbon() {
         <img alt="" className="block w-full h-full" src={`${A}/ripple1.svg`} />
       </div>
 
-      {/* CO₂ particles */}
-      {CO2.map((c, i) => (
-        <div
-          key={i}
-          className="absolute"
-          style={{ left: c.left, top: c.top, width: c.size, height: c.size, zIndex: 3 }}
-        >
-          <img alt="" className="block w-full h-full" src={`${A}/${c.src}`} />
-        </div>
-      ))}
+      {/* CO₂ particles — .bubble-rise (ascend + fade, infinite). Staggered delay
+          để 6 hạt rời rạc, không sync. Duration vary 5-8s theo size (nhỏ rise nhanh). */}
+      {CO2.map((c, i) => {
+        const dur = 5 + (32 - c.size) * 0.15; // 5s (size 32) → 7.4s (size 16)
+        const delay = -i * 1.1; // stagger phase
+        return (
+          <div
+            key={i}
+            className="absolute bubble-rise"
+            style={{
+              left: c.left,
+              top: c.top,
+              width: c.size,
+              height: c.size,
+              zIndex: 3,
+              ['--bub-dur' as string]: `${dur}s`,
+              ['--bub-delay' as string]: `${delay}s`,
+              ['--bub-op' as string]: 0.7,
+            } as React.CSSProperties}
+          >
+            <img alt="" className="block w-full h-full" src={`${A}/${c.src}`} />
+          </div>
+        );
+      })}
 
       {/* Hexagon 35× CARBON badge (267, 287) 170×170 rotate 6° */}
       <div

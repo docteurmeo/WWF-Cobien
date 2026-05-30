@@ -10,10 +10,37 @@ const S8_H = 1430;
 export default function CBBaoTon() {
   return (
     <FrameSection height={S8_H} background="#F8F5EF">
-      {/* Decoration top-right (1280, 80) 84×84 */}
-      <div className="absolute pointer-events-none" style={{ left: 1280, top: 80, width: 84, height: 84, zIndex: 2 }}>
-        <img alt="" className="block w-full h-full" src={`${A}/deco-top.svg`} />
-      </div>
+      {/* 2 Bubble accents top-right (Figma node 129:1391 + 129:1392).
+          Render thẳng inline (không cần SVG) vì là 2 ellipse solid color teal #3AACA8
+          opacity 0.26. Apply .bubble-cluster (breathe + drift gentle) — 2 phase khác nhau
+          để không sync. */}
+      <div
+        className="absolute pointer-events-none bubble-cluster"
+        style={{
+          left: 1280,
+          top: 80,
+          width: 48,
+          height: 48,
+          borderRadius: '50%',
+          background: 'rgba(58,172,168,0.26)',
+          zIndex: 2,
+          ['--bub-dur' as string]: '9s',
+        } as React.CSSProperties}
+      />
+      <div
+        className="absolute pointer-events-none bubble-cluster"
+        style={{
+          left: 1340,
+          top: 140,
+          width: 24,
+          height: 24,
+          borderRadius: '50%',
+          background: 'rgba(58,172,168,0.26)',
+          zIndex: 2,
+          ['--bub-dur' as string]: '7s',
+          ['--bub-delay' as string]: '-2.5s',
+        } as React.CSSProperties}
+      />
 
       {/* Tag (120, 83) 210×33 */}
       <div className="absolute" style={{ left: 120, top: 83, width: 210, height: 33, zIndex: 4 }}>
