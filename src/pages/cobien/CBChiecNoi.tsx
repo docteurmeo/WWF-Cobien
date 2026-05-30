@@ -80,13 +80,16 @@ export default function CBChiecNoi() {
         </div>
       </div>
 
-      {/* Crab decoration (76, 376) */}
-      <div className="absolute pointer-events-none" style={{ left: 76, top: 376, width: 133, height: 88, zIndex: 6 }}>
+      {/* Crab decoration (76, 376) — jerky shuffle steps(6) */}
+      <div className="absolute creature-crab pointer-events-none" style={{ left: 76, top: 376, width: 133, height: 88, zIndex: 6 }}>
         <img alt="" className="block w-full h-full" src={`${A}/crab.svg`} />
       </div>
 
-      {/* Grass cluster bottom (472, bottom) */}
-      <div className="absolute pointer-events-none" style={{ left: 472, bottom: 0, width: 131, height: 101, zIndex: 3 }}>
+      {/* Grass cluster bottom — kelp sway 8s */}
+      <div
+        className="absolute creature-kelp pointer-events-none"
+        style={{ left: 472, bottom: 0, width: 131, height: 101, zIndex: 3, ['--kelp-dur' as string]: '8s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/grass-cluster.svg`} />
       </div>
 

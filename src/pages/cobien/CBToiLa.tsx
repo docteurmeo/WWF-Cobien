@@ -147,7 +147,8 @@ export default function CBToiLa() {
       </div>
 
       {/* Decorative seagrass — Cỏ biển tròn (top center, flipped + rotated, subtle).
-          z:4 — TRÊN polaroid (z:3) theo Figma DOM order */}
+          z:4. Wrap thêm 1 div ngoài giữ transform tĩnh (scaleX -1, rotate), inner div
+          dùng .creature-kelp để sway không xung đột. */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -160,12 +161,17 @@ export default function CBToiLa() {
           zIndex: 4,
         }}
       >
-        <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-tron.png`} />
+        <div
+          className="creature-kelp w-full h-full"
+          style={{ ['--kelp-dur' as string]: '7s', ['--kelp-delay' as string]: '-1.5s' } as React.CSSProperties}
+        >
+          <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-tron.png`} />
+        </div>
       </div>
 
-      {/* Decorative seagrass — Cỏ biển dài (right side mid-bottom). z:5 */}
+      {/* Decorative seagrass — Cỏ biển dài (right side mid-bottom). z:5, kelp sway 9s */}
       <div
-        className="absolute pointer-events-none"
+        className="absolute creature-kelp pointer-events-none"
         style={{
           left: 1201,
           top: 377,
@@ -173,7 +179,9 @@ export default function CBToiLa() {
           height: 233,
           opacity: 0.85,
           zIndex: 5,
-        }}
+          ['--kelp-dur' as string]: '9s',
+          ['--kelp-delay' as string]: '-3s',
+        } as React.CSSProperties}
       >
         <img alt="" className="block w-full h-full object-contain" src={`${A}/co-bien-dai.png`} />
       </div>

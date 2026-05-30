@@ -11,16 +11,16 @@ const S3_H = 1016;
 
 type Stage = {
   bg: string;
-  illu?: { src: string; left: number; top: number; w: number; h: number };
+  illu?: { src: string; left: number; top: number; w: number; h: number; creature?: string };
   label: string;
   caption: string;
   cx: number; // center x of stage circle
 };
 
 const STAGES: Stage[] = [
-  { bg: 'stage1-bg.svg', label: 'CỎ BIỂN', caption: 'quang hợp', cx: 324, illu: { src: 'co-bien-dai.png', left: -36, top: -55, w: 240, h: 240 } },
-  { bg: 'stage2-bg.svg', label: 'SINH VẬT NHỎ', caption: 'ấu trùng, tôm con', cx: 600, illu: { src: 'stage2-shrimp.svg', left: -16, top: -9, w: 115, h: 101 } },
-  { bg: 'stage3-bg.svg', label: 'CÁ LỚN', caption: 'đàn cá khơi', cx: 876, illu: { src: 'stage3-fish.svg', left: -9, top: 28, w: 166, h: 80 } },
+  { bg: 'stage1-bg.svg', label: 'CỎ BIỂN', caption: 'quang hợp', cx: 324, illu: { src: 'co-bien-dai.png', left: -36, top: -55, w: 240, h: 240, creature: 'creature-kelp' } },
+  { bg: 'stage2-bg.svg', label: 'SINH VẬT NHỎ', caption: 'ấu trùng, tôm con', cx: 600, illu: { src: 'stage2-shrimp.svg', left: -16, top: -9, w: 115, h: 101, creature: 'creature-shrimp' } },
+  { bg: 'stage3-bg.svg', label: 'CÁ LỚN', caption: 'đàn cá khơi', cx: 876, illu: { src: 'stage3-fish.svg', left: -9, top: 28, w: 166, h: 80, creature: 'creature-fish-big' } },
 ];
 
 export default function CBMatXich() {
@@ -83,9 +83,13 @@ export default function CBMatXich() {
             <div className="absolute" style={{ left: s.cx - 70, top: 8, width: 140, height: 140 }}>
               <img alt="" className="block w-full h-full" src={`${A}/${s.bg}`} />
             </div>
-            {/* Illustration overlay */}
+            {/* Illustration overlay — apply creature motion class per stage type:
+                kelp sway for seagrass, shrimp drift, fish-big glide */}
             {s.illu && (
-              <div className="absolute pointer-events-none" style={{ left: s.cx - 70 + s.illu.left, top: 8 + s.illu.top, width: s.illu.w, height: s.illu.h }}>
+              <div
+                className={`absolute pointer-events-none ${s.illu.creature ?? ''}`}
+                style={{ left: s.cx - 70 + s.illu.left, top: 8 + s.illu.top, width: s.illu.w, height: s.illu.h }}
+              >
                 <img alt="" className="block w-full h-full object-contain" src={`${A}/${s.illu.src}`} />
               </div>
             )}

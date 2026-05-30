@@ -58,41 +58,23 @@ export default function CBHero() {
         style={{ left: 180, top: 180, opacity: 0.55, zIndex: 3 }}
       />
 
-      {/* Layer_1 left: small grass/leaves cluster (253×93 at 223,460) */}
+      {/* Layer_1 left: small grass/leaves cluster (253×93 at 223,460) — kelp sway 8s */}
       <div
-        className="absolute"
-        style={{ left: 223, top: 460, width: 253, height: 93, zIndex: 4 }}
+        className="absolute creature-kelp"
+        style={{ left: 223, top: 460, width: 253, height: 93, zIndex: 4, ['--kelp-dur' as string]: '8s' } as React.CSSProperties}
       >
         <img alt="" className="block w-full h-full" src={`${A}/layer1-left.svg`} />
       </div>
 
-      {/* Layer_1 right: 2 nested groups in 214×134 container at (1058,369) */}
+      {/* Layer_1 right: 2 nested groups in 214×134 container at (1058,369) — kelp sway 9s offset */}
       <div
-        className="absolute overflow-hidden"
-        style={{ left: 1058, top: 369, width: 214, height: 134, zIndex: 4 }}
+        className="absolute creature-kelp overflow-hidden"
+        style={{ left: 1058, top: 369, width: 214, height: 134, zIndex: 4, ['--kelp-dur' as string]: '9s', ['--kelp-delay' as string]: '-2s' } as React.CSSProperties}
       >
-        {/* Group top-right half — inset[-0.01% 0 48.6% 51.53%] of 214×134 */}
-        <div
-          className="absolute"
-          style={{
-            top: 0,
-            right: 0,
-            bottom: `${48.6}%`,
-            left: `${51.53}%`,
-          }}
-        >
+        <div className="absolute" style={{ top: 0, right: 0, bottom: '48.6%', left: '51.53%' }}>
           <img alt="" className="block w-full h-full" src={`${A}/group-top.svg`} />
         </div>
-        {/* Group bottom-left half — inset[47.89% 50.54% 0.02% 0.01%] */}
-        <div
-          className="absolute"
-          style={{
-            top: `${47.89}%`,
-            right: `${50.54}%`,
-            bottom: 0,
-            left: 0,
-          }}
-        >
+        <div className="absolute" style={{ top: '47.89%', right: '50.54%', bottom: 0, left: 0 }}>
           <img alt="" className="block w-full h-full" src={`${A}/group-bottom.svg`} />
         </div>
       </div>
