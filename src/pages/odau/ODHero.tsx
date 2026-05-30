@@ -1,74 +1,139 @@
-import TornTag from '@/components/TornTag';
-import PhotoFrame from '@/components/PhotoFrame';
-import Creature from '@/components/Creature';
-import Bubble from '@/components/Bubble';
+import FrameSection from '@/components/FrameSection';
 
 /**
- * Hero — Người mở cửa — 1440×888 at y=100. Warm light.
- * Photo Frame at (600, 120) 778×720 — homestay porch.
- * Hero Content at (120, 179) 451×442.
- * Layer_1 at (155, 715) 131×101.
+ * 🏡 Hero — Người mở cửa · 1440×888 · Figma node 129:1546
+ *
+ * Layout:
+ *   - LEFT (120, 179, w=451): label + headline + subhead + CTA button (flex-col gap-24)
+ *   - RIGHT (600, 100.11, w=778, h=720): large photo frame rotate(-1.5deg)
+ *   - Bottom-left: 3 bubbles decorative + Layer_1 illustration
+ *
+ * Bg gradient warm sand (top → bottom): #f5edd8 → #e8d5b0 → rgba(201,180,138,0.85)
+ *
+ * Real assets in /public/assets/odau/.
  */
+const A = '/WWF-Cobien/assets/odau';
+const HERO_H = 888;
+
 export default function ODHero() {
   return (
-    <section className="relative w-[1440px] h-[888px] overflow-hidden">
-      {/* Warm gradient bg */}
+    <FrameSection
+      height={HERO_H}
+      background="linear-gradient(180deg, #f5edd8 0%, #e8d5b0 50%, rgba(201,180,138,0.85) 100%)"
+    >
+      {/* Large photo frame — homestay porch chiều, võng + lưới phơi.
+          Figma: wrapper 778×720 flex-centered → inner rotate(-1.5deg), card 760×700 white bg + heavy shadow */}
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(225deg, #F5EDD8 0%, #E8D5B0 50%, #C9B48A 100%)' }}
-      />
+        className="absolute flex items-center justify-center"
+        style={{ left: 600, top: 100.11, width: 778.063, height: 719.655 }}
+      >
+        <div className="flex-none" style={{ transform: 'rotate(-1.5deg)' }}>
+          <div
+            className="bg-white relative overflow-hidden"
+            style={{
+              width: 760,
+              height: 700,
+              boxShadow: '0px 20px 60px 0px rgba(13,38,33,0.18)',
+            }}
+          >
+            <img
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              style={{ left: 8, top: 8, width: 744, height: 684, position: 'absolute' }}
+              src={`${A}/imgHeroHienNhaHomestayBuiChiuVongLiPhiAnhNngNghieng.jpg`}
+            />
+          </div>
+        </div>
+      </div>
 
-      {/* Large photo (600, 120) 778×720 */}
-      <PhotoFrame
-        width={778}
-        height={720}
-        rotate={1.5}
-        bg="bg-sand-dark"
-        label="Hiên nhà homestay buổi chiều · võng · lưới phơi · ánh nắng nghiêng"
-        shadow="lg"
-        className="absolute"
-        style={{ left: 600, top: 120 }}
-      />
+      {/* Hero Content — LEFT column at (120, 179) w=451 */}
+      <div
+        className="absolute flex flex-col items-start"
+        style={{ left: 120, top: 179, width: 451, gap: 24 }}
+      >
+        {/* Label torn tag — imgLabel.svg behind, white text overlay */}
+        <div className="relative" style={{ width: 224, height: 33 }}>
+          <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/imgLabel.svg`} />
+          <div
+            className="absolute flex items-center justify-center"
+            style={{
+              left: '50%',
+              top: 'calc(50% + 0.5px)',
+              transform: 'translate(-50%, -50%)',
+              padding: '10px 16px',
+            }}
+          >
+            <p
+              className="font-display font-semibold text-white whitespace-nowrap"
+              style={{ fontSize: 12, lineHeight: 1, letterSpacing: 1, textTransform: 'uppercase' }}
+            >
+              HOMESTAY · CÙ LAO CHÀM
+            </p>
+          </div>
+        </div>
 
-      {/* Hero Content (120, 179) 451×442 */}
-      <div className="absolute" style={{ left: 120, top: 179, width: 540 }}>
-        <TornTag bg="bg-coral">HOMESTAY · CÙ LAO CHÀM</TornTag>
-
+        {/* Headline — Geologica Bold 52 tracking-[-0.8] line 1.08 */}
         <h1
-          className="font-display font-black text-ink-main mt-9"
-          style={{ fontSize: 64, lineHeight: '104%', letterSpacing: '-1.5px' }}
+          className="font-display font-bold text-[#1a2e2d] w-full"
+          style={{ fontSize: 52, lineHeight: 1.08, letterSpacing: '-0.8px' }}
         >
-          Người mở cửa đón bạn<br />
-          không phải lễ tân.<br />
-          <span className="text-coral">Mà là chính chủ nhà.</span>
+          <span>Người mở cửa đón bạn không phải lễ tân. </span>
+          <span>Mà là chính chủ nhà.</span>
         </h1>
 
-        <p
-          className="font-quote text-ink-muted mt-7"
-          style={{ fontSize: 19, lineHeight: '155%', opacity: 0.88 }}
+        {/* Subhead — Lora Italic 18 muted opacity-88 */}
+        <div
+          className="font-quote italic text-[#5a7370] w-full"
+          style={{ fontSize: 18, opacity: 0.88 }}
         >
-          Ở Cù Lao Chàm, chỗ ở không phải điểm kết thúc của một ngày.<br />
-          Đó là nơi câu chuyện thật về hòn đảo bắt đầu.
-        </p>
+          <p style={{ margin: 0 }}>Ở Cù Lao Chàm, chỗ ở không phải điểm kết thúc của một ngày.</p>
+          <p style={{ margin: 0 }}>Đó là nơi câu chuyện thật về hòn đảo bắt đầu.</p>
+        </div>
 
-        <button
-          className="mt-9 inline-flex items-center justify-between bg-ocean-primary rounded-[2px] shadow-btn-teal hover:bg-ocean-deep transition-colors"
-          style={{ width: 220, height: 46, paddingLeft: 28, paddingRight: 28 }}
+        {/* CTA button — bg #2a9b97, padding 28/15, rounded-2, teal shadow */}
+        <a
+          href="#s1"
+          className="btn-primary-hover arrow-down inline-flex items-center font-display font-medium text-white whitespace-nowrap"
+          style={{
+            background: '#2a9b97',
+            padding: '15px 28px',
+            borderRadius: 2,
+            fontSize: 14,
+            letterSpacing: '0.5px',
+            lineHeight: 1,
+            gap: 10,
+            boxShadow: '0px 8px 20px 0px rgba(41,153,150,0.35)',
+          }}
         >
-          <span className="text-cta-btn text-ink-white">Khám phá cách ở lại</span>
-          <span className="text-cta-btn text-ink-white text-lg">↓</span>
-        </button>
+          <span>Khám phá cách ở lại</span>
+          <span className="arrow-nudge"> ↓</span>
+        </a>
       </div>
 
-      {/* Layer_1 — small creature at (155, 715) 131×101 */}
-      <div className="absolute" style={{ left: 155, top: 715 }}>
-        <Creature type="crab" width={131} height={101} fill="#E86B35" rotate={-15} />
+      {/* Bubble decorations bottom-left — gentle breathe via .bubble-cluster */}
+      <div
+        className="absolute bubble-cluster"
+        style={{ left: 120, top: 640, width: 64, height: 64, ['--bub-dur' as any]: '6.8s', ['--bub-delay' as any]: '0s' }}
+      >
+        <img alt="" className="block w-full h-full" src={`${A}/imgBubble1.svg`} />
+      </div>
+      <div
+        className="absolute bubble-cluster"
+        style={{ left: 200, top: 700, width: 36, height: 36, ['--bub-dur' as any]: '5.4s', ['--bub-delay' as any]: '-1.6s' }}
+      >
+        <img alt="" className="block w-full h-full" src={`${A}/imgBubble2.svg`} />
+      </div>
+      <div
+        className="absolute bubble-cluster"
+        style={{ left: 80, top: 760, width: 24, height: 24, ['--bub-dur' as any]: '4.2s', ['--bub-delay' as any]: '-0.8s' }}
+      >
+        <img alt="" className="block w-full h-full" src={`${A}/imgBubble3.svg`} />
       </div>
 
-      {/* Bubble accents bottom-left */}
-      <Bubble size={28} className="absolute" style={{ left: 120, top: 640 }} />
-      <Bubble size={16} className="absolute" style={{ left: 200, top: 690 }} />
-      <Bubble size={12} className="absolute" style={{ left: 80, top: 760 }} />
-    </section>
+      {/* Layer_1 small illustration — bottom-left at bottom:72, left:155, 131×101 */}
+      <div className="absolute" style={{ left: 155, bottom: 72, width: 131, height: 101 }}>
+        <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.svg`} />
+      </div>
+    </FrameSection>
   );
 }

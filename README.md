@@ -19,8 +19,8 @@ Website bảo tồn cỏ biển kết hợp du lịch bền vững tại Cù Lao
 | Route | Page | Frame Figma | Trạng thái |
 |---|---|---|---|
 | `/#/` | Homepage | 🏠 Homepage — 1440px (6423px) | ✅ **DONE** — assets thật + responsive ≥1440 + motion + interactive map + hover |
-| `/#/co-bien/` | Cỏ Biển | 🌿 Cỏ Biển — 1440px (9772px) | ⏳ Vẫn dùng SVG draft, chưa rebuild |
-| `/#/kham-pha/o-dau/` | Ở Đâu | 🏡 Ở Đâu — 1440px (9340px) | ⏳ Vẫn dùng SVG draft, chưa rebuild |
+| `/#/co-bien/` | Cỏ Biển | 🌿 Cỏ Biển — 1440px (9772px) | ✅ **DONE** — 11 sections, 60+ assets, 12 motion classes |
+| `/#/kham-pha/o-dau/` | Ở Đâu | 🏡 Ở Đâu — 1440px (9340px) | ✅ **DONE** — 9 sections, 57 assets, reuse 100% motion lib |
 
 ## Responsive desktop 1440 → 1920+
 
