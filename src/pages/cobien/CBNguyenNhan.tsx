@@ -51,11 +51,13 @@ export default function CBNguyenNhan() {
       background="linear-gradient(90deg, #0F2524 0%, #1A2E2D 50%, #0F2524 100%)"
       fullBleed={
         <>
-          {/* Underwater photo backdrop opacity 0.21 */}
+          {/* Underwater photo backdrop opacity 0.21 + ken-burns slow zoom 30s.
+              Cảm giác câu chuyện đang diễn ra — chuyển động chậm như tâm trạng narrative
+              "biển đang đổi", không gấp gáp. */}
           <img
             alt=""
             src={`${A}/bg-photo.jpg`}
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none ken-burns"
             style={{ opacity: 0.21, zIndex: 0 }}
           />
           {/* Wave bottom → S8 light sand */}

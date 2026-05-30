@@ -80,8 +80,14 @@ export default function CBChiecNoi() {
         </div>
       </div>
 
-      {/* Crab decoration (76, 376) — jerky shuffle steps(6) */}
-      <div className="absolute creature-crab pointer-events-none" style={{ left: 76, top: 376, width: 133, height: 88, zIndex: 6 }}>
+      {/* Oyster decoration (76, 376) — Figma đặt tên Isolation_Mode nhưng thực ra là con
+          hàu (oyster). Trước dùng creature-crab steps(6) jerky → sai personality (hàu
+          không di chuyển giật). Đổi sang bubble-cluster: breathe + drift gentle như
+          hàu hơi mở vỏ nhẹ theo nước. */}
+      <div
+        className="absolute bubble-cluster pointer-events-none"
+        style={{ left: 76, top: 376, width: 133, height: 88, zIndex: 6, ['--bub-dur' as string]: '6.5s' } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/crab.svg`} />
       </div>
 

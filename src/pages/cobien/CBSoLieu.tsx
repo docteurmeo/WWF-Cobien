@@ -17,17 +17,25 @@ const GRID = (filledCount: number) => (
       rowGap: 8,
     }}
   >
-    {Array.from({ length: 25 }).map((_, i) => (
-      <div
-        key={i}
-        style={{
-          width: 32,
-          height: 32,
-          borderRadius: 6,
-          background: i < filledCount ? '#4A7C59' : '#F5EDD8',
-        }}
-      />
-    ))}
+    {Array.from({ length: 25 }).map((_, i) => {
+      const row = Math.floor(i / 5);
+      const col = i % 5;
+      // Diagonal wave: delay tăng theo (row + col) → wave breathe lan từ top-left
+      const delay = (row + col) * 0.18;
+      return (
+        <div
+          key={i}
+          className="grid-breathe"
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 6,
+            background: i < filledCount ? '#4A7C59' : '#F5EDD8',
+            ['--grid-delay' as string]: `${delay}s`,
+          } as React.CSSProperties}
+        />
+      );
+    })}
   </div>
 );
 
@@ -81,7 +89,7 @@ export default function CBSoLieu() {
           TRƯỚC ĐÂY
         </p>
         <p
-          className="font-display font-black text-center whitespace-nowrap"
+          className="font-display font-black text-center whitespace-nowrap stat-attention"
           style={{ color: '#225322', fontSize: 88, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0 }}
         >
           ~50 ha
@@ -95,9 +103,9 @@ export default function CBSoLieu() {
         {GRID(25)}
       </div>
 
-      {/* Arrow → (600, 247) 240×140 center */}
+      {/* Arrow → (600, 247) 240×140 center — pulse translateX ngang gợi flow "trước → nay" */}
       <p
-        className="absolute font-display font-black text-center"
+        className="absolute font-display font-black text-center arrow-x-nudge"
         style={{
           left: 600,
           top: 247,
@@ -126,8 +134,11 @@ export default function CBSoLieu() {
           HIỆN NAY
         </p>
         <p
-          className="font-display font-black text-center whitespace-nowrap"
-          style={{ color: '#E86B35', fontSize: 88, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0 }}
+          className="font-display font-black text-center whitespace-nowrap stat-attention"
+          style={{
+            color: '#E86B35', fontSize: 88, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0,
+            ['--stat-delay' as string]: '-1.9s', // offset phase với ~50 ha
+          } as React.CSSProperties}
         >
           ~17 ha
         </p>

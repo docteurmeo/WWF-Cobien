@@ -484,6 +484,94 @@ body {
   .bubble-up, .bubble-sway { animation: none; }
 }
 
+/* === Signature & accent motion — dùng riêng cho hero moments (Carbon hex, stats, photo) ===
+       Mỗi class dùng CSS vars để stagger qua nhiều instance — pattern chung như BubbleField. */
+
+/* Ripple echo — pulse outward + fade. Dùng cho concentric rings quanh hexagon (S5 Carbon).
+   Mỗi vòng start opacity → fade out scale up, staggered delay → cảm giác sonar ping liên hồi. */
+@keyframes ripple-echo {
+  0%   { transform: scale(0.55); opacity: 0; }
+  18%  { opacity: var(--ring-op, 0.4); }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+.ripple-echo {
+  animation: ripple-echo var(--ring-dur, 5s) ease-out infinite;
+  animation-delay: var(--ring-delay, 0s);
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Hex pulse — slight scale + glow shadow expand (S5 35× CARBON badge).
+   Compose with parent's static rotate(6deg) via wrapping div. */
+@keyframes hex-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(46,204,154,0));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 22px rgba(46,204,154,0.55));
+  }
+}
+.hex-pulse {
+  animation: hex-pulse 3.2s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, filter;
+}
+
+/* Stat attention — subtle continuous pulse to draw eye (S6 ~50ha / ~17ha big numbers).
+   Khác CTA hover (transient): infinite low-amplitude scale để các con số "thở" mà không gây mệt mắt. */
+@keyframes stat-attention {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+.stat-attention {
+  animation: stat-attention 3.8s ease-in-out infinite;
+  animation-delay: var(--stat-delay, 0s);
+  transform-origin: center;
+  will-change: transform;
+  display: inline-block;
+}
+
+/* Grid breathe — stagger pulse cho 5×5 grid squares (S6).
+   Mỗi ô có --grid-delay riêng theo (row + col) → wave diagonal lan từ top-left. */
+@keyframes grid-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(0.94); }
+}
+.grid-breathe {
+  animation: grid-breathe 2.8s ease-in-out infinite;
+  animation-delay: var(--grid-delay, 0s);
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Arrow nudge horizontal — translateX subtle pulse (S6 → arrow). */
+@keyframes arrow-x-nudge {
+  0%, 100% { transform: translateX(-6px); }
+  50%      { transform: translateX(6px); }
+}
+.arrow-x-nudge {
+  animation: arrow-x-nudge 2.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Ken Burns — slow zoom + drift cho background photo (S7).
+   Cảm giác "câu chuyện đang diễn ra" thay vì photo tĩnh trên dark warm narrative. */
+@keyframes ken-burns {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50%      { transform: scale(1.08) translate(-1.2%, -0.8%); }
+}
+.ken-burns {
+  animation: ken-burns 30s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ripple-echo, .hex-pulse, .stat-attention, .grid-breathe, .arrow-x-nudge, .ken-burns { animation: none; }
+}
+
 /* === Sea creature animations — cut-paper drift, mỗi loài 1 personality ===
        Áp dụng vào wrapper div (KHÔNG đụng inline transform của <img>).
        Hover dùng `scale:` longhand → compose với animated `transform:` mà

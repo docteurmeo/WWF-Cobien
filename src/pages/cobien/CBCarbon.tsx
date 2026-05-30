@@ -38,17 +38,50 @@ export default function CBCarbon() {
         <img alt="" className="block w-full h-full" src={`${A}/bg-photo.png`} style={{ objectFit: 'contain' }} />
       </div>
 
-      {/* Ripples — 4 concentric rings, opacity descending */}
-      <div className="absolute" style={{ left: 70, top: 90, width: 580, height: 580, opacity: 0.15, zIndex: 2 }}>
+      {/* Ripples — 4 concentric rings echo outward (sonar ping infinite).
+          Staggered delays để 4 ring liên tục lan ra → cảm giác carbon sink "thở" mạnh. */}
+      <div
+        className="absolute ripple-echo"
+        style={{
+          left: 70, top: 90, width: 580, height: 580, zIndex: 2,
+          ['--ring-op' as string]: 0.15,
+          ['--ring-dur' as string]: '5s',
+          ['--ring-delay' as string]: '-3s',
+        } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/ripple4.png`} />
       </div>
-      <div className="absolute" style={{ left: 135, top: 155, width: 450, height: 450, opacity: 0.25, zIndex: 2 }}>
+      <div
+        className="absolute ripple-echo"
+        style={{
+          left: 135, top: 155, width: 450, height: 450, zIndex: 2,
+          ['--ring-op' as string]: 0.25,
+          ['--ring-dur' as string]: '5s',
+          ['--ring-delay' as string]: '-2s',
+        } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/ripple3.png`} />
       </div>
-      <div className="absolute" style={{ left: 195, top: 215, width: 330, height: 330, opacity: 0.35, zIndex: 2 }}>
+      <div
+        className="absolute ripple-echo"
+        style={{
+          left: 195, top: 215, width: 330, height: 330, zIndex: 2,
+          ['--ring-op' as string]: 0.35,
+          ['--ring-dur' as string]: '5s',
+          ['--ring-delay' as string]: '-1s',
+        } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/ripple2.png`} />
       </div>
-      <div className="absolute" style={{ left: 250, top: 270, width: 220, height: 220, zIndex: 2 }}>
+      <div
+        className="absolute ripple-echo"
+        style={{
+          left: 250, top: 270, width: 220, height: 220, zIndex: 2,
+          ['--ring-op' as string]: 0.55,
+          ['--ring-dur' as string]: '5s',
+          ['--ring-delay' as string]: '0s',
+        } as React.CSSProperties}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/ripple1.svg`} />
       </div>
 
@@ -77,7 +110,8 @@ export default function CBCarbon() {
         );
       })}
 
-      {/* Hexagon 35× CARBON badge (267, 287) 170×170 rotate 6° */}
+      {/* Hexagon 35× CARBON badge (267, 287) 170×170 rotate 6° + hex-pulse glow.
+          2 layer: outer rotate static, inner hex-pulse (scale + drop-shadow expand). */}
       <div
         className="absolute flex items-center justify-center"
         style={{ left: 267, top: 287, width: 186.839, height: 186.839, zIndex: 4 }}
@@ -86,19 +120,21 @@ export default function CBCarbon() {
           className="card-lift-hover"
           style={{ transform: 'rotate(6deg)', width: 170, height: 170, position: 'relative' }}
         >
-          <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/hexagon.svg`} />
-          <p
-            className="absolute font-display font-black text-white text-center"
-            style={{ left: 0, top: 48.5, width: '100%', fontSize: 64, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0 }}
-          >
-            35×
-          </p>
-          <p
-            className="absolute font-display font-semibold text-white uppercase text-center"
-            style={{ left: 0, top: 115, width: '100%', fontSize: 12, lineHeight: 1, letterSpacing: '1px', opacity: 0.85, margin: 0 }}
-          >
-            CARBON
-          </p>
+          <div className="hex-pulse" style={{ position: 'absolute', inset: 0 }}>
+            <img alt="" className="absolute inset-0 w-full h-full" src={`${A}/hexagon.svg`} />
+            <p
+              className="absolute font-display font-black text-white text-center"
+              style={{ left: 0, top: 48.5, width: '100%', fontSize: 64, lineHeight: 0.95, letterSpacing: '-2.5px', margin: 0 }}
+            >
+              35×
+            </p>
+            <p
+              className="absolute font-display font-semibold text-white uppercase text-center"
+              style={{ left: 0, top: 115, width: '100%', fontSize: 12, lineHeight: 1, letterSpacing: '1px', opacity: 0.85, margin: 0 }}
+            >
+              CARBON
+            </p>
+          </div>
         </div>
       </div>
 
