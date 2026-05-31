@@ -82,11 +82,13 @@ export default function ODTestimonials() {
         // the 1440×720 photo to fill width without leaving side gaps.
         <div
           className="absolute"
-          style={{ left: 0, right: 0, top: 0, height: 720, zIndex: 1 }}
+          style={{ left: 0, right: 0, top: 0, height: 720, zIndex: 1, overflow: 'hidden' }}
         >
+          {/* Slow Ken Burns drift — 30s loop, gợi "câu chuyện đang sống" thay vì backdrop tĩnh.
+              overflow:hidden trên wrapper để scale 1.08 không tràn ra ngoài section. */}
           <img
             alt=""
-            className="block w-full h-full object-cover"
+            className="block w-full h-full object-cover ken-burns"
             src={`${A}/imgImage1.jpg`}
           />
         </div>

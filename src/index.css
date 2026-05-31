@@ -664,6 +664,33 @@ html {
   scroll-behavior: smooth;
 }
 
+/* === Scroll reveal — paper-drop DNA ===
+   Cards/elements wear `.scroll-reveal-paper`. JS toggles `.is-revealed` when
+   the wrapper enters viewport (IntersectionObserver, once). Paper-settling feel:
+   subtle rise from below + scale-up + opacity fade. Transition curve emphasises
+   the "land" beat at the end. Compose-friendly — outer wrapper handles reveal,
+   inner static rotate(±0.5°) untouched. */
+.scroll-reveal-paper {
+  opacity: 0;
+  transform: translateY(36px) scale(0.97);
+  transition:
+    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal-paper.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-paper,
+  .scroll-reveal-paper.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* === Torn-edge polygon backgrounds via clip-path === */
 .torn-tag-clip {
   clip-path: polygon(

@@ -25,21 +25,23 @@ export default function ODDualCTA() {
       background="#e8d5b0"
       fullBleed={
         <>
-          {/* LEFT half photo + overlay — full-bleed from viewport left edge to center */}
+          {/* LEFT half photo + overlay — full-bleed from viewport left edge to center.
+              Ken Burns slow drift trên img + overflow:hidden trên panel để scale 1.08 không lộ ra. */}
           <div
             className="absolute panel-hover-group"
-            style={{ left: 0, top: 0, width: '50%', height: SECTION_H, zIndex: 1 }}
+            style={{ left: 0, top: 0, width: '50%', height: SECTION_H, zIndex: 1, overflow: 'hidden' }}
           >
-            <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375331.jpg`} />
+            <img alt="" className="absolute inset-0 w-full h-full object-cover ken-burns" src={`${A}/imgCoBien15868375331.jpg`} />
             <div className="absolute inset-0 panel-overlay" style={{ background: 'rgba(0,0,0,0.54)' }} />
           </div>
 
-          {/* RIGHT half photo + overlay — full-bleed from center to viewport right edge */}
+          {/* RIGHT half photo + overlay — full-bleed from center to viewport right edge.
+              Ken Burns lệch pha 15s (half cycle) để 2 panel không zoom đồng bộ. */}
           <div
             className="absolute panel-hover-group"
-            style={{ left: '50%', top: 0, width: '50%', height: SECTION_H, zIndex: 1 }}
+            style={{ left: '50%', top: 0, width: '50%', height: SECTION_H, zIndex: 1, overflow: 'hidden' }}
           >
-            <img alt="" className="absolute inset-0 w-full h-full object-cover" src={`${A}/imgCoBien15868375332.jpg`} />
+            <img alt="" className="absolute inset-0 w-full h-full object-cover ken-burns" style={{ animationDelay: '-15s' }} src={`${A}/imgCoBien15868375332.jpg`} />
             <div className="absolute inset-0 panel-overlay" style={{ background: 'rgba(0,0,0,0.4)' }} />
           </div>
         </>

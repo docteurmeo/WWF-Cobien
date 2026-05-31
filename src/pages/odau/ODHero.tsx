@@ -1,4 +1,5 @@
 import FrameSection from '@/components/FrameSection';
+import BubbleField from '@/components/BubbleField';
 
 /**
  * 🏡 Hero — Người mở cửa · 1440×888 · Figma node 129:1546
@@ -20,6 +21,17 @@ export default function ODHero() {
     <FrameSection
       height={HERO_H}
       background="linear-gradient(180deg, #f5edd8 0%, #e8d5b0 50%, rgba(201,180,138,0.85) 100%)"
+      fullBleed={
+        // Ambient bubble field rising from bottom-left — gợi không khí ven biển buổi chiều.
+        // Reuse pattern Homepage Hero/ThreeCards. Light tone (sand bg) → giảm opacity + chọn fill
+        // teal nhẹ để không lấn lướt headline.
+        <div
+          className="absolute"
+          style={{ left: 0, bottom: 0, width: 520, height: 480, zIndex: 1, opacity: 0.55 }}
+        >
+          <BubbleField width={520} height={480} count={14} sizeRange={[10, 32]} fill="#7DD3D0" seed={37} />
+        </div>
+      }
     >
       {/* Large photo frame — homestay porch chiều, võng + lưới phơi.
           Figma: wrapper 778×720 flex-centered → inner rotate(-1.5deg), card 760×700 white bg + heavy shadow */}
@@ -130,8 +142,12 @@ export default function ODHero() {
         <img alt="" className="block w-full h-full" src={`${A}/imgBubble3.svg`} />
       </div>
 
-      {/* Layer_1 small illustration — bottom-left at bottom:72, left:155, 131×101 */}
-      <div className="absolute" style={{ left: 155, bottom: 72, width: 131, height: 101 }}>
+      {/* Layer_1 small illustration — gentle sway via .creature-shrimp (drift + flick).
+          Animation gives life to the bottom-left composition without competing with photo. */}
+      <div
+        className="absolute creature-shrimp"
+        style={{ left: 155, bottom: 72, width: 131, height: 101 }}
+      >
         <img alt="" className="block w-full h-full" src={`${A}/imgLayer1.svg`} />
       </div>
     </FrameSection>

@@ -1,4 +1,5 @@
 import FrameSection from '@/components/FrameSection';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 /**
  * S3 — Nhịp ngày khi ở lại · 1440×2181 · Figma 129:1607 (largest section)
@@ -199,50 +200,76 @@ export default function ODTimeline() {
       />
 
       {STEPS.map((s, i) => (
-        <div key={i}>
-          {/* Time dot */}
-          <div className="absolute" style={{ left: 711, top: s.dotTop, width: 18, height: 18 }}>
-            <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/${s.dotImg}`} />
-          </div>
+        <TimelineStep key={i} step={s} index={i} />
+      ))}
+    </FrameSection>
+  );
+}
 
-          {/* Time label — LEFT cards: label right of line; RIGHT cards: label left of line */}
-          {s.side === 'L' ? (
-            <p
-              className="absolute font-display font-semibold whitespace-nowrap"
-              style={{
-                left: 750,
-                top: s.dotTop - 4,
-                width: 180,
-                color: s.timeColor,
-                fontSize: 13,
-                lineHeight: 1,
-                letterSpacing: 2,
-              }}
-            >
-              {s.timeLabel}
-            </p>
-          ) : (
-            <p
-              className="absolute font-display font-semibold whitespace-nowrap"
-              style={{
-                left: 690,
-                top: s.dotTop - 4,
-                width: 180,
-                color: s.timeColor,
-                fontSize: 13,
-                lineHeight: 1,
-                letterSpacing: 2,
-                textAlign: 'right',
-                transform: 'translateX(-100%)',
-              }}
-            >
-              {s.timeLabel}
-            </p>
-          )}
+/**
+ * TimelineStep — renders a single timeline beat (dot + time label + card).
+ *
+ * Each step owns its own IntersectionObserver via useScrollReveal. When the
+ * card wrapper enters viewport, all 3 elements share the `.is-revealed` state
+ * and animate into place with a paper-drop feel.
+ *
+ * The ref is attached to the card wrapper (largest hit-target, drives reveal
+ * for the whole group). Dot + label sit slightly below and ride along.
+ */
+function TimelineStep({ step: s, index: i }: { step: Step; index: number }) {
+  const { ref, revealed } = useScrollReveal<HTMLDivElement>();
+  const reveal = revealed ? 'scroll-reveal-paper is-revealed' : 'scroll-reveal-paper';
 
-          {/* Card wrapper */}
-          <div
-            className="absolute flex items-center justify-center"
+  return (
+    <>
+      {/* Time dot — low-amplitude pulse to suggest the passage of time.
+          Stagger each dot by -0.5s so the 7 dots breathe out of sync. */}
+      <div
+        className={`absolute stat-attention ${reveal}`}
+        style={{ left: 711, top: s.dotTop, width: 18, height: 18, ['--stat-delay' as any]: `${-i * 0.5}s` }}
+      >
+        <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/${s.dotImg}`} />
+      </div>
+
+      {/* Time label — LEFT cards: label right of line; RIGHT cards: label left of line */}
+      {s.side === 'L' ? (
+        <p
+          className={`absolute font-display font-semibold whitespace-nowrap ${reveal}`}
+          style={{
+            left: 750,
+            top: s.dotTop - 4,
+            width: 180,
+            color: s.timeColor,
+            fontSize: 13,
+            lineHeight: 1,
+            letterSpacing: 2,
+          }}
+        >
+          {s.timeLabel}
+        </p>
+      ) : (
+        <p
+          className={`absolute font-display font-semibold whitespace-nowrap ${reveal}`}
+          style={{
+            left: 690,
+            top: s.dotTop - 4,
+            width: 180,
+            color: s.timeColor,
+            fontSize: 13,
+            lineHeight: 1,
+            letterSpacing: 2,
+            textAlign: 'right',
+            transform: 'translateX(-100%)',
+          }}
+        >
+          {s.timeLabel}
+        </p>
+      )}
+
+      {/* Card wrapper — attach scroll-reveal ref here (largest element, drives the group) */}
+      <div
+        ref={ref}
+        className={`absolute flex items-center justify-center ${reveal}`}
             style={{
               left: s.cardWrapperLeft,
               top: s.cardTop,
@@ -302,8 +329,6 @@ export default function ODTimeline() {
               </div>
             </div>
           </div>
-        </div>
-      ))}
-    </FrameSection>
+    </>
   );
 }

@@ -152,10 +152,15 @@ export default function ODThucTien() {
               {/* Color band left edge */}
               <div className="absolute" style={{ left: -1, top: -1, width: 4, height: 280, background: c.bandColor }} />
 
-              {/* Emoji */}
+              {/* Emoji — gentle breathe (bubble-cluster reuses bubble-breathe keyframe 8s).
+                  Stagger per card index so 4 emojis don't pulse in sync. */}
               <p
-                className="absolute font-display font-black text-[#1a2e2d] whitespace-nowrap"
-                style={{ left: 23, top: 19, fontSize: 44, lineHeight: 1, letterSpacing: '-2px' }}
+                className="absolute font-display font-black text-[#1a2e2d] whitespace-nowrap bubble-cluster"
+                style={{
+                  left: 23, top: 19, fontSize: 44, lineHeight: 1, letterSpacing: '-2px',
+                  ['--bub-dur' as any]: '7s',
+                  ['--bub-delay' as any]: `${-i * 1.4}s`,
+                }}
               >
                 {c.emoji}
               </p>

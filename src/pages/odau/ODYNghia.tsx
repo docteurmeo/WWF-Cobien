@@ -1,4 +1,5 @@
 import FrameSection from '@/components/FrameSection';
+import BubbleField from '@/components/BubbleField';
 
 /**
  * S5 — Vì sao ở lại lâu hơn · 1440×1109 · Figma 129:1679
@@ -37,6 +38,16 @@ export default function ODYNghia() {
     <FrameSection
       height={SECTION_H}
       background="linear-gradient(to right, #f8f5ef 0%, #eaf4f1 50%, rgba(125,211,208,0.45) 100%)"
+      fullBleed={
+        // Ambient bubbles rising near the stat — câu chuyện sinh kế nuôi dưỡng vùng nước.
+        // Đặt cùng vùng với 3 ripple ring (right side) để tăng tính motion vùng đó.
+        <div
+          className="absolute"
+          style={{ right: 0, bottom: 0, width: 420, height: 540, zIndex: 1, opacity: 0.4 }}
+        >
+          <BubbleField width={420} height={540} count={10} sizeRange={[8, 22]} fill="#3AACA8" seed={71} />
+        </div>
+      }
     >
       {/* Background illustration */}
       <div className="absolute" style={{ left: 200, top: 180, width: 1116, height: 146 }}>
@@ -127,13 +138,13 @@ export default function ODYNghia() {
         <img alt="" className="absolute inset-0 w-full h-full block" src={`${A}/imgRipple1.svg`} />
       </div>
 
-      {/* Stat text 5-10% */}
+      {/* Stat text 5-10% — pulse low-amplitude (3.8s) sync với polaroid breathing */}
       <div
         className="absolute flex flex-col items-end text-right"
         style={{ left: 1102, top: 439, width: 260, gap: 4 }}
       >
         <p
-          className="font-display font-black text-[#e86b35] whitespace-nowrap"
+          className="font-display font-black text-[#e86b35] whitespace-nowrap stat-attention"
           style={{ fontSize: 72, lineHeight: 0.95, letterSpacing: '-2.5px' }}
         >
           5–10%
@@ -161,10 +172,13 @@ export default function ODYNghia() {
         {POLAROIDS.map((p, i) => (
           <div
             key={i}
-            className="absolute flex items-center justify-center"
+            className="absolute flex items-center justify-center card-lift-hover"
             style={{ left: p.wrapperLeft, top: p.wrapperTop, width: p.wrapperW, height: p.wrapperH }}
           >
-            <div className="flex-none" style={{ transform: `rotate(${p.rotate}deg)` }}>
+            <div
+              className="flex-none card-lift-inner"
+              style={{ ['--rot' as any]: `${p.rotate}deg`, ['--lift' as any]: '-6px' }}
+            >
               <div
                 className="bg-white flex flex-col items-start relative"
                 style={{
@@ -176,7 +190,9 @@ export default function ODYNghia() {
                 }}
               >
                 <div className="relative w-full overflow-hidden" style={{ height: 280 }}>
-                  <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={`${A}/${p.photo}`} />
+                  <div className="card-lift-photo absolute inset-0">
+                    <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={`${A}/${p.photo}`} />
+                  </div>
                 </div>
                 {/* Caption strip — `relative` so the absolute <p> anchors here, not the card root */}
                 <div className="relative w-full" style={{ height: 15, opacity: 0.5 }}>
